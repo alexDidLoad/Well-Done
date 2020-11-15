@@ -60,6 +60,21 @@
             </objects>
             <point key="canvasLocation" x="2715.9420289855075" y="97.767857142857139"/>
         </scene>
+        <!--Choice View Controller-->
+        <scene sceneID="Qsd-x7-qb5">
+            <objects>
+                <viewController storyboardIdentifier="ChoiceVC" id="3Dq-3n-KUX" customClass="ChoiceViewController" customModule="Well_Done" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fUN-N2-WSZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MFX-YR-lXt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FsR-gW-mmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3541" y="98"/>
+        </scene>
         <!--Item-->
         <scene sceneID="evC-IQ-hkx">
             <objects>
@@ -69,6 +84,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NyA-Am-3eI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

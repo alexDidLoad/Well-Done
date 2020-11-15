@@ -25,22 +25,26 @@ class ViewController: UIViewController {
     
     
     func setView() {
+        
         setButtons()
         
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         
-        
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Baskerville-BoldItalic", size: 25)!,
-            .foregroundColor: UIColor.black
+            .font: UIFont(name: "Noteworthy-Bold", size: 30)!,
+            .foregroundColor: UIColor.black,
         ]
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.backgroundColor = view.backgroundColor
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         title = "Well Done"
         
-        label.text = "Choose a Protein"
+        label.text = "1. Choose a Protein"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont(name: "Baskerville-Italic", size: 40)
+        label.font = UIFont(name: "Noteworthy-Bold", size: 40)
         view.addSubview(label)
         
         NSLayoutConstraint.activate([
@@ -53,11 +57,19 @@ class ViewController: UIViewController {
     func setButtons() {
         
         let buttonConstant = CGFloat(150)
+        let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).cgColor
+        let shadowOffSet = CGSize(width: 0, height: 10.0)
+        let shadowOpacity = Float(1.0)
+        let shadowRadius = CGFloat(10.0)
         
         steakButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
-        steakButton.layer.masksToBounds = true
+        steakButton.layer.masksToBounds = false
         steakButton.layer.borderWidth = 3
-        steakButton.layer.borderColor = UIColor.black.cgColor
+        steakButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
+        steakButton.layer.shadowColor = shadowColor
+        steakButton.layer.shadowOffset = shadowOffSet
+        steakButton.layer.shadowOpacity = shadowOpacity
+        steakButton.layer.shadowRadius = shadowRadius
         steakButton.layer.cornerRadius = 0.5 * steakButton.frame.size.width
         steakButton.imageView?.contentMode = .scaleAspectFit
         steakButton.setImage(UIImage(named: "meat"), for: .normal)
@@ -65,9 +77,13 @@ class ViewController: UIViewController {
         steakButton.backgroundColor = UIColor.white
         
         chickenButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
-        chickenButton.layer.masksToBounds = true
+        chickenButton.layer.masksToBounds = false
         chickenButton.layer.borderWidth = 3
-        chickenButton.layer.borderColor = UIColor.black.cgColor
+        chickenButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
+        chickenButton.layer.shadowColor = shadowColor
+        chickenButton.layer.shadowOffset = shadowOffSet
+        chickenButton.layer.shadowOpacity = shadowOpacity
+        chickenButton.layer.shadowRadius = shadowRadius
         chickenButton.layer.cornerRadius = 0.5 * chickenButton.frame.size.width
         chickenButton.imageView?.contentMode = .scaleAspectFit
         chickenButton.setImage(UIImage(named: "chicken"), for: .normal)
@@ -75,9 +91,13 @@ class ViewController: UIViewController {
         chickenButton.backgroundColor = UIColor.white
         
         fishButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
-        fishButton.layer.masksToBounds = true
+        fishButton.layer.masksToBounds = false
         fishButton.layer.borderWidth = 3
-        fishButton.layer.borderColor = UIColor.black.cgColor
+        fishButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
+        fishButton.layer.shadowColor = shadowColor
+        fishButton.layer.shadowOffset = shadowOffSet
+        fishButton.layer.shadowOpacity = shadowOpacity
+        fishButton.layer.shadowRadius = shadowRadius
         fishButton.layer.cornerRadius = 0.5 * chickenButton.frame.size.width
         fishButton.imageView?.contentMode = .scaleAspectFit
         fishButton.setImage(UIImage(named: "fish"), for: .normal)
@@ -85,9 +105,13 @@ class ViewController: UIViewController {
         fishButton.backgroundColor = UIColor.white
         
         eggButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
-        eggButton.layer.masksToBounds = true
+        eggButton.layer.masksToBounds = false
         eggButton.layer.borderWidth = 3
-        eggButton.layer.borderColor = UIColor.black.cgColor
+        eggButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
+        eggButton.layer.shadowColor = shadowColor
+        eggButton.layer.shadowRadius = shadowRadius
+        eggButton.layer.shadowOffset = shadowOffSet
+        eggButton.layer.shadowOpacity = shadowOpacity
         eggButton.layer.cornerRadius = 0.5 * eggButton.frame.size.width
         eggButton.imageView?.contentMode = .scaleAspectFit
         eggButton.setImage(UIImage(named: "egg"), for: .normal)
@@ -117,6 +141,14 @@ class ViewController: UIViewController {
             eggButton.heightAnchor.constraint(equalToConstant: buttonConstant),
             eggButton.widthAnchor.constraint(equalToConstant: buttonConstant)
         ])
+    }
+    
+    func setGradient(topColor: UIColor, bottomColor: UIColor) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [bottomColor.cgColor, topColor.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.locations = [0, 1]
     }
     
     @IBAction func steakButtonPressed(_ sender: UIButton) {
