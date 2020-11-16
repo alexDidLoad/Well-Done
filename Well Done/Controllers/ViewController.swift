@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var chickenButton: UIButton!
     @IBOutlet var fishButton: UIButton!
     @IBOutlet var eggButton: UIButton!
-    let label = UILabel()
+    private let label = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +23,9 @@ class ViewController: UIViewController {
         
     }
     
+    //MARK: - Set View methods
     
-    func setView() {
+    private func setView() {
         
         setButtons()
         
@@ -44,7 +45,7 @@ class ViewController: UIViewController {
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont(name: "Noteworthy-Bold", size: 40)
+        label.font = UIFont(name: "Noteworthy", size: 36)
         view.addSubview(label)
         
         NSLayoutConstraint.activate([
@@ -54,7 +55,7 @@ class ViewController: UIViewController {
         ])
     }
     
-    func setButtons() {
+    private func setButtons() {
         
         let buttonConstant = CGFloat(150)
         let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).cgColor
@@ -143,27 +144,35 @@ class ViewController: UIViewController {
         ])
     }
     
-    func setGradient(topColor: UIColor, bottomColor: UIColor) {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [bottomColor.cgColor, topColor.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.locations = [0, 1]
-    }
-    
     @IBAction func steakButtonPressed(_ sender: UIButton) {
         
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
         print("meat")
     }
     @IBAction func chickenButtonPressed(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
         print("chicken")
     }
     
     @IBAction func fishButtonPressed(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
         print("fish")
     }
     
     @IBAction func eggButtonPressed(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
         print("egg")
     }
     
