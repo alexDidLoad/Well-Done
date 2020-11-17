@@ -27,10 +27,10 @@ class ChoiceViewController: UIViewController {
     private func setView() {
         
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-        label.text = "2. Choose a cooking method"
+        label.text = "2. Select a cooking method"
         label.textColor = UIColor.black
         label.textAlignment = .center
-        label.font = UIFont(name: "Noteworthy", size: 36)
+        label.font = UIFont(name: "SFProText-Ultralight", size: 30)
         label.numberOfLines = 0
         
         panMethodButton.setImage(UIImage(named: "pan"), for: .normal)

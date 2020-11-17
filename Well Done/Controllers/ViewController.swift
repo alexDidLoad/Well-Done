@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Noteworthy-Bold", size: 30)!,
+            .font: UIFont(name: "SFProText-Thin", size: 30)!,
             .foregroundColor: UIColor.black,
         ]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -41,11 +41,11 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         title = "Well Done"
         
-        label.text = "1. Choose a Protein"
+        label.text = "1. Select a Protein"
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont(name: "Noteworthy", size: 36)
+        label.font = UIFont(name: "SFProText-Ultralight", size: 36)
         view.addSubview(label)
         
         NSLayoutConstraint.activate([

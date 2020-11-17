@@ -8,8 +8,6 @@
 import UIKit
 
 class CustomButton: UIButton {
-
-    var imageName: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,9 +34,6 @@ class CustomButton: UIButton {
         self.layer.shadowOpacity = shadowOpacity
         self.layer.shadowRadius = shadowRadius
         self.layer.cornerRadius = 0.5 * self.frame.size.width
-//        if imageName != nil {
-//            self.setImage(UIImage(named: imageName!), for: .normal)
-//        }
         self.backgroundColor = UIColor.white
         
     }
