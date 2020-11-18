@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "SFProText-Thin", size: 30)!,
+            .font: UIFont(name: "SFProText-Light", size: 30)!,
             .foregroundColor: UIColor.black,
         ]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -46,13 +46,13 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Ultralight", size: 36)
-        view.addSubview(label)
+//        view.addSubview(label)
         
-        NSLayoutConstraint.activate([
-            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -200),
-            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+//        NSLayoutConstraint.activate([
+//            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -200),
+//            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+//        ])
     }
     
     private func setButtons() {
@@ -124,13 +124,17 @@ class ViewController: UIViewController {
         fishButton.translatesAutoresizingMaskIntoConstraints = false
         eggButton.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(label)
+        
         NSLayoutConstraint.activate([
             steakButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            steakButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            steakButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            steakButton.trailingAnchor.constraint(lessThanOrEqualTo: chickenButton.leadingAnchor),
             steakButton.widthAnchor.constraint(equalToConstant: buttonConstant),
             steakButton.heightAnchor.constraint(equalToConstant: buttonConstant),
             chickenButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            chickenButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            chickenButton.leadingAnchor.constraint(greaterThanOrEqualTo: steakButton.trailingAnchor),
+            chickenButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
             chickenButton.widthAnchor.constraint(equalToConstant: buttonConstant),
             chickenButton.heightAnchor.constraint(equalToConstant: buttonConstant),
             fishButton.topAnchor.constraint(equalTo: steakButton.bottomAnchor, constant: 50),
@@ -140,7 +144,11 @@ class ViewController: UIViewController {
             eggButton.topAnchor.constraint(equalTo: chickenButton.bottomAnchor, constant: 50),
             eggButton.trailingAnchor.constraint(equalTo: chickenButton.trailingAnchor),
             eggButton.heightAnchor.constraint(equalToConstant: buttonConstant),
-            eggButton.widthAnchor.constraint(equalToConstant: buttonConstant)
+            eggButton.widthAnchor.constraint(equalToConstant: buttonConstant),
+            label.topAnchor.constraint(equalTo: eggButton.bottomAnchor),
+            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     

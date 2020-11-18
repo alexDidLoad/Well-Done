@@ -33,6 +33,9 @@
 		11F7E1BC2563AB8F000B8B30 /* SF-Pro-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1A52563AB4A000B8B30 /* SF-Pro-Text-HeavyItalic.otf */; };
 		11F7E1BD2563AB8F000B8B30 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E19B2563AB4A000B8B30 /* SF-Pro-Text-MediumItalic.otf */; };
 		11F7E1BE2563AB8F000B8B30 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1A62563AB4A000B8B30 /* SF-Pro-Text-SemiboldItalic.otf */; };
+		11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C02563D653000B8B30 /* CookViewController.swift */; };
+		11F7E1C4256499AE000B8B30 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C3256499AE000B8B30 /* TimerViewController.swift */; };
+		11F7E1C72564C1DE000B8B30 /* CookTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C62564C1DE000B8B30 /* CookTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		11F7E1A82563AB4B000B8B30 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 		11F7E1A92563AB4B000B8B30 /* SF-Pro-Text-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-LightItalic.otf"; sourceTree = "<group>"; };
 		11F7E1AA2563AB4B000B8B30 /* SF-Pro-Text-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-BoldItalic.otf"; sourceTree = "<group>"; };
+		11F7E1C02563D653000B8B30 /* CookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookViewController.swift; sourceTree = "<group>"; };
+		11F7E1C3256499AE000B8B30 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		11F7E1C62564C1DE000B8B30 /* CookTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,11 +105,10 @@
 			children = (
 				11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */,
 				11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */,
+				11F7E1C92564C1E5000B8B30 /* Model */,
+				11F7E1CA2564C203000B8B30 /* View */,
 				11F7E19425616DDC000B8B30 /* Controllers */,
-				11F7E18B256024E8000B8B30 /* CustomButton.swift */,
-				11F7E174255FD5E0000B8B30 /* Main.storyboard */,
 				11F7E177255FD5E1000B8B30 /* Assets.xcassets */,
-				11F7E179255FD5E1000B8B30 /* LaunchScreen.storyboard */,
 				11F7E17C255FD5E1000B8B30 /* Info.plist */,
 			);
 			path = "Well Done";
@@ -114,6 +119,8 @@
 			children = (
 				11F7E172255FD5E0000B8B30 /* ViewController.swift */,
 				11F7E19125616DC2000B8B30 /* ChoiceViewController.swift */,
+				11F7E1C02563D653000B8B30 /* CookViewController.swift */,
+				11F7E1C3256499AE000B8B30 /* TimerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -141,6 +148,24 @@
 				11F7E1A22563AB4A000B8B30 /* SF-Pro-Text-UltralightItalic.otf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		11F7E1C92564C1E5000B8B30 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11F7E1C62564C1DE000B8B30 /* CookTimer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11F7E1CA2564C203000B8B30 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11F7E174255FD5E0000B8B30 /* Main.storyboard */,
+				11F7E179255FD5E1000B8B30 /* LaunchScreen.storyboard */,
+				11F7E18B256024E8000B8B30 /* CustomButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,11 +256,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */,
 				11F7E18C256024E8000B8B30 /* CustomButton.swift in Sources */,
 				11F7E173255FD5E0000B8B30 /* ViewController.swift in Sources */,
+				11F7E1C4256499AE000B8B30 /* TimerViewController.swift in Sources */,
 				11F7E19225616DC2000B8B30 /* ChoiceViewController.swift in Sources */,
 				11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */,
 				11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */,
+				11F7E1C72564C1DE000B8B30 /* CookTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

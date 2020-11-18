@@ -75,6 +75,36 @@
             </objects>
             <point key="canvasLocation" x="3540.579710144928" y="97.767857142857139"/>
         </scene>
+        <!--Cook View Controller-->
+        <scene sceneID="6dO-Ap-MWb">
+            <objects>
+                <viewController storyboardIdentifier="CookVC" id="taT-LO-1G5" customClass="CookViewController" customModule="Well_Done" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Jy-P8-ddE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ybC-v2-sKQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BUn-Yk-I92" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4319" y="98"/>
+        </scene>
+        <!--Timer View Controller-->
+        <scene sceneID="5C6-L9-qQO">
+            <objects>
+                <viewController storyboardIdentifier="TimerVC" id="AMG-b2-jO9" customClass="TimerViewController" customModule="Well_Done" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KCf-hc-Mg1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="TN6-5u-Box"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j5X-vJ-aP6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5066" y="99"/>
+        </scene>
         <!--Item-->
         <scene sceneID="evC-IQ-hkx">
             <objects>

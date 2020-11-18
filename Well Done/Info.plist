@@ -7,6 +7,8 @@
 		<string>SF-Pro-Text-Thin.otf</string>
 		<string>SF-Pro-Text-Semibold.otf</string>
 		<string>SF-Pro-Text-Ultralight.otf</string>
+		<string>SF-Pro-Text-Medium.otf</string>
+		<string>SF-Pro-Text-Light.otf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

@@ -27,7 +27,7 @@ class ChoiceViewController: UIViewController {
     private func setView() {
         
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-        label.text = "2. Select a cooking method"
+        label.text = "2. Select a method"
         label.textColor = UIColor.black
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Ultralight", size: 30)
@@ -39,7 +39,6 @@ class ChoiceViewController: UIViewController {
         ovenMethodButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         fryMethodButton.setImage(UIImage(named: "fryer"), for: .normal)
         fryMethodButton.imageEdgeInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 12)
-        
         
         panMethodButton.addTarget(self, action: #selector(self.panTap), for: .touchUpInside)
         ovenMethodButton.addTarget(self, action: #selector(self.ovenTap), for: .touchUpInside)
@@ -55,13 +54,12 @@ class ChoiceViewController: UIViewController {
         ovenMethodButton.translatesAutoresizingMaskIntoConstraints = false
         fryMethodButton.translatesAutoresizingMaskIntoConstraints = false
         
-        
         NSLayoutConstraint.activate([
-            panMethodButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            panMethodButton.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             panMethodButton.widthAnchor.constraint(equalToConstant: 160),
             panMethodButton.heightAnchor.constraint(equalToConstant: 160),
             panMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            ovenMethodButton.topAnchor.constraint(equalTo: panMethodButton.bottomAnchor, constant: 30),
+            ovenMethodButton.topAnchor.constraint(lessThanOrEqualTo: panMethodButton.bottomAnchor, constant: 30),
             ovenMethodButton.heightAnchor.constraint(equalToConstant: 160),
             ovenMethodButton.widthAnchor.constraint(equalToConstant: 160),
             ovenMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -69,7 +67,8 @@ class ChoiceViewController: UIViewController {
             fryMethodButton.heightAnchor.constraint(equalToConstant: 160),
             fryMethodButton.widthAnchor.constraint(equalToConstant: 160),
             fryMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.topAnchor.constraint(equalTo: fryMethodButton.bottomAnchor, constant: 60),
+            label.topAnchor.constraint(equalTo: fryMethodButton.bottomAnchor, constant: 30),
+            label.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -78,14 +77,27 @@ class ChoiceViewController: UIViewController {
     //MARK: - Button methods
     
     @objc func panTap() {
+        
+        if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
         print("pan")
     }
     
     @objc func ovenTap() {
+        if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
         print("oven")
     }
     
     @objc func fryTap() {
+        if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
         print("fry")
     }
 }
