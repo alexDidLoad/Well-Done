@@ -13,12 +13,17 @@ class ChoiceViewController: UIViewController {
     private var ovenMethodButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private var fryMethodButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private let label = UILabel()
-    
+    public var selectedProtein: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setView()
+        
+        //hides fry method because you cant deep fry an egg and steak
+        if selectedProtein == "steak" || selectedProtein == "egg" {
+            fryMethodButton.isHidden = true
+        }
         
     }
     
@@ -79,6 +84,7 @@ class ChoiceViewController: UIViewController {
     @objc func panTap() {
         
         if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
+            vc.selectedMethod = "panFry"
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
@@ -87,6 +93,7 @@ class ChoiceViewController: UIViewController {
     
     @objc func ovenTap() {
         if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
+            vc.selectedMethod = "bake"
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
@@ -95,6 +102,7 @@ class ChoiceViewController: UIViewController {
     
     @objc func fryTap() {
         if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
+            vc.selectedMethod = "deepFry"
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }

@@ -46,13 +46,6 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Ultralight", size: 36)
-//        view.addSubview(label)
-        
-//        NSLayoutConstraint.activate([
-//            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -200),
-//            label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-//        ])
     }
     
     private func setButtons() {
@@ -155,6 +148,7 @@ class ViewController: UIViewController {
     @IBAction func steakButtonPressed(_ sender: UIButton) {
         
         if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "steak"
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
@@ -162,6 +156,7 @@ class ViewController: UIViewController {
     }
     @IBAction func chickenButtonPressed(_ sender: UIButton) {
         if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "chicken"
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
@@ -170,6 +165,7 @@ class ViewController: UIViewController {
     
     @IBAction func fishButtonPressed(_ sender: UIButton) {
         if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "fish"
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
@@ -178,6 +174,7 @@ class ViewController: UIViewController {
     
     @IBAction func eggButtonPressed(_ sender: UIButton) {
         if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "egg"
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }

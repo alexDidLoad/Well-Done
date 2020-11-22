@@ -13,6 +13,7 @@ class CookViewController: UIViewController {
     private var mediumRareButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private var wellDoneButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private let label = UILabel()
+    public var selectedMethod: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +94,7 @@ class CookViewController: UIViewController {
     @objc func rareTap() {
         
         if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
+            vc.cookTime = 320
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
         }
@@ -102,6 +104,7 @@ class CookViewController: UIViewController {
     @objc func mediumRareTap() {
         
         if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
+            vc.cookTime = 420
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
         }
@@ -111,6 +114,7 @@ class CookViewController: UIViewController {
     @objc func wellDoneTap() {
         
         if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
+            vc.cookTime = 640
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
         }
