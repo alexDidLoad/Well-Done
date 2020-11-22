@@ -9,23 +9,26 @@ import UIKit
 
 class CookViewController: UIViewController {
     
-    private var rareButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-    private var mediumRareButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-    private var wellDoneButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
+    private var topButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
+    private var midButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
+    private var botButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private let label = UILabel()
+    
     public var selectedMethod: String?
+    public var selectedProtein: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setView()
-
-      
+        
     }
+
     
+    //MARK: - Set View Method
     
     private func setView() {
-        
+                
         //set labels and background color for view and buttons
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         label.text = "3. Select a preferred doneness"
@@ -34,71 +37,73 @@ class CookViewController: UIViewController {
         label.font = UIFont(name: "SFProText-Ultralight", size: 30)
         label.numberOfLines = 0
         
-        rareButton.setTitle("Rare", for: .normal)
-        rareButton.setTitleColor(UIColor.black, for: .normal)
-        rareButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
-        rareButton.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-        mediumRareButton.setTitle("Medium Rare", for: .normal)
-        mediumRareButton.setTitleColor(UIColor.black, for: .normal)
-        mediumRareButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
-        mediumRareButton.titleLabel?.textAlignment = .center
-        mediumRareButton.titleLabel?.numberOfLines = 0
-        mediumRareButton.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-        wellDoneButton.setTitle("Well Done", for: .normal)
-        wellDoneButton.setTitleColor(UIColor.black, for: .normal)
-        wellDoneButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
-        wellDoneButton.titleLabel?.textAlignment = .center
-        wellDoneButton.titleLabel?.numberOfLines = 0
-        wellDoneButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
+        topButton.setTitle("Rare", for: .normal)
+        topButton.setTitleColor(UIColor.black, for: .normal)
+        topButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
+        topButton.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        midButton.setTitle("Medium Rare", for: .normal)
+        midButton.setTitleColor(UIColor.black, for: .normal)
+        midButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
+        midButton.titleLabel?.textAlignment = .center
+        midButton.titleLabel?.numberOfLines = 0
+        midButton.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        botButton.setTitle("Well Done", for: .normal)
+        botButton.setTitleColor(UIColor.black, for: .normal)
+        botButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
+        botButton.titleLabel?.textAlignment = .center
+        botButton.titleLabel?.numberOfLines = 0
+        botButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
         
         //Add targets
-        rareButton.addTarget(self, action: #selector(self.rareTap), for: .touchUpInside)
-        mediumRareButton.addTarget(self, action: #selector(self.mediumRareTap), for: .touchUpInside)
-        wellDoneButton.addTarget(self, action: #selector(self.wellDoneTap), for: .touchUpInside)
+        topButton.addTarget(self, action: #selector(self.rareTap), for: .touchUpInside)
+        midButton.addTarget(self, action: #selector(self.mediumRareTap), for: .touchUpInside)
+        botButton.addTarget(self, action: #selector(self.wellDoneTap), for: .touchUpInside)
         
         //Add buttons to subview
-        view.addSubview(rareButton)
-        view.addSubview(mediumRareButton)
-        view.addSubview(wellDoneButton)
+        view.addSubview(topButton)
+        view.addSubview(midButton)
+        view.addSubview(botButton)
         view.addSubview(label)
         
-        rareButton.translatesAutoresizingMaskIntoConstraints = false
-        mediumRareButton.translatesAutoresizingMaskIntoConstraints = false
-        wellDoneButton.translatesAutoresizingMaskIntoConstraints = false
+        topButton.translatesAutoresizingMaskIntoConstraints = false
+        midButton.translatesAutoresizingMaskIntoConstraints = false
+        botButton.translatesAutoresizingMaskIntoConstraints = false
         label.translatesAutoresizingMaskIntoConstraints = false
         
         //constraints
         NSLayoutConstraint.activate([
-            rareButton.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            rareButton.widthAnchor.constraint(equalToConstant: 160),
-            rareButton.heightAnchor.constraint(equalToConstant: 160),
-            rareButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mediumRareButton.topAnchor.constraint(lessThanOrEqualTo: rareButton.bottomAnchor, constant: 20),
-            mediumRareButton.heightAnchor.constraint(equalToConstant: 160),
-            mediumRareButton.widthAnchor.constraint(equalToConstant: 160),
-            mediumRareButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            wellDoneButton.topAnchor.constraint(lessThanOrEqualTo: mediumRareButton.bottomAnchor, constant: 20),
-            wellDoneButton.heightAnchor.constraint(equalToConstant: 160),
-            wellDoneButton.widthAnchor.constraint(equalToConstant: 160),
-            wellDoneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.topAnchor.constraint(lessThanOrEqualTo: wellDoneButton.bottomAnchor, constant: 20),
+            topButton.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            topButton.widthAnchor.constraint(equalToConstant: 160),
+            topButton.heightAnchor.constraint(equalToConstant: 160),
+            topButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            midButton.topAnchor.constraint(lessThanOrEqualTo: topButton.bottomAnchor, constant: 20),
+            midButton.heightAnchor.constraint(equalToConstant: 160),
+            midButton.widthAnchor.constraint(equalToConstant: 160),
+            midButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            botButton.topAnchor.constraint(lessThanOrEqualTo: midButton.bottomAnchor, constant: 20),
+            botButton.heightAnchor.constraint(equalToConstant: 160),
+            botButton.widthAnchor.constraint(equalToConstant: 160),
+            botButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.topAnchor.constraint(lessThanOrEqualTo: botButton.bottomAnchor, constant: 20),
             label.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
+        updateButtonLabels()
+        
     }
-
+    
+    //MARK: - Obj-c Methods
     
     @objc func rareTap() {
         
         if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
-            vc.cookTime = 320
+            vc.cookTime = calculateCookTime(for: selectedProtein, method: selectedMethod, doneness: topButton.currentTitle)
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
         }
-        print("rare")
     }
     
     @objc func mediumRareTap() {
@@ -108,7 +113,6 @@ class CookViewController: UIViewController {
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
         }
-        print("medium rare")
     }
     
     @objc func wellDoneTap() {
@@ -118,6 +122,40 @@ class CookViewController: UIViewController {
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
         }
-        print("well done")
     }
+    
+    //MARK: - Update Label Method
+    
+    private func updateButtonLabels() {
+        
+        if selectedProtein == "chicken" || selectedProtein == "fish" {
+            
+            self.topButton.setTitle("Medium", for: .normal)
+            self.midButton.setTitle("Medium Well", for: .normal)
+            self.botButton.setTitle("Well Done", for: .normal)
+            
+        } else if selectedProtein == "egg" {
+            self.topButton.setTitle("Soft Boiled", for: .normal)
+            self.midButton.setTitle("Medium Boiled", for: .normal)
+            self.botButton.setTitle("Hard Boiled", for: .normal)
+            
+        } else {
+            return
+        }
+    }
+    
+    //MARK: - calculate cooktime method
+    
+    private func calculateCookTime(for protein: String!, method: String!, doneness: String!) -> Double {
+        
+        var cookTime = 0.0
+        
+        if protein == "steak" && method == "pan" && doneness == "Rare" {
+            cookTime = 120
+        }
+        
+        
+        return cookTime
+    }
+    
 }

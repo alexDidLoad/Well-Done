@@ -152,7 +152,7 @@ class ViewController: UIViewController {
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
-        print("meat")
+       
     }
     @IBAction func chickenButtonPressed(_ sender: UIButton) {
         if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
@@ -160,7 +160,7 @@ class ViewController: UIViewController {
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
-        print("chicken")
+       
     }
     
     @IBAction func fishButtonPressed(_ sender: UIButton) {
@@ -169,7 +169,7 @@ class ViewController: UIViewController {
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
-        print("fish")
+        
     }
     
     @IBAction func eggButtonPressed(_ sender: UIButton) {
@@ -178,7 +178,7 @@ class ViewController: UIViewController {
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
-        print("egg")
+       
     }
     
 }
