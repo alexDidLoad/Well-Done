@@ -90,7 +90,7 @@ class ChoiceViewController: UIViewController {
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
-        
+        topMethodButton.bounce()
     }
     
     @objc func midTap() {
@@ -100,7 +100,7 @@ class ChoiceViewController: UIViewController {
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
-        
+        midMethodButton.bounce()
     }
     
     @objc func botTap() {
@@ -110,6 +110,7 @@ class ChoiceViewController: UIViewController {
             vc.modalTransitionStyle = .flipHorizontal
             present(vc, animated: true)
         }
+        botMethodButton.bounce()
     }
     
     //MARK: - Update Button Images and cooking methods

@@ -100,14 +100,17 @@ class CookViewController: UIViewController {
     
     @objc func topTap() {
         presentVC(for: selectedProtein, method: selectedMethod, doneness: topButton.currentTitle!)
+        topButton.bounce()
     }
     
     @objc func midTap() {
         presentVC(for: selectedProtein, method: selectedMethod, doneness: midButton.currentTitle!)
+        midButton.bounce()
     }
     
     @objc func botTap() {
         presentVC(for: selectedProtein, method: selectedMethod, doneness: botButton.currentTitle!)
+        botButton.bounce()
     }
     
     //MARK: - Present VC Method

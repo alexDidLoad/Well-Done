@@ -17,7 +17,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
     //button and labels
     private let startButton = UIButton()
     private let resetButton = UIButton()
-    private let exitButton = UIButton()
+    private let backButton = UIButton()
     private var timerLabel = UILabel()
     
     //timer objects
@@ -120,25 +120,25 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         resetButton.translatesAutoresizingMaskIntoConstraints = false
         resetButton.isHidden = true
         
-        exitButton.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
-        exitButton.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
-        exitButton.setTitle("BACK", for: .normal)
-        exitButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 20)
-        exitButton.layer.cornerRadius = 30
-        exitButton.layer.masksToBounds = false
-        exitButton.layer.shadowColor = shadowColor
-        exitButton.layer.shadowOffset = shadowOffSet
-        exitButton.layer.shadowOpacity = shadowOpacity
-        exitButton.layer.shadowRadius = shadowRadius
-        exitButton.translatesAutoresizingMaskIntoConstraints = false
-        exitButton.isHidden = false
+        backButton.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
+        backButton.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+        backButton.setTitle("BACK", for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 20)
+        backButton.layer.cornerRadius = 30
+        backButton.layer.masksToBounds = false
+        backButton.layer.shadowColor = shadowColor
+        backButton.layer.shadowOffset = shadowOffSet
+        backButton.layer.shadowOpacity = shadowOpacity
+        backButton.layer.shadowRadius = shadowRadius
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.isHidden = false
         
         //add targets
         startButton.addTarget(self, action: #selector(startTimer), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
-        exitButton.addTarget(self, action: #selector(exitView), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(exitView), for: .touchUpInside)
         
-        view.addSubview(exitButton)
+        view.addSubview(backButton)
         view.addSubview(startButton)
         view.addSubview(resetButton)
         
@@ -151,10 +151,10 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
             resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             resetButton.heightAnchor.constraint(equalToConstant: 60),
             resetButton.widthAnchor.constraint(equalToConstant: 150),
-            exitButton.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 20),
-            exitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exitButton.heightAnchor.constraint(equalToConstant: 60),
-            exitButton.widthAnchor.constraint(equalToConstant: 150)
+            backButton.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 20),
+            backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backButton.heightAnchor.constraint(equalToConstant: 60),
+            backButton.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
     
@@ -169,6 +169,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         
         startButton.isHidden = true
         resetButton.isHidden = false
+        resetButton.bounce()
     }
     
     @objc private func resetTimer() {
@@ -181,6 +182,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         
         resetButton.isHidden = true
         startButton.isHidden = false
+        startButton.bounce()
     }
     
     @objc private func updateTime() {
@@ -205,6 +207,8 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] action in self?.dismiss(animated: true)}))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
+        
+        backButton.bounce()
     }
     
     //MARK: - Supporting methods
@@ -225,12 +229,8 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
     }
 }
 
-//MARK: - Extensions
 
-extension TimeInterval {
+
+
     
-    var time: String {
-        return String(format: "%02d:%02d", Int(self/60), Int(ceil(truncatingRemainder(dividingBy: 60))))
-    }
-    
-}
+
