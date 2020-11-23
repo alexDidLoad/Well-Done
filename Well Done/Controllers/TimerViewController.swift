@@ -47,28 +47,22 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         timeLeft = cookTime
         
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-        
         timerLabel.text = timeLeft.time
         timerLabel.textAlignment = .center
         timerLabel.font = UIFont(name: "SFProText-Ultralight", size: 60)
-        
         timerLabel.isHidden = false
-        
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(timerLabel)
         
         NSLayoutConstraint.activate([
             timerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timerLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
-        
     }
     
     private func drawTrackLayer() {
         //draw circle
         let center = view.center
-        
         //create track layer
         let circularPath = UIBezierPath(arcCenter: center, radius: 125, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
         
@@ -128,7 +122,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         
         exitButton.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
         exitButton.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
-        exitButton.setTitle("EXIT", for: .normal)
+        exitButton.setTitle("BACK", for: .normal)
         exitButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 20)
         exitButton.layer.cornerRadius = 30
         exitButton.layer.masksToBounds = false
@@ -204,13 +198,13 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
             ac.addAction(UIAlertAction(title: "Okay", style: .default))
             present(ac, animated: true)
         }
-        
     }
     
     @objc private func exitView() {
-        
-        dismiss(animated: true)
-
+        let ac = UIAlertController(title: "Are you sure?", message: "Going back will reset the timer", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] action in self?.dismiss(animated: true)}))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
     }
     
     //MARK: - Supporting methods
@@ -229,7 +223,6 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         
         animation.delegate = self
     }
-    
 }
 
 //MARK: - Extensions

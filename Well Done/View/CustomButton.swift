@@ -27,8 +27,8 @@ class CustomButton: UIButton {
         let shadowRadius = CGFloat(10.0)
         
         self.layer.masksToBounds = false
-        self.layer.borderWidth = 3
-        self.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
+//        self.layer.borderWidth = 3
+//        self.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
         self.layer.shadowColor = shadowColor
         self.layer.shadowOffset = shadowOffSet
         self.layer.shadowOpacity = shadowOpacity

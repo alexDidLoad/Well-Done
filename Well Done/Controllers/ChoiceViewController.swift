@@ -20,8 +20,6 @@ class ChoiceViewController: UIViewController {
     
     public var selectedProtein: String!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +35,7 @@ class ChoiceViewController: UIViewController {
         label.text = "2. Select a method"
         label.textColor = UIColor.black
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Ultralight", size: 30)
+        label.font = UIFont(name: "SFProText-Light", size: 30)
         label.numberOfLines = 0
         
         topMethodButton.setImage(UIImage(named: "pan"), for: .normal)

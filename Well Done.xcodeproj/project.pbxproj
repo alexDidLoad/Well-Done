@@ -35,6 +35,7 @@
 		11F7E1BE2563AB8F000B8B30 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1A62563AB4A000B8B30 /* SF-Pro-Text-SemiboldItalic.otf */; };
 		11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C02563D653000B8B30 /* CookViewController.swift */; };
 		11F7E1C4256499AE000B8B30 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C3256499AE000B8B30 /* TimerViewController.swift */; };
+		11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		11F7E1AA2563AB4B000B8B30 /* SF-Pro-Text-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-BoldItalic.otf"; sourceTree = "<group>"; };
 		11F7E1C02563D653000B8B30 /* CookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookViewController.swift; sourceTree = "<group>"; };
 		11F7E1C3256499AE000B8B30 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		11F7E1C92564C1E5000B8B30 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */,
 				11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */,
 				11F7E18C256024E8000B8B30 /* CustomButton.swift in Sources */,
 				11F7E173255FD5E0000B8B30 /* ViewController.swift in Sources */,

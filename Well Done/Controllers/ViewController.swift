@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "SFProText-Light", size: 30)!,
+            .font: UIFont(name: "SFProText-Medium", size: 30)!,
             .foregroundColor: UIColor.black,
         ]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Ultralight", size: 36)
+        label.font = UIFont(name: "SFProText-Light", size: 36)
     }
     
     private func setButtons() {
@@ -58,8 +58,6 @@ class ViewController: UIViewController {
         
         steakButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         steakButton.layer.masksToBounds = false
-        steakButton.layer.borderWidth = 3
-        steakButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
         steakButton.layer.shadowColor = shadowColor
         steakButton.layer.shadowOffset = shadowOffSet
         steakButton.layer.shadowOpacity = shadowOpacity
@@ -72,8 +70,6 @@ class ViewController: UIViewController {
         
         chickenButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         chickenButton.layer.masksToBounds = false
-        chickenButton.layer.borderWidth = 3
-        chickenButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
         chickenButton.layer.shadowColor = shadowColor
         chickenButton.layer.shadowOffset = shadowOffSet
         chickenButton.layer.shadowOpacity = shadowOpacity
@@ -86,8 +82,6 @@ class ViewController: UIViewController {
         
         fishButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         fishButton.layer.masksToBounds = false
-        fishButton.layer.borderWidth = 3
-        fishButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
         fishButton.layer.shadowColor = shadowColor
         fishButton.layer.shadowOffset = shadowOffSet
         fishButton.layer.shadowOpacity = shadowOpacity
@@ -100,8 +94,6 @@ class ViewController: UIViewController {
         
         eggButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         eggButton.layer.masksToBounds = false
-        eggButton.layer.borderWidth = 3
-        eggButton.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor
         eggButton.layer.shadowColor = shadowColor
         eggButton.layer.shadowRadius = shadowRadius
         eggButton.layer.shadowOffset = shadowOffSet

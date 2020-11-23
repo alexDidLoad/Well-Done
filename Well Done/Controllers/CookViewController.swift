@@ -9,13 +9,15 @@ import UIKit
 
 class CookViewController: UIViewController {
     
+    private let calculator = CookTimeCalculator()
+    
     private var topButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private var midButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private var botButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private let label = UILabel()
     
-    public var selectedMethod: String?
-    public var selectedProtein: String?
+    public var selectedMethod: String!
+    public var selectedProtein: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +25,18 @@ class CookViewController: UIViewController {
         setView()
         
     }
-
+    
     
     //MARK: - Set View Method
     
     private func setView() {
-                
+        
         //set labels and background color for view and buttons
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         label.text = "3. Select a preferred doneness"
         label.textColor = UIColor.black
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Ultralight", size: 30)
+        label.font = UIFont(name: "SFProText-Light", size: 30)
         label.numberOfLines = 0
         
         topButton.setTitle("Rare", for: .normal)
@@ -55,9 +57,9 @@ class CookViewController: UIViewController {
         botButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
         
         //Add targets
-        topButton.addTarget(self, action: #selector(self.rareTap), for: .touchUpInside)
-        midButton.addTarget(self, action: #selector(self.mediumRareTap), for: .touchUpInside)
-        botButton.addTarget(self, action: #selector(self.wellDoneTap), for: .touchUpInside)
+        topButton.addTarget(self, action: #selector(self.topTap), for: .touchUpInside)
+        midButton.addTarget(self, action: #selector(self.midTap), for: .touchUpInside)
+        botButton.addTarget(self, action: #selector(self.botTap), for: .touchUpInside)
         
         //Add buttons to subview
         view.addSubview(topButton)
@@ -92,33 +94,27 @@ class CookViewController: UIViewController {
         ])
         
         updateButtonLabels()
-        
     }
     
     //MARK: - Obj-c Methods
     
-    @objc func rareTap() {
-        
-        if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
-            vc.cookTime = calculateCookTime(for: selectedProtein, method: selectedMethod, doneness: topButton.currentTitle)
-            vc.modalPresentationStyle = .overFullScreen
-            present(vc, animated: true)
-        }
+    @objc func topTap() {
+        presentVC(for: selectedProtein, method: selectedMethod, doneness: topButton.currentTitle!)
     }
     
-    @objc func mediumRareTap() {
-        
-        if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
-            vc.cookTime = 420
-            vc.modalPresentationStyle = .overFullScreen
-            present(vc, animated: true)
-        }
+    @objc func midTap() {
+        presentVC(for: selectedProtein, method: selectedMethod, doneness: midButton.currentTitle!)
     }
     
-    @objc func wellDoneTap() {
-        
+    @objc func botTap() {
+        presentVC(for: selectedProtein, method: selectedMethod, doneness: botButton.currentTitle!)
+    }
+    
+    //MARK: - Present VC Method
+    
+    private func presentVC(for protein: String, method: String, doneness: String) {
         if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
-            vc.cookTime = 640
+            vc.cookTime = calculator.calculateCookTime(for: protein, method: method, doneness: doneness)
             vc.modalPresentationStyle = .overFullScreen
             present(vc, animated: true)
         }
@@ -129,33 +125,18 @@ class CookViewController: UIViewController {
     private func updateButtonLabels() {
         
         if selectedProtein == "chicken" || selectedProtein == "fish" {
-            
             self.topButton.setTitle("Medium", for: .normal)
             self.midButton.setTitle("Medium Well", for: .normal)
             self.botButton.setTitle("Well Done", for: .normal)
-            
         } else if selectedProtein == "egg" {
-            self.topButton.setTitle("Soft Boiled", for: .normal)
-            self.midButton.setTitle("Medium Boiled", for: .normal)
-            self.botButton.setTitle("Hard Boiled", for: .normal)
-            
-        } else {
-            return
+            self.topButton.setTitle("Soft Boil", for: .normal)
+            self.midButton.setTitle("Medium Boil", for: .normal)
+            self.botButton.setTitle("Hard Boil", for: .normal)
+        } else if selectedMethod == "boil" {
+            self.topButton.isHidden = true
+            self.midButton.setTitle("Well Done", for: .normal)
+            self.midButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
+            self.botButton.isHidden = true
         }
     }
-    
-    //MARK: - calculate cooktime method
-    
-    private func calculateCookTime(for protein: String!, method: String!, doneness: String!) -> Double {
-        
-        var cookTime = 0.0
-        
-        if protein == "steak" && method == "pan" && doneness == "Rare" {
-            cookTime = 120
-        }
-        
-        
-        return cookTime
-    }
-    
 }
