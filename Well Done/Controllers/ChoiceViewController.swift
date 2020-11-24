@@ -32,18 +32,18 @@ class ChoiceViewController: UIViewController {
     private func setView() {
         
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-        label.text = "2. Select a method"
+        label.text = "Select a method"
         label.textColor = UIColor.black
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Light", size: 30)
         label.numberOfLines = 0
         
         topMethodButton.setImage(UIImage(named: "pan"), for: .normal)
-        topMethodButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 24)
+        topMethodButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
         midMethodButton.setImage(UIImage(named: "oven"), for: .normal)
-        midMethodButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        midMethodButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
         botMethodButton.setImage(UIImage(named: "fryer"), for: .normal)
-        botMethodButton.imageEdgeInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 12)
+        botMethodButton.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
         
         topMethodButton.addTarget(self, action: #selector(self.topTap), for: .touchUpInside)
         midMethodButton.addTarget(self, action: #selector(self.midTap), for: .touchUpInside)
@@ -122,6 +122,7 @@ class ChoiceViewController: UIViewController {
             topMethodButton.setImage(UIImage(named: "pan"), for: .normal)
             midMethodButton.setImage(UIImage(named: "oven"), for: .normal)
             botMethodButton.setImage(UIImage(named: "boil"), for: .normal)
+            botMethodButton.imageEdgeInsets = UIEdgeInsets(top: 17, left: 17, bottom: 17, right: 17)
             
             topMethod = "pan"
             midMethod = "oven"

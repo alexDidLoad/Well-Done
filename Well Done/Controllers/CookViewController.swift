@@ -33,7 +33,7 @@ class CookViewController: UIViewController {
         
         //set labels and background color for view and buttons
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-        label.text = "3. Select a preferred doneness"
+        label.text = "Select a preferred doneness"
         label.textColor = UIColor.black
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Light", size: 30)

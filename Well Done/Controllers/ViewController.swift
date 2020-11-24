@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         title = "Well Done"
         
-        label.text = "1. Select a Protein"
+        label.text = "Select a Protein"
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         steakButton.layer.cornerRadius = 0.5 * steakButton.frame.size.width
         steakButton.imageView?.contentMode = .scaleAspectFit
         steakButton.setImage(UIImage(named: "meat"), for: .normal)
-        steakButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        steakButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         steakButton.backgroundColor = UIColor.white
         
         chickenButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         chickenButton.layer.cornerRadius = 0.5 * chickenButton.frame.size.width
         chickenButton.imageView?.contentMode = .scaleAspectFit
         chickenButton.setImage(UIImage(named: "chicken"), for: .normal)
-        chickenButton.imageEdgeInsets = UIEdgeInsets(top: 11, left: 11, bottom: 11, right: 11)
+        chickenButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         chickenButton.backgroundColor = UIColor.white
         
         fishButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         fishButton.layer.cornerRadius = 0.5 * chickenButton.frame.size.width
         fishButton.imageView?.contentMode = .scaleAspectFit
         fishButton.setImage(UIImage(named: "fish"), for: .normal)
-        fishButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 30)
+        fishButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         fishButton.backgroundColor = UIColor.white
         
         eggButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         eggButton.layer.cornerRadius = 0.5 * eggButton.frame.size.width
         eggButton.imageView?.contentMode = .scaleAspectFit
         eggButton.setImage(UIImage(named: "egg"), for: .normal)
-        eggButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 30)
+        eggButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         eggButton.backgroundColor = UIColor.white
         
         steakButton.translatesAutoresizingMaskIntoConstraints = false
