@@ -67,6 +67,7 @@ class ViewController: UIViewController {
         steakButton.setImage(UIImage(named: "meat"), for: .normal)
         steakButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         steakButton.backgroundColor = UIColor.white
+        steakButton.adjustsImageWhenHighlighted = false
         
         chickenButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         chickenButton.layer.masksToBounds = false
@@ -79,6 +80,7 @@ class ViewController: UIViewController {
         chickenButton.setImage(UIImage(named: "chicken"), for: .normal)
         chickenButton.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         chickenButton.backgroundColor = UIColor.white
+        chickenButton.adjustsImageWhenHighlighted = false
         
         fishButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         fishButton.layer.masksToBounds = false
@@ -91,6 +93,7 @@ class ViewController: UIViewController {
         fishButton.setImage(UIImage(named: "fish"), for: .normal)
         fishButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         fishButton.backgroundColor = UIColor.white
+        fishButton.adjustsImageWhenHighlighted = false
         
         eggButton.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         eggButton.layer.masksToBounds = false
@@ -103,6 +106,7 @@ class ViewController: UIViewController {
         eggButton.setImage(UIImage(named: "egg"), for: .normal)
         eggButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         eggButton.backgroundColor = UIColor.white
+        eggButton.adjustsImageWhenHighlighted = false
         
         steakButton.translatesAutoresizingMaskIntoConstraints = false
         chickenButton.translatesAutoresizingMaskIntoConstraints = false

@@ -26,6 +26,7 @@ class CustomButton: UIButton {
         let shadowOpacity = Float(1.0)
         let shadowRadius = CGFloat(10.0)
         
+        self.adjustsImageWhenHighlighted = false
         self.layer.masksToBounds = false
         self.layer.shadowColor = shadowColor
         self.layer.shadowOffset = shadowOffSet

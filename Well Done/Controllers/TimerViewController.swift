@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TimerViewController: UIViewController, CAAnimationDelegate {
     
@@ -31,6 +32,9 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
     
     //boolean properties
     private var isRunning: Bool = false
+    
+    //Alarm
+    private var audioPlayer: AVAudioPlayer!
     
     
     //MARK: - View Methods
@@ -224,6 +228,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
             timerLabel.text = timeLeft.time
         } else {
             timerLabel.text = "00:00"
+            AudioServicesPlaySystemSound(1005)
             pulsatingLayer.removeAnimation(forKey: "pulsing")
             cookTimer.invalidate()
             
