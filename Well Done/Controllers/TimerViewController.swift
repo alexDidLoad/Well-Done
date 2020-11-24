@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import UserNotifications
 import AVFoundation
 
-class TimerViewController: UIViewController, CAAnimationDelegate {
+class TimerViewController: UIViewController {
     
     //animation layer objects
     private let progressLayer = CAShapeLayer()
@@ -36,6 +37,9 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
     //Alarm
     private var audioPlayer: AVAudioPlayer!
     
+    //notificationCenter
+    private let center = UNUserNotificationCenter.current()
+    
     
     //MARK: - View Methods
     
@@ -52,7 +56,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
     
     func configureTimer() {
         
-        timeLeft = cookTime
+        timeLeft = 2
         
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         timerLabel.text = timeLeft.time
@@ -195,6 +199,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         drawProgressLayer()
         configureAnimation()
         animatePulsatingLayer()
+        notificationAlert()
         
         endTime = Date().addingTimeInterval(timeLeft)
         cookTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -218,6 +223,9 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         isRunning = false
         resetButton.isHidden = true
         startButton.isHidden = false
+        
+        center.removeAllPendingNotificationRequests()
+        
         startButton.bounce()
     }
     
@@ -228,7 +236,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
             timerLabel.text = timeLeft.time
         } else {
             timerLabel.text = "00:00"
-            AudioServicesPlaySystemSound(1005)
+            AudioServicesPlaySystemSound(1110)
             pulsatingLayer.removeAnimation(forKey: "pulsing")
             cookTimer.invalidate()
             
@@ -248,6 +256,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
             ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             present(ac, animated: true)
         }
+        center.removeAllPendingNotificationRequests()
         backButton.bounce()
     }
     
@@ -265,7 +274,7 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         
         progressLayer.add(animation, forKey: nil)
         
-        animation.delegate = self
+//        animation.delegate = self
     }
     
     private func animatePulsatingLayer() {
@@ -278,7 +287,22 @@ class TimerViewController: UIViewController, CAAnimationDelegate {
         animation.autoreverses = true
         animation.repeatCount = .infinity
         pulsatingLayer.add(animation, forKey: "pulsing")
+    }
+    
+    private func notificationAlert() {
         
+        let content = UNMutableNotificationContent()
+        content.title = "Food is ready!"
+        content.body = "Don't let it burn!"
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData" : "Well Done"]
+        content.sound = UNNotificationSound.default
+        
+        let interval = TimeInterval(5)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        center.add(request)
     }
     
 }

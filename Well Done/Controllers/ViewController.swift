@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 
 class ViewController: UIViewController {
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setView()
-        
+        registerForNotifications()
     }
     
     //MARK: - Set View methods
@@ -176,6 +177,17 @@ class ViewController: UIViewController {
             present(vc, animated: true)
         }
         sender.bounce()
+    }
+    
+    func registerForNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Yes!")
+            } else {
+                print("Oh no...")
+            }
+        }
     }
     
 }
