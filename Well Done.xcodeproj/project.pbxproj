@@ -38,6 +38,7 @@
 		11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */; };
 		11F7E1E2256BC6F3000B8B30 /* AnimationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1E1256BC6F3000B8B30 /* AnimationExtensions.swift */; };
 		11F7E1E5256BC7EA000B8B30 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1E4256BC7EA000B8B30 /* TimeIntervalExtension.swift */; };
+		11F7E1E9256D1E5F000B8B30 /* marimba.wav in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1E8256D1E5F000B8B30 /* marimba.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeCalculator.swift; sourceTree = "<group>"; };
 		11F7E1E1256BC6F3000B8B30 /* AnimationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExtensions.swift; sourceTree = "<group>"; };
 		11F7E1E4256BC7EA000B8B30 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		11F7E1E8256D1E5F000B8B30 /* marimba.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marimba.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		11F7E1972563AAC4000B8B30 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11F7E1E8256D1E5F000B8B30 /* marimba.wav */,
 				11F7E19F2563AB4A000B8B30 /* SF-Pro-Text-Black.otf */,
 				11F7E1A42563AB4A000B8B30 /* SF-Pro-Text-BlackItalic.otf */,
 				11F7E19D2563AB4A000B8B30 /* SF-Pro-Text-Bold.otf */,
@@ -247,6 +250,7 @@
 				11F7E1B02563AB8F000B8B30 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				11F7E176255FD5E0000B8B30 /* Main.storyboard in Resources */,
 				11F7E1BB2563AB8F000B8B30 /* SF-Pro-Text-UltralightItalic.otf in Resources */,
+				11F7E1E9256D1E5F000B8B30 /* marimba.wav in Resources */,
 				11F7E1AC2563AB89000B8B30 /* SF-Pro-Text-Black.otf in Resources */,
 				11F7E1B52563AB8F000B8B30 /* SF-Pro-Text-LightItalic.otf in Resources */,
 				11F7E1BA2563AB8F000B8B30 /* SF-Pro-Text-BlackItalic.otf in Resources */,

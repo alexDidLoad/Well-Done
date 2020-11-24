@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "SFProText-Medium", size: 30)!,
+            .font: UIFont(name: "Noteworthy", size: 35)!,
             .foregroundColor: UIColor.black,
         ]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)

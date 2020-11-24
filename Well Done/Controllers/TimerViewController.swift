@@ -35,7 +35,7 @@ class TimerViewController: UIViewController {
     private var isRunning: Bool = false
     
     //Alarm
-    private var audioPlayer: AVAudioPlayer!
+    private var audioPlayer: AVAudioPlayer?
     
     //notificationCenter
     private let center = UNUserNotificationCenter.current()
@@ -56,7 +56,7 @@ class TimerViewController: UIViewController {
     
     func configureTimer() {
         
-        timeLeft = 2
+        timeLeft = cookTime
         
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         timerLabel.text = timeLeft.time
@@ -236,12 +236,14 @@ class TimerViewController: UIViewController {
             timerLabel.text = timeLeft.time
         } else {
             timerLabel.text = "00:00"
-            AudioServicesPlaySystemSound(1110)
+            playSound()
             pulsatingLayer.removeAnimation(forKey: "pulsing")
             cookTimer.invalidate()
             
-            let ac = UIAlertController(title: "Food's Ready", message: "\nDon't Overcook it!", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Okay", style: .default))
+            let ac = UIAlertController(title: "Food's Ready", message: "\nDon't overcook it!", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: { [weak self] _ in
+                self?.audioPlayer?.stop()
+            }))
             present(ac, animated: true)
         }
     }
@@ -274,7 +276,6 @@ class TimerViewController: UIViewController {
         
         progressLayer.add(animation, forKey: nil)
         
-//        animation.delegate = self
     }
     
     private func animatePulsatingLayer() {
@@ -298,11 +299,26 @@ class TimerViewController: UIViewController {
         content.userInfo = ["customData" : "Well Done"]
         content.sound = UNNotificationSound.default
         
-        let interval = TimeInterval(5)
+        let interval = TimeInterval(cookTime)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         center.add(request)
+    }
+    
+    private func playSound() {
+        
+        guard let url = Bundle.main.url(forResource: "marimba", withExtension: ".wav") else { return }
+        
+        do {
+               try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+               try AVAudioSession.sharedInstance().setActive(true)
+               audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+               guard let player = audioPlayer else { return }
+               player.play()
+           } catch let error {
+               print(error.localizedDescription)
+           }
     }
     
 }
