@@ -1,9 +1,9 @@
 # Well-Done
 
-<img src="https://user-images.githubusercontent.com/67172004/100192804-727ad200-2ea7-11eb-8902-d3215bdcadfd.png" width="100" height="200">
+<img src="https://user-images.githubusercontent.com/67172004/100192804-727ad200-2ea7-11eb-8902-d3215bdcadfd.png" width=50% height=50%>
 
-![Second Screen Image](https://user-images.githubusercontent.com/67172004/100193018-d8fff000-2ea7-11eb-84d8-ccf61582e54a.png)
-<img src="https://your-image-url.type" width="100" height="100">
+<img src="https://user-images.githubusercontent.com/67172004/100193018-d8fff000-2ea7-11eb-84d8-ccf61582e54a.png" width=50% height=50%>
+
 ---
 
 ### Table of Contents
