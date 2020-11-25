@@ -32,17 +32,17 @@ If the application is on the foreground, it will play an alarm using the AVFound
 
 ## How To Use
 
-1. Select a Protein of your choice
-2. Select a method of cooking. The methods will change depending on the initial protein you select.
-3. Select a preferred doneness. The cook times will vary.
-4. Press Start to run the timer.
-5. Wait until you hear the alarm go off or if you plan to place the app in the background, you will receive a notification when the food is done!
+1. Select a Protein of your choice 🍖🍗🥚🐟
+2. Select a method of cooking. The methods will change depending on the initial protein you select 🥘 🍳
+3. Select a preferred doneness. The cook times will vary 🌡
+4. Press Start to run the timer 🕒
+5. Wait until you hear the alarm go off or if you plan to place the app in the background, you will receive a notification when the food is done! ✅
 
 #### Installation
 
 Clone the project and run it on Xcode.
 
-Will be launching on the appstore after tweaking the UI!
+Will be launching on the appstore after tweaking the UI! 🍎
 
 ---
 
