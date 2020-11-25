@@ -1,8 +1,9 @@
 # Well-Done
 
-![Home Screen Image] <img src="https://user-images.githubusercontent.com/67172004/100192804-727ad200-2ea7-11eb-8902-d3215bdcadfd.png" width="100 height="100>
-![Second Screen Image](https://user-images.githubusercontent.com/67172004/100193018-d8fff000-2ea7-11eb-84d8-ccf61582e54a.png)
+![Home Screen Image] <img src="https://user-images.githubusercontent.com/67172004/100192804-727ad200-2ea7-11eb-8902-d3215bdcadfd.png" width="100" height="100">
 
+![Second Screen Image](https://user-images.githubusercontent.com/67172004/100193018-d8fff000-2ea7-11eb-84d8-ccf61582e54a.png)
+<img src="https://your-image-url.type" width="100" height="100">
 ---
 
 ### Table of Contents
