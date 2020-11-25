@@ -1,7 +1,7 @@
 # Well-Done
 
-![Home Screen Image](https://user-images.githubusercontent.com/67172004/100192804-727ad200-2ea7-11eb-8902-d3215bdcadfd.png =250x250)
-![Second Screen Image](https://user-images.githubusercontent.com/67172004/100193018-d8fff000-2ea7-11eb-84d8-ccf61582e54a.png =250x250)
+![Home Screen Image](https://user-images.githubusercontent.com/67172004/100192804-727ad200-2ea7-11eb-8902-d3215bdcadfd.png){:height="700px" width="400px"}
+![Second Screen Image](https://user-images.githubusercontent.com/67172004/100193018-d8fff000-2ea7-11eb-84d8-ccf61582e54a.png){:height="700px" width="400px"}
 
 ---
 
