@@ -13,11 +13,9 @@ class ChoiceViewController: UIViewController {
     private var midMethodButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private var botMethodButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
     private let label = UILabel()
-    
     private var topMethod: String!
     private var midMethod: String!
     private var botMethod: String!
-    
     public var selectedProtein: String!
     
     override func viewDidLoad() {
@@ -26,60 +24,6 @@ class ChoiceViewController: UIViewController {
         setView()
         
     }
-    
-    //MARK: - Set View Method
-    
-    private func setView() {
-        
-        view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-        label.text = "Select a method"
-        label.textColor = UIColor.black
-        label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Light", size: 30)
-        label.numberOfLines = 0
-        
-        topMethodButton.setImage(UIImage(named: "pan"), for: .normal)
-        topMethodButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
-        midMethodButton.setImage(UIImage(named: "oven"), for: .normal)
-        midMethodButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
-        botMethodButton.setImage(UIImage(named: "fryer"), for: .normal)
-        botMethodButton.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
-        
-        topMethodButton.addTarget(self, action: #selector(self.topTap), for: .touchUpInside)
-        midMethodButton.addTarget(self, action: #selector(self.midTap), for: .touchUpInside)
-        botMethodButton.addTarget(self, action: #selector(self.botTap), for: .touchUpInside)
-        
-        view.addSubview(topMethodButton)
-        view.addSubview(midMethodButton)
-        view.addSubview(botMethodButton)
-        view.addSubview(label)
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        topMethodButton.translatesAutoresizingMaskIntoConstraints = false
-        midMethodButton.translatesAutoresizingMaskIntoConstraints = false
-        botMethodButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            topMethodButton.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            topMethodButton.widthAnchor.constraint(equalToConstant: 160),
-            topMethodButton.heightAnchor.constraint(equalToConstant: 160),
-            topMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            midMethodButton.topAnchor.constraint(lessThanOrEqualTo: topMethodButton.bottomAnchor, constant: 30),
-            midMethodButton.heightAnchor.constraint(equalToConstant: 160),
-            midMethodButton.widthAnchor.constraint(equalToConstant: 160),
-            midMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            botMethodButton.topAnchor.constraint(equalTo: midMethodButton.bottomAnchor, constant: 30),
-            botMethodButton.heightAnchor.constraint(equalToConstant: 160),
-            botMethodButton.widthAnchor.constraint(equalToConstant: 160),
-            botMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.topAnchor.constraint(equalTo: botMethodButton.bottomAnchor, constant: 30),
-            label.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        updateImage()
-    }
-    
     //MARK: - Button methods
     
     @objc func topTap() {
@@ -148,5 +92,58 @@ class ChoiceViewController: UIViewController {
             midMethod = "boil"
             botMethod = ""
         }
+    }
+    
+    //MARK: - Set View Method
+    
+    private func setView() {
+        
+        view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+        label.text = "Select a method"
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        label.font = UIFont(name: "SFProText-Light", size: 30)
+        label.numberOfLines = 0
+        
+        topMethodButton.setImage(UIImage(named: "pan"), for: .normal)
+        topMethodButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
+        midMethodButton.setImage(UIImage(named: "oven"), for: .normal)
+        midMethodButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
+        botMethodButton.setImage(UIImage(named: "fryer"), for: .normal)
+        botMethodButton.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
+        
+        topMethodButton.addTarget(self, action: #selector(self.topTap), for: .touchUpInside)
+        midMethodButton.addTarget(self, action: #selector(self.midTap), for: .touchUpInside)
+        botMethodButton.addTarget(self, action: #selector(self.botTap), for: .touchUpInside)
+        
+        view.addSubview(topMethodButton)
+        view.addSubview(midMethodButton)
+        view.addSubview(botMethodButton)
+        view.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        topMethodButton.translatesAutoresizingMaskIntoConstraints = false
+        midMethodButton.translatesAutoresizingMaskIntoConstraints = false
+        botMethodButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            topMethodButton.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            topMethodButton.widthAnchor.constraint(equalToConstant: 160),
+            topMethodButton.heightAnchor.constraint(equalToConstant: 160),
+            topMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            midMethodButton.topAnchor.constraint(lessThanOrEqualTo: topMethodButton.bottomAnchor, constant: 30),
+            midMethodButton.heightAnchor.constraint(equalToConstant: 160),
+            midMethodButton.widthAnchor.constraint(equalToConstant: 160),
+            midMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            botMethodButton.topAnchor.constraint(equalTo: midMethodButton.bottomAnchor, constant: 30),
+            botMethodButton.heightAnchor.constraint(equalToConstant: 160),
+            botMethodButton.widthAnchor.constraint(equalToConstant: 160),
+            botMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.topAnchor.constraint(equalTo: botMethodButton.bottomAnchor, constant: 30),
+            label.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        updateImage()
     }
 }

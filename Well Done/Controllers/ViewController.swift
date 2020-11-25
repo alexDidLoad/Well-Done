@@ -24,12 +24,63 @@ class ViewController: UIViewController {
         registerForNotifications()
     }
     
+    //MARK: - Button Methods
+    
+    @IBAction func steakButtonPressed(_ sender: UIButton) {
+        
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "steak"
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
+        sender.bounce()
+    }
+    
+    @IBAction func chickenButtonPressed(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "chicken"
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
+        sender.bounce()
+    }
+    
+    @IBAction func fishButtonPressed(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "fish"
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
+        sender.bounce()
+    }
+    
+    @IBAction func eggButtonPressed(_ sender: UIButton) {
+        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
+            vc.selectedProtein = "egg"
+            vc.modalTransitionStyle = .flipHorizontal
+            present(vc, animated: true)
+        }
+        sender.bounce()
+    }
+    
+    //MARK: - UserNotification
+    
+    private func registerForNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Yes!")
+            } else {
+                print("Oh no...")
+            }
+        }
+    }
+    
     //MARK: - Set View methods
     
     private func setView() {
         
         setButtons()
-        
         view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
         
         let attributes: [NSAttributedString.Key: Any] = [
@@ -48,6 +99,8 @@ class ViewController: UIViewController {
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Light", size: 36)
     }
+    
+    //MARK: - Setting Button properties and constraints
     
     private func setButtons() {
         
@@ -141,55 +194,6 @@ class ViewController: UIViewController {
             label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    @IBAction func steakButtonPressed(_ sender: UIButton) {
-        
-        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
-            vc.selectedProtein = "steak"
-            vc.modalTransitionStyle = .flipHorizontal
-            present(vc, animated: true)
-        }
-        sender.bounce()
-    }
-    
-    @IBAction func chickenButtonPressed(_ sender: UIButton) {
-        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
-            vc.selectedProtein = "chicken"
-            vc.modalTransitionStyle = .flipHorizontal
-            present(vc, animated: true)
-        }
-        sender.bounce()
-    }
-    
-    @IBAction func fishButtonPressed(_ sender: UIButton) {
-        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
-            vc.selectedProtein = "fish"
-            vc.modalTransitionStyle = .flipHorizontal
-            present(vc, animated: true)
-        }
-        sender.bounce()
-    }
-    
-    @IBAction func eggButtonPressed(_ sender: UIButton) {
-        if let vc = storyboard?.instantiateViewController(identifier: "ChoiceVC") as? ChoiceViewController {
-            vc.selectedProtein = "egg"
-            vc.modalTransitionStyle = .flipHorizontal
-            present(vc, animated: true)
-        }
-        sender.bounce()
-    }
-    
-    func registerForNotifications() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-            if granted {
-                print("Yes!")
-            } else {
-                print("Oh no...")
-            }
-        }
-    }
-    
 }
 
 

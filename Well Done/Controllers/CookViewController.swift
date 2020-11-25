@@ -26,6 +26,52 @@ class CookViewController: UIViewController {
         
     }
     
+    //MARK: - Obj-c Methods
+    
+    @objc func topTap() {
+        presentVC(for: selectedProtein, method: selectedMethod, doneness: topButton.currentTitle!)
+        topButton.bounce()
+    }
+    
+    @objc func midTap() {
+        presentVC(for: selectedProtein, method: selectedMethod, doneness: midButton.currentTitle!)
+        midButton.bounce()
+    }
+    
+    @objc func botTap() {
+        presentVC(for: selectedProtein, method: selectedMethod, doneness: botButton.currentTitle!)
+        botButton.bounce()
+    }
+    
+    //MARK: - Present VC Method
+    
+    private func presentVC(for protein: String, method: String, doneness: String) {
+        if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
+            vc.cookTime = calculator.calculateCookTime(for: protein, method: method, doneness: doneness)
+            vc.modalPresentationStyle = .overFullScreen
+            present(vc, animated: true)
+        }
+    }
+    
+    //MARK: - Update Label Method
+    
+    private func updateButtonLabels() {
+        
+        if selectedProtein == "chicken" || selectedProtein == "fish" {
+            self.topButton.setTitle("Medium", for: .normal)
+            self.midButton.setTitle("Medium Well", for: .normal)
+            self.botButton.setTitle("Well Done", for: .normal)
+        } else if selectedProtein == "egg" {
+            self.topButton.setTitle("Soft Boil", for: .normal)
+            self.midButton.setTitle("Medium Boil", for: .normal)
+            self.botButton.setTitle("Hard Boil", for: .normal)
+        } else if selectedMethod == "boil" {
+            self.topButton.isHidden = true
+            self.midButton.setTitle("Well Done", for: .normal)
+            self.midButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
+            self.botButton.isHidden = true
+        }
+    }
     
     //MARK: - Set View Method
     
@@ -94,52 +140,5 @@ class CookViewController: UIViewController {
         ])
         
         updateButtonLabels()
-    }
-    
-    //MARK: - Obj-c Methods
-    
-    @objc func topTap() {
-        presentVC(for: selectedProtein, method: selectedMethod, doneness: topButton.currentTitle!)
-        topButton.bounce()
-    }
-    
-    @objc func midTap() {
-        presentVC(for: selectedProtein, method: selectedMethod, doneness: midButton.currentTitle!)
-        midButton.bounce()
-    }
-    
-    @objc func botTap() {
-        presentVC(for: selectedProtein, method: selectedMethod, doneness: botButton.currentTitle!)
-        botButton.bounce()
-    }
-    
-    //MARK: - Present VC Method
-    
-    private func presentVC(for protein: String, method: String, doneness: String) {
-        if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
-            vc.cookTime = calculator.calculateCookTime(for: protein, method: method, doneness: doneness)
-            vc.modalPresentationStyle = .overFullScreen
-            present(vc, animated: true)
-        }
-    }
-    
-    //MARK: - Update Label Method
-    
-    private func updateButtonLabels() {
-        
-        if selectedProtein == "chicken" || selectedProtein == "fish" {
-            self.topButton.setTitle("Medium", for: .normal)
-            self.midButton.setTitle("Medium Well", for: .normal)
-            self.botButton.setTitle("Well Done", for: .normal)
-        } else if selectedProtein == "egg" {
-            self.topButton.setTitle("Soft Boil", for: .normal)
-            self.midButton.setTitle("Medium Boil", for: .normal)
-            self.botButton.setTitle("Hard Boil", for: .normal)
-        } else if selectedMethod == "boil" {
-            self.topButton.isHidden = true
-            self.midButton.setTitle("Well Done", for: .normal)
-            self.midButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
-            self.botButton.isHidden = true
-        }
     }
 }
