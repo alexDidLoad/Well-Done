@@ -42,7 +42,8 @@ If the application is on the foreground, it will play an alarm using the AVFound
 
 Clone the project and run it on Xcode.
 
-(#well-done)
+Will be launching on the appstore after tweaking the UI!
+
 ---
 
 ## Author Info
