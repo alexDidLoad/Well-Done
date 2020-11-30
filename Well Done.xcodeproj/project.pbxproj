@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11A4BCCD2574845000C09D7A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCCC2574845000C09D7A /* Extensions.swift */; };
+		11A4BCD625748C5100C09D7A /* Protein.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCD525748C5100C09D7A /* Protein.swift */; };
 		11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */; };
 		11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */; };
-		11F7E173255FD5E0000B8B30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E172255FD5E0000B8B30 /* ViewController.swift */; };
-		11F7E176255FD5E0000B8B30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E174255FD5E0000B8B30 /* Main.storyboard */; };
+		11F7E173255FD5E0000B8B30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E172255FD5E0000B8B30 /* HomeViewController.swift */; };
 		11F7E178255FD5E1000B8B30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E177255FD5E1000B8B30 /* Assets.xcassets */; };
 		11F7E17B255FD5E1000B8B30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E179255FD5E1000B8B30 /* LaunchScreen.storyboard */; };
 		11F7E18C256024E8000B8B30 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E18B256024E8000B8B30 /* CustomButton.swift */; };
@@ -36,17 +37,16 @@
 		11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C02563D653000B8B30 /* CookViewController.swift */; };
 		11F7E1C4256499AE000B8B30 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C3256499AE000B8B30 /* TimerViewController.swift */; };
 		11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */; };
-		11F7E1E2256BC6F3000B8B30 /* AnimationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1E1256BC6F3000B8B30 /* AnimationExtensions.swift */; };
-		11F7E1E5256BC7EA000B8B30 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1E4256BC7EA000B8B30 /* TimeIntervalExtension.swift */; };
 		11F7E1E9256D1E5F000B8B30 /* marimba.wav in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1E8256D1E5F000B8B30 /* marimba.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11A4BCCC2574845000C09D7A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		11A4BCD525748C5100C09D7A /* Protein.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protein.swift; sourceTree = "<group>"; };
 		11F7E16B255FD5E0000B8B30 /* Well Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Well Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		11F7E172255FD5E0000B8B30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		11F7E175255FD5E0000B8B30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		11F7E172255FD5E0000B8B30 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		11F7E177255FD5E1000B8B30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11F7E17A255FD5E1000B8B30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11F7E17C255FD5E1000B8B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,8 +73,6 @@
 		11F7E1C02563D653000B8B30 /* CookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookViewController.swift; sourceTree = "<group>"; };
 		11F7E1C3256499AE000B8B30 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeCalculator.swift; sourceTree = "<group>"; };
-		11F7E1E1256BC6F3000B8B30 /* AnimationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExtensions.swift; sourceTree = "<group>"; };
-		11F7E1E4256BC7EA000B8B30 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		11F7E1E8256D1E5F000B8B30 /* marimba.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marimba.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11A4BCD02574845700C09D7A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				11A4BCCC2574845000C09D7A /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		11F7E162255FD5E0000B8B30 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +120,7 @@
 				11F7E1C92564C1E5000B8B30 /* Model */,
 				11F7E1CA2564C203000B8B30 /* View */,
 				11F7E19425616DDC000B8B30 /* Controllers */,
+				11A4BCD02574845700C09D7A /* Utils */,
 				11F7E177255FD5E1000B8B30 /* Assets.xcassets */,
 				11F7E17C255FD5E1000B8B30 /* Info.plist */,
 			);
@@ -123,7 +130,7 @@
 		11F7E19425616DDC000B8B30 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				11F7E172255FD5E0000B8B30 /* ViewController.swift */,
+				11F7E172255FD5E0000B8B30 /* HomeViewController.swift */,
 				11F7E19125616DC2000B8B30 /* ChoiceViewController.swift */,
 				11F7E1C02563D653000B8B30 /* CookViewController.swift */,
 				11F7E1C3256499AE000B8B30 /* TimerViewController.swift */,
@@ -161,8 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */,
-				11F7E1E1256BC6F3000B8B30 /* AnimationExtensions.swift */,
-				11F7E1E4256BC7EA000B8B30 /* TimeIntervalExtension.swift */,
+				11A4BCD525748C5100C09D7A /* Protein.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -170,7 +176,6 @@
 		11F7E1CA2564C203000B8B30 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				11F7E174255FD5E0000B8B30 /* Main.storyboard */,
 				11F7E179255FD5E1000B8B30 /* LaunchScreen.storyboard */,
 				11F7E18B256024E8000B8B30 /* CustomButton.swift */,
 			);
@@ -248,7 +253,6 @@
 				11F7E1BC2563AB8F000B8B30 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
 				11F7E1B12563AB8F000B8B30 /* SF-Pro-Text-Semibold.otf in Resources */,
 				11F7E1B02563AB8F000B8B30 /* SF-Pro-Text-RegularItalic.otf in Resources */,
-				11F7E176255FD5E0000B8B30 /* Main.storyboard in Resources */,
 				11F7E1BB2563AB8F000B8B30 /* SF-Pro-Text-UltralightItalic.otf in Resources */,
 				11F7E1E9256D1E5F000B8B30 /* marimba.wav in Resources */,
 				11F7E1AC2563AB89000B8B30 /* SF-Pro-Text-Black.otf in Resources */,
@@ -267,29 +271,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */,
-				11F7E1E5256BC7EA000B8B30 /* TimeIntervalExtension.swift in Sources */,
 				11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */,
 				11F7E18C256024E8000B8B30 /* CustomButton.swift in Sources */,
-				11F7E173255FD5E0000B8B30 /* ViewController.swift in Sources */,
+				11F7E173255FD5E0000B8B30 /* HomeViewController.swift in Sources */,
 				11F7E1C4256499AE000B8B30 /* TimerViewController.swift in Sources */,
 				11F7E19225616DC2000B8B30 /* ChoiceViewController.swift in Sources */,
 				11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */,
-				11F7E1E2256BC6F3000B8B30 /* AnimationExtensions.swift in Sources */,
+				11A4BCCD2574845000C09D7A /* Extensions.swift in Sources */,
 				11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */,
+				11A4BCD625748C5100C09D7A /* Protein.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		11F7E174255FD5E0000B8B30 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				11F7E175255FD5E0000B8B30 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		11F7E179255FD5E1000B8B30 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -425,7 +421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 584W76NDBF;
 				INFOPLIST_FILE = "Well Done/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -445,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 584W76NDBF;
 				INFOPLIST_FILE = "Well Done/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
