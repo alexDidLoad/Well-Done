@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import AVFoundation
+
+var audioPlayer: AVAudioPlayer!
 
 //MARK: - UIView Extension
 
@@ -80,14 +83,17 @@ extension UIView {
     }
     
     
-    /// Button pressed animation
-    func bounce() {
+    /// Button released animation
+    func liftUp() {
+        UIView.animate(withDuration: 0.09) {
+            self.transform = CGAffineTransform.identity
+        }
+    }
+    
+    /// Button pressed down animation
+    func pushDown() {
         UIView.animate(withDuration: 0.09) {
             self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.09) {
-                self.transform = CGAffineTransform.identity
-            }
         }
     }
     
@@ -147,7 +153,7 @@ extension UIViewController {
         protein.type = type
         protein.method = method
         protein.doneness = doneness
-        button.bounce()
+        button.liftUp()
     }
     
 }

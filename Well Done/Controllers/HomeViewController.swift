@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         button.setDimensions(height: 150, width: 150)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(steakButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -31,6 +32,7 @@ class HomeViewController: UIViewController {
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         button.setDimensions(height: 150, width: 150)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(chickenButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -41,6 +43,7 @@ class HomeViewController: UIViewController {
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         button.setDimensions(height: 150, width: 150)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(fishButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -51,6 +54,7 @@ class HomeViewController: UIViewController {
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         button.setDimensions(height: 150, width: 150)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(eggButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -64,6 +68,7 @@ class HomeViewController: UIViewController {
         return label
     }()
     
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -71,6 +76,7 @@ class HomeViewController: UIViewController {
         
         configureUI()
         registerForNotifications()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +102,10 @@ class HomeViewController: UIViewController {
         pushTo(viewController: ChoiceViewController(), withProtein: "egg", button: eggButton)
     }
     
+    @objc func animateTouchDown(button: UIButton) {
+        button.pushDown()
+    }
+    
     //MARK: - UserNotification
     
     private func registerForNotifications() {
@@ -118,6 +128,7 @@ class HomeViewController: UIViewController {
         
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         configureNavBar(withTitle: "Well Done", prefersLargeTitle: true)
+        navigationItem.backButtonTitle = "Select a Protein"
         
         let topStack = UIStackView(arrangedSubviews: [steakButton, chickenButton])
         topStack.axis = .horizontal

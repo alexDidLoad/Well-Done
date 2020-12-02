@@ -9,8 +9,8 @@ import UIKit
 
 class CustomButton: UIButton {
     
-    init() {
-        super.init(frame: .zero)
+   override init(frame: CGRect) {
+        super.init(frame: frame)
         
         let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).cgColor
         let shadowOffSet = CGSize(width: 0, height: 10.0)
@@ -27,7 +27,6 @@ class CustomButton: UIButton {
         layer.borderColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
         layer.borderWidth = 1
         backgroundColor = UIColor.white
-        
     }
     
     required init?(coder: NSCoder) {

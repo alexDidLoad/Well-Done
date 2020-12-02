@@ -23,6 +23,7 @@ class ChoiceViewController: UIViewController {
         button.setImage(UIImage(named: "pan"), for: .normal)
         button.setDimensions(height: 150, width: 150)
         button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleTopTap), for: .touchUpInside)
         return button
     }()
@@ -31,6 +32,7 @@ class ChoiceViewController: UIViewController {
         button.setImage(UIImage(named: "oven"), for: .normal)
         button.setDimensions(height: 150, width: 150)
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleMidTap), for: .touchUpInside)
         return button
     }()
@@ -39,6 +41,7 @@ class ChoiceViewController: UIViewController {
         button.setImage(UIImage(named: "fryer"), for: .normal)
         button.setDimensions(height: 150, width: 150)
         button.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleBotTap), for: .touchUpInside)
         return button
     }()
@@ -75,16 +78,21 @@ class ChoiceViewController: UIViewController {
         pushTo(viewController: CookViewController(), withProtein: protein.type, withCookMethod: botMethod, button: botButton)
     }
     
+    @objc func animateTouchDown(button: UIButton) {
+        button.pushDown()
+    }
+   
     //MARK: - Helpers
     
     private func configureUI() {
        
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.backButtonTitle = "Select a Method"
         
         stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
         stack.axis = .vertical
-        stack.spacing = 40
+        stack.spacing = 35
         view.addSubview(stack)
         stack.centerX(inView: view)
         stackTopAnchor = stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12)
@@ -93,9 +101,7 @@ class ChoiceViewController: UIViewController {
         view.addSubview(label)
         label.centerX(inView: view)
         label.anchor(top: stack.bottomAnchor,
-                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                     paddingTop: -30)
-        
+                     bottom: view.safeAreaLayoutGuide.bottomAnchor)
         updateImage()
     }
     
@@ -130,3 +136,4 @@ class ChoiceViewController: UIViewController {
     }
     
 }
+

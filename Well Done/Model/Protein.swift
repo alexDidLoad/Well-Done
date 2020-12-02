@@ -13,7 +13,6 @@ struct Protein {
     var method: String!
     var doneness: String!
     
-    
     init(type: String? = "", method: String? = "", doneness: String? = "") {
       
         self.type = type
