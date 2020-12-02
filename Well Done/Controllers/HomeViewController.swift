@@ -8,12 +8,13 @@
 import UIKit
 import UserNotifications
 
-private var protein = Protein()
+//Set above class to allow all classes to have access to the protein properties
+var protein = Protein()
 
 class HomeViewController: UIViewController {
     
     //MARK: - Properties
-
+    
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Select a Protein"
@@ -28,7 +29,6 @@ class HomeViewController: UIViewController {
         let button = CustomButton(imageName: "meat")
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        button.backgroundColor = UIColor.white
         button.setDimensions(height: 150, width: 150)
         button.addTarget(self, action: #selector(steakButtonPressed), for: .touchUpInside)
         return button
@@ -38,7 +38,6 @@ class HomeViewController: UIViewController {
         let button = CustomButton(imageName: "chicken")
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        button.backgroundColor = UIColor.white
         button.setDimensions(height: 150, width: 150)
         button.addTarget(self, action: #selector(chickenButtonPressed), for: .touchUpInside)
         return button
@@ -48,7 +47,6 @@ class HomeViewController: UIViewController {
         let button = CustomButton(imageName: "fish")
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
-        button.backgroundColor = UIColor.white
         button.setDimensions(height: 150, width: 150)
         button.addTarget(self, action: #selector(fishButtonPressed), for: .touchUpInside)
         return button
@@ -58,7 +56,6 @@ class HomeViewController: UIViewController {
         let button = CustomButton(imageName: "egg")
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
-        button.backgroundColor = UIColor.white
         button.setDimensions(height: 150, width: 150)
         button.addTarget(self, action: #selector(eggButtonPressed), for: .touchUpInside)
         return button
@@ -78,32 +75,32 @@ class HomeViewController: UIViewController {
     @objc func steakButtonPressed() {
         protein.type = "steak"
         let choiceVC = ChoiceViewController()
-        choiceVC.modalPresentationStyle = .automatic
-        present(choiceVC, animated: true)
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(choiceVC, animated: true)
         steakButton.bounce()
     }
     
     @objc func chickenButtonPressed() {
         protein.type = "chicken"
         let choiceVC = ChoiceViewController()
-        choiceVC.modalPresentationStyle = .automatic
-        present(choiceVC, animated: true)
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(choiceVC, animated: true)
         chickenButton.bounce()
     }
     
     @objc func fishButtonPressed() {
         protein.type = "fish"
         let choiceVC = ChoiceViewController()
-        choiceVC.modalPresentationStyle = .automatic
-        present(choiceVC, animated: true)
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(choiceVC, animated: true)
         fishButton.bounce()
     }
     
     @objc func eggButtonPressed() {
         protein.type = "egg"
         let choiceVC = ChoiceViewController()
-        choiceVC.modalPresentationStyle = .automatic
-        present(choiceVC, animated: true)
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(choiceVC, animated: true)
         eggButton.bounce()
     }
     
@@ -155,8 +152,8 @@ class HomeViewController: UIViewController {
         view.addSubview(label)
         label.anchor(top: midStack.bottomAnchor,
                      leading: view.leadingAnchor,
-                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                     trailing: view.trailingAnchor)
+                     trailing: view.trailingAnchor,
+                     paddingTop: 100)
         
     }
     

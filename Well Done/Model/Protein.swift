@@ -9,13 +9,13 @@ import UIKit
 
 struct Protein {
     
-    var type: String?
-    var method: String?
-    var doneness: String?
+    var type: String!
+    var method: String!
+    var doneness: String!
     
     
     init(type: String? = "", method: String? = "", doneness: String? = "") {
-        
+      
         self.type = type
         self.method = method
         self.doneness = doneness

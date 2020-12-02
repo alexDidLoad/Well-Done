@@ -30,7 +30,6 @@ class ChoiceViewController: UIViewController {
         return button
     }()
     
-    
     //MARK: - Lifecycle
     
     
@@ -38,14 +37,17 @@ class ChoiceViewController: UIViewController {
             super.viewDidLoad()
     
             configureUI()
-    
+        
+        
+        print(protein.type!)
+        
         }
     
     //MARK: - Helpers
     
     func configureUI() {
         
-        view.backgroundColor = .green
+        view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         
     }
     
