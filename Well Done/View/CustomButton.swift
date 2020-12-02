@@ -9,7 +9,7 @@ import UIKit
 
 class CustomButton: UIButton {
     
-    init(imageName: String? = nil) {
+    init() {
         super.init(frame: .zero)
         
         let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.40).cgColor
@@ -17,9 +17,6 @@ class CustomButton: UIButton {
         let shadowOpacity = Float(1.0)
         let shadowRadius = CGFloat(10.0)
         
-        
-        guard let imageName = imageName else { return }
-        setImage(UIImage(named: imageName), for: .normal)
         adjustsImageWhenHighlighted = false
         layer.masksToBounds = false
         layer.shadowColor = shadowColor

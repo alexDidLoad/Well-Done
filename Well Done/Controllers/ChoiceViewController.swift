@@ -11,178 +11,122 @@ class ChoiceViewController: UIViewController {
     
     //MARK: - Properties
     
+    private var stack = UIStackView()
+    private var stackTopAnchor: NSLayoutConstraint!
+    
+    private var topMethod: String? = "pan"
+    private var midMethod: String? = "oven"
+    private var botMethod: String? = "fryer"
+    
     private let topButton: CustomButton = {
-        let button = CustomButton(imageName: nil)
-        
-        
+        let button = CustomButton()
+        button.setImage(UIImage(named: "pan"), for: .normal)
+        button.setDimensions(height: 150, width: 150)
+        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
+        button.addTarget(self, action: #selector(handleTopTap), for: .touchUpInside)
         return button
     }()
     private let midButton: CustomButton = {
-        let button = CustomButton(imageName: nil)
-        
-        
+        let button = CustomButton()
+        button.setImage(UIImage(named: "oven"), for: .normal)
+        button.setDimensions(height: 150, width: 150)
+        button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
+        button.addTarget(self, action: #selector(handleMidTap), for: .touchUpInside)
         return button
     }()
     private let botButton: CustomButton = {
-        let button = CustomButton(imageName: nil)
-        
-        
+        let button = CustomButton()
+        button.setImage(UIImage(named: "fryer"), for: .normal)
+        button.setDimensions(height: 150, width: 150)
+        button.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
+        button.addTarget(self, action: #selector(handleBotTap), for: .touchUpInside)
         return button
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Select a method"
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "SFProText-Light", size: 36)
+        return label
     }()
     
     //MARK: - Lifecycle
     
-    
     override func viewDidLoad() {
-            super.viewDidLoad()
-    
-            configureUI()
+        super.viewDidLoad()
         
-        
-        print(protein.type!)
-        
-        }
-    
-    //MARK: - Helpers
-    
-    func configureUI() {
-        
-        view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        configureUI()
         
     }
     
+    //MARK: - Selectors
     
-
-//    private var topMethodButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-//    private var midMethodButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-//    private var botMethodButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-//    private let label = UILabel()
-//    private var topMethod: String!
-//    private var midMethod: String!
-//    private var botMethod: String!
-//    public var selectedProtein: String!
-//
-//
-//    //MARK: - Button methods
-//
-//    @objc func topTap() {
-//
-//        if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
-//            vc.selectedMethod = topMethod
-//            vc.selectedProtein = selectedProtein
-//            vc.modalTransitionStyle = .flipHorizontal
-//            present(vc, animated: true)
-//        }
-//        topMethodButton.bounce()
-//    }
-//
-//    @objc func midTap() {
-//        if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
-//            vc.selectedMethod = midMethod
-//            vc.selectedProtein = selectedProtein
-//            vc.modalTransitionStyle = .flipHorizontal
-//            present(vc, animated: true)
-//        }
-//        midMethodButton.bounce()
-//    }
-//
-//    @objc func botTap() {
-//        if let vc = storyboard?.instantiateViewController(identifier: "CookVC") as? CookViewController {
-//            vc.selectedMethod = botMethod
-//            vc.selectedProtein = selectedProtein
-//            vc.modalTransitionStyle = .flipHorizontal
-//            present(vc, animated: true)
-//        }
-//        botMethodButton.bounce()
-//    }
-//
-//    //MARK: - Update Button Images and cooking methods
-//
-//    private func updateImage() {
-//
-//        if selectedProtein == "steak" {
-//
-//            topMethodButton.setImage(UIImage(named: "pan"), for: .normal)
-//            midMethodButton.setImage(UIImage(named: "oven"), for: .normal)
-//            botMethodButton.setImage(UIImage(named: "boil"), for: .normal)
-//            botMethodButton.imageEdgeInsets = UIEdgeInsets(top: 17, left: 17, bottom: 17, right: 17)
-//
-//            topMethod = "pan"
-//            midMethod = "oven"
-//            botMethod = "boil"
-//
-//        } else if selectedProtein == "chicken" || selectedProtein == "fish" {
-//
-//            topMethodButton.setImage(UIImage(named: "pan"), for: .normal)
-//            midMethodButton.setImage(UIImage(named: "oven"), for: .normal)
-//            botMethodButton.setImage(UIImage(named: "fryer"), for: .normal)
-//
-//            topMethod = "pan"
-//            midMethod = "oven"
-//            botMethod = "fryer"
-//
-//        } else {
-//
-//            topMethodButton.isHidden = true
-//            midMethodButton.setImage(UIImage(named: "boil"), for: .normal)
-//            botMethodButton.isHidden = true
-//
-//            topMethod = ""
-//            midMethod = "boil"
-//            botMethod = ""
-//        }
-//    }
-//
-//    //MARK: - Set View Method
-//
-//    private func setView() {
-//
-//        view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-//        label.text = "Select a method"
-//        label.textColor = UIColor.black
-//        label.textAlignment = .center
-//        label.font = UIFont(name: "SFProText-Light", size: 30)
-//        label.numberOfLines = 0
-//
-//        topMethodButton.setImage(UIImage(named: "pan"), for: .normal)
-//        topMethodButton.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
-//        midMethodButton.setImage(UIImage(named: "oven"), for: .normal)
-//        midMethodButton.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
-//        botMethodButton.setImage(UIImage(named: "fryer"), for: .normal)
-//        botMethodButton.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
-//
-//        topMethodButton.addTarget(self, action: #selector(self.topTap), for: .touchUpInside)
-//        midMethodButton.addTarget(self, action: #selector(self.midTap), for: .touchUpInside)
-//        botMethodButton.addTarget(self, action: #selector(self.botTap), for: .touchUpInside)
-//
-//        view.addSubview(topMethodButton)
-//        view.addSubview(midMethodButton)
-//        view.addSubview(botMethodButton)
-//        view.addSubview(label)
-//
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        topMethodButton.translatesAutoresizingMaskIntoConstraints = false
-//        midMethodButton.translatesAutoresizingMaskIntoConstraints = false
-//        botMethodButton.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            topMethodButton.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-//            topMethodButton.widthAnchor.constraint(equalToConstant: 160),
-//            topMethodButton.heightAnchor.constraint(equalToConstant: 160),
-//            topMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            midMethodButton.topAnchor.constraint(lessThanOrEqualTo: topMethodButton.bottomAnchor, constant: 30),
-//            midMethodButton.heightAnchor.constraint(equalToConstant: 160),
-//            midMethodButton.widthAnchor.constraint(equalToConstant: 160),
-//            midMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            botMethodButton.topAnchor.constraint(equalTo: midMethodButton.bottomAnchor, constant: 30),
-//            botMethodButton.heightAnchor.constraint(equalToConstant: 160),
-//            botMethodButton.widthAnchor.constraint(equalToConstant: 160),
-//            botMethodButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            label.topAnchor.constraint(equalTo: botMethodButton.bottomAnchor, constant: 30),
-//            label.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-//            label.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ])
-//
-//        updateImage()
-//    }
+    @objc func handleTopTap() {
+        pushTo(viewController: CookViewController(), withProtein: protein.type, withCookMethod: topMethod, button: topButton)
+    }
+    
+    @objc func handleMidTap() {
+        pushTo(viewController: CookViewController(), withProtein: protein.type, withCookMethod: midMethod, button: midButton)
+    }
+    
+    @objc func handleBotTap() {
+        pushTo(viewController: CookViewController(), withProtein: protein.type, withCookMethod: botMethod, button: botButton)
+    }
+    
+    //MARK: - Helpers
+    
+    private func configureUI() {
+       
+        view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
+        stack.axis = .vertical
+        stack.spacing = 40
+        view.addSubview(stack)
+        stack.centerX(inView: view)
+        stackTopAnchor = stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12)
+        stackTopAnchor.isActive = true
+        
+        view.addSubview(label)
+        label.centerX(inView: view)
+        label.anchor(top: stack.bottomAnchor,
+                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                     paddingTop: -30)
+        
+        updateImage()
+    }
+    
+    /// Updates button images according to the protein.type
+    private func updateImage() {
+        if protein.type == "steak" {
+            topButton.setImage(UIImage(named: "pan"), for: .normal)
+            midButton.setImage(UIImage(named: "oven"), for: .normal)
+            botButton.setImage(UIImage(named: "boil"), for: .normal)
+            botButton.imageEdgeInsets = UIEdgeInsets(top: 17, left: 17, bottom: 17, right: 17)
+            topMethod = "pan"
+            midMethod = "oven"
+            botMethod = "boil"
+        } else if protein.type == "chicken" || protein.type == "fish" {
+            topButton.setImage(UIImage(named: "pan"), for: .normal)
+            midButton.setImage(UIImage(named: "oven"), for: .normal)
+            botButton.setImage(UIImage(named: "fryer"), for: .normal)
+            topMethod = "pan"
+            midMethod = "oven"
+            botMethod = "fryer"
+        } else {
+            stackTopAnchor.isActive = false
+            stack.centerY(inView: view, constant: -20)
+            stack.centerX(inView: view)
+            
+            topButton.isHidden = true
+            midButton.setImage(UIImage(named: "boil"), for: .normal)
+            botButton.isHidden = true
+    
+            midMethod = "boil"
+        }
+    }
+    
 }

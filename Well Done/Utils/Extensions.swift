@@ -79,12 +79,13 @@ extension UIView {
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
     
-    //button animation
+    
+    /// Button pressed animation
     func bounce() {
-        UIView.animate(withDuration: 0.08) {
+        UIView.animate(withDuration: 0.09) {
             self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         } completion: { _ in
-            UIView.animate(withDuration: 0.08) {
+            UIView.animate(withDuration: 0.09) {
                 self.transform = CGAffineTransform.identity
             }
         }
@@ -125,6 +126,28 @@ extension UIViewController {
         
         //overrides status bar to be white (battery | wifi symbol | time)
         navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
+    }
+    
+    /// Pushes to next view controller
+    /// - Parameters:
+    ///   - viewController: The View controller that you'd like the current one to be pushed to.
+    ///   - withProtein: Sets the protein.type property (optional)
+    ///   - withCookMethod: Sets the protein.method property (optional)
+    ///   - withDoneness: Sets the protein.doneness property (optional)
+    ///   - button: allows for the current button to have the bounce() animation.
+    func pushTo(viewController: UIViewController, withProtein: String? = "", withCookMethod: String? = "", withDoneness: String? = "",  button: UIButton) {
+        guard let type = withProtein else { return }
+        guard let method = withCookMethod else { return }
+        guard let doneness = withDoneness else { return }
+        
+        let vc = viewController
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
+        
+        protein.type = type
+        protein.method = method
+        protein.doneness = doneness
+        button.bounce()
     }
     
 }

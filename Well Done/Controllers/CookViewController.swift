@@ -4,11 +4,27 @@
 ////
 ////  Created by Alexander Ha on 11/17/20.
 ////
-//
-//import UIKit
-//
-//class CookViewController: UIViewController {
-//
+
+import UIKit
+
+class CookViewController: UIViewController {
+    
+    
+    //MARK: - Properties
+    
+    //MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .green
+        print(protein.type!)
+        print(protein.method!)
+    }
+    
+    //MARK: - Helpers
+    
+
 //    private let calculator = CookTimeCalculator()
 //
 //    private var topButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
@@ -141,4 +157,4 @@
 //
 //        updateButtonLabels()
 //    }
-//}
+}

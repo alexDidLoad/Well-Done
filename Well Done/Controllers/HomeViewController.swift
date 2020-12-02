@@ -15,18 +15,9 @@ class HomeViewController: UIViewController {
     
     //MARK: - Properties
     
-    private let label: UILabel = {
-        let label = UILabel()
-        label.text = "Select a Protein"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Light", size: 36)
-        return label
-    }()
-    
     private let steakButton: CustomButton = {
-        let button = CustomButton(imageName: "meat")
+        let button = CustomButton()
+        button.setImage(UIImage(named: "meat"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         button.setDimensions(height: 150, width: 150)
@@ -35,7 +26,8 @@ class HomeViewController: UIViewController {
     }()
     
     private let chickenButton: CustomButton = {
-        let button = CustomButton(imageName: "chicken")
+        let button = CustomButton()
+        button.setImage(UIImage(named: "chicken"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         button.setDimensions(height: 150, width: 150)
@@ -44,7 +36,8 @@ class HomeViewController: UIViewController {
     }()
     
     private let fishButton: CustomButton = {
-        let button = CustomButton(imageName: "fish")
+        let button = CustomButton()
+        button.setImage(UIImage(named: "fish"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         button.setDimensions(height: 150, width: 150)
@@ -53,12 +46,22 @@ class HomeViewController: UIViewController {
     }()
     
     private let eggButton: CustomButton = {
-        let button = CustomButton(imageName: "egg")
+        let button = CustomButton()
+        button.setImage(UIImage(named: "egg"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
         button.setDimensions(height: 150, width: 150)
         button.addTarget(self, action: #selector(eggButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Select a Protein"
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "SFProText-Light", size: 36)
+        return label
     }()
     
     //MARK: - Lifecycle
@@ -70,38 +73,27 @@ class HomeViewController: UIViewController {
         registerForNotifications()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     //MARK: - Selectors
     
     @objc func steakButtonPressed() {
-        protein.type = "steak"
-        let choiceVC = ChoiceViewController()
-        navigationController?.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(choiceVC, animated: true)
-        steakButton.bounce()
+        pushTo(viewController: ChoiceViewController(), withProtein: "steak", button: steakButton)
     }
     
     @objc func chickenButtonPressed() {
-        protein.type = "chicken"
-        let choiceVC = ChoiceViewController()
-        navigationController?.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(choiceVC, animated: true)
-        chickenButton.bounce()
+       pushTo(viewController: ChoiceViewController(), withProtein: "chicken", button: chickenButton)
     }
     
     @objc func fishButtonPressed() {
-        protein.type = "fish"
-        let choiceVC = ChoiceViewController()
-        navigationController?.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(choiceVC, animated: true)
-        fishButton.bounce()
+        pushTo(viewController: ChoiceViewController(), withProtein: "fish", button: fishButton)
     }
     
     @objc func eggButtonPressed() {
-        protein.type = "egg"
-        let choiceVC = ChoiceViewController()
-        navigationController?.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(choiceVC, animated: true)
-        eggButton.bounce()
+        pushTo(viewController: ChoiceViewController(), withProtein: "egg", button: eggButton)
     }
     
     //MARK: - UserNotification
@@ -122,7 +114,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - Helpers
     
-    func configureUI() {
+    private func configureUI() {
         
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         configureNavBar(withTitle: "Well Done", prefersLargeTitle: true)
