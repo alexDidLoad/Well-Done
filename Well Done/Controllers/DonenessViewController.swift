@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CookViewController: UIViewController {
+class DonenessViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -78,7 +78,6 @@ class CookViewController: UIViewController {
         pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: topButton.currentTitle?.lowercased(), button: topButton)
     }
     
-    
     @objc func handleMidTap() {
         pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: midButton.currentTitle?.lowercased(), button: midButton)
     }
@@ -96,7 +95,6 @@ class CookViewController: UIViewController {
         
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.backButtonTitle = "Select Doneness"
         
         stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
         stack.axis = .vertical

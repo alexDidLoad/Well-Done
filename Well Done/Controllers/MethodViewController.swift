@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChoiceViewController: UIViewController {
+class MethodViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -65,21 +65,20 @@ class ChoiceViewController: UIViewController {
     //MARK: - Selectors
     
     @objc func handleTopTap() {
-        pushTo(viewController: CookViewController(), withProtein: PROTEIN.type, withCookMethod: topMethod, button: topButton)
+        pushTo(viewController: DonenessViewController(), withProtein: PROTEIN.type, withCookMethod: topMethod, button: topButton)
     }
     
     @objc func handleMidTap() {
-        pushTo(viewController: CookViewController(), withProtein: PROTEIN.type, withCookMethod: midMethod, button: midButton)
+        pushTo(viewController: DonenessViewController(), withProtein: PROTEIN.type, withCookMethod: midMethod, button: midButton)
     }
     
     @objc func handleBotTap() {
-        pushTo(viewController: CookViewController(), withProtein: PROTEIN.type, withCookMethod: botMethod, button: botButton)
+        pushTo(viewController: DonenessViewController(), withProtein: PROTEIN.type, withCookMethod: botMethod, button: botButton)
     }
     
     @objc func animateTouchDown(button: UIButton) {
         button.pushDown()
     }
-   
     //MARK: - Helpers
     
     private func configureUI() {
@@ -101,7 +100,6 @@ class ChoiceViewController: UIViewController {
                      bottom: view.safeAreaLayoutGuide.bottomAnchor)
     }
     
-    /// Updates button images according to the protein.type
     private func updateImage() {
         if PROTEIN.type == "steak" {
             topButton.setImage(UIImage(named: "pan"), for: .normal)

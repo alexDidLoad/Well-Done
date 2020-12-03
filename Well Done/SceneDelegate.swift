@@ -18,11 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let nav = UINavigationController(rootViewController: HomeViewController())
+        let nav = UINavigationController(rootViewController: ProteinViewController())
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
-        
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

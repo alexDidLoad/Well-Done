@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
-
-var audioPlayer: AVAudioPlayer!
 
 //MARK: - UIView Extension
 
@@ -155,7 +152,6 @@ extension UIViewController {
         PROTEIN.doneness = doneness
         button.liftUp()
     }
-    
 }
 
 

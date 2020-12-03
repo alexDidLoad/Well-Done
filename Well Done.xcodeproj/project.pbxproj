@@ -10,13 +10,15 @@
 		11A4BCCD2574845000C09D7A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCCC2574845000C09D7A /* Extensions.swift */; };
 		11A4BCD625748C5100C09D7A /* Protein.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCD525748C5100C09D7A /* Protein.swift */; };
 		11A4BCF82579368800C09D7A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCF72579368800C09D7A /* Global.swift */; };
+		11A4BCFF257945B000C09D7A /* CustomShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCFE257945B000C09D7A /* CustomShapeLayer.swift */; };
+		11A4BD04257952EA00C09D7A /* CustomTimerButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BD03257952EA00C09D7A /* CustomTimerButtons.swift */; };
 		11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */; };
 		11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */; };
-		11F7E173255FD5E0000B8B30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E172255FD5E0000B8B30 /* HomeViewController.swift */; };
+		11F7E173255FD5E0000B8B30 /* ProteinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E172255FD5E0000B8B30 /* ProteinViewController.swift */; };
 		11F7E178255FD5E1000B8B30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E177255FD5E1000B8B30 /* Assets.xcassets */; };
 		11F7E17B255FD5E1000B8B30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E179255FD5E1000B8B30 /* LaunchScreen.storyboard */; };
 		11F7E18C256024E8000B8B30 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E18B256024E8000B8B30 /* CustomButton.swift */; };
-		11F7E19225616DC2000B8B30 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E19125616DC2000B8B30 /* ChoiceViewController.swift */; };
+		11F7E19225616DC2000B8B30 /* MethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E19125616DC2000B8B30 /* MethodViewController.swift */; };
 		11F7E1AC2563AB89000B8B30 /* SF-Pro-Text-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E19F2563AB4A000B8B30 /* SF-Pro-Text-Black.otf */; };
 		11F7E1AE2563AB8F000B8B30 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1A12563AB4A000B8B30 /* SF-Pro-Text-Heavy.otf */; };
 		11F7E1AF2563AB8F000B8B30 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1A02563AB4A000B8B30 /* SF-Pro-Text-Regular.otf */; };
@@ -35,7 +37,7 @@
 		11F7E1BC2563AB8F000B8B30 /* SF-Pro-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1A52563AB4A000B8B30 /* SF-Pro-Text-HeavyItalic.otf */; };
 		11F7E1BD2563AB8F000B8B30 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E19B2563AB4A000B8B30 /* SF-Pro-Text-MediumItalic.otf */; };
 		11F7E1BE2563AB8F000B8B30 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1A62563AB4A000B8B30 /* SF-Pro-Text-SemiboldItalic.otf */; };
-		11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C02563D653000B8B30 /* CookViewController.swift */; };
+		11F7E1C12563D653000B8B30 /* DonenessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C02563D653000B8B30 /* DonenessViewController.swift */; };
 		11F7E1C4256499AE000B8B30 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1C3256499AE000B8B30 /* TimerViewController.swift */; };
 		11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */; };
 		11F7E1E9256D1E5F000B8B30 /* marimba.wav in Resources */ = {isa = PBXBuildFile; fileRef = 11F7E1E8256D1E5F000B8B30 /* marimba.wav */; };
@@ -45,15 +47,17 @@
 		11A4BCCC2574845000C09D7A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		11A4BCD525748C5100C09D7A /* Protein.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protein.swift; sourceTree = "<group>"; };
 		11A4BCF72579368800C09D7A /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		11A4BCFE257945B000C09D7A /* CustomShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShapeLayer.swift; sourceTree = "<group>"; };
+		11A4BD03257952EA00C09D7A /* CustomTimerButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimerButtons.swift; sourceTree = "<group>"; };
 		11F7E16B255FD5E0000B8B30 /* Well Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Well Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		11F7E172255FD5E0000B8B30 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		11F7E172255FD5E0000B8B30 /* ProteinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinViewController.swift; sourceTree = "<group>"; };
 		11F7E177255FD5E1000B8B30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11F7E17A255FD5E1000B8B30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11F7E17C255FD5E1000B8B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11F7E18B256024E8000B8B30 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		11F7E19125616DC2000B8B30 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
+		11F7E19125616DC2000B8B30 /* MethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodViewController.swift; sourceTree = "<group>"; };
 		11F7E1992563AB4A000B8B30 /* SF-Pro-Text-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Thin.otf"; sourceTree = "<group>"; };
 		11F7E19A2563AB4A000B8B30 /* SF-Pro-Text-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-ThinItalic.otf"; sourceTree = "<group>"; };
 		11F7E19B2563AB4A000B8B30 /* SF-Pro-Text-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-MediumItalic.otf"; sourceTree = "<group>"; };
@@ -72,7 +76,7 @@
 		11F7E1A82563AB4B000B8B30 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 		11F7E1A92563AB4B000B8B30 /* SF-Pro-Text-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-LightItalic.otf"; sourceTree = "<group>"; };
 		11F7E1AA2563AB4B000B8B30 /* SF-Pro-Text-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-BoldItalic.otf"; sourceTree = "<group>"; };
-		11F7E1C02563D653000B8B30 /* CookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookViewController.swift; sourceTree = "<group>"; };
+		11F7E1C02563D653000B8B30 /* DonenessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonenessViewController.swift; sourceTree = "<group>"; };
 		11F7E1C3256499AE000B8B30 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		11F7E1D9256B3813000B8B30 /* CookTimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimeCalculator.swift; sourceTree = "<group>"; };
 		11F7E1E8256D1E5F000B8B30 /* marimba.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = marimba.wav; sourceTree = "<group>"; };
@@ -133,9 +137,9 @@
 		11F7E19425616DDC000B8B30 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				11F7E172255FD5E0000B8B30 /* HomeViewController.swift */,
-				11F7E19125616DC2000B8B30 /* ChoiceViewController.swift */,
-				11F7E1C02563D653000B8B30 /* CookViewController.swift */,
+				11F7E172255FD5E0000B8B30 /* ProteinViewController.swift */,
+				11F7E19125616DC2000B8B30 /* MethodViewController.swift */,
+				11F7E1C02563D653000B8B30 /* DonenessViewController.swift */,
 				11F7E1C3256499AE000B8B30 /* TimerViewController.swift */,
 			);
 			path = Controllers;
@@ -181,6 +185,8 @@
 			children = (
 				11F7E179255FD5E1000B8B30 /* LaunchScreen.storyboard */,
 				11F7E18B256024E8000B8B30 /* CustomButton.swift */,
+				11A4BD03257952EA00C09D7A /* CustomTimerButtons.swift */,
+				11A4BCFE257945B000C09D7A /* CustomShapeLayer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,13 +279,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11A4BCFF257945B000C09D7A /* CustomShapeLayer.swift in Sources */,
 				11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */,
 				11A4BCF82579368800C09D7A /* Global.swift in Sources */,
-				11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */,
+				11F7E1C12563D653000B8B30 /* DonenessViewController.swift in Sources */,
 				11F7E18C256024E8000B8B30 /* CustomButton.swift in Sources */,
-				11F7E173255FD5E0000B8B30 /* HomeViewController.swift in Sources */,
+				11F7E173255FD5E0000B8B30 /* ProteinViewController.swift in Sources */,
+				11A4BD04257952EA00C09D7A /* CustomTimerButtons.swift in Sources */,
 				11F7E1C4256499AE000B8B30 /* TimerViewController.swift in Sources */,
-				11F7E19225616DC2000B8B30 /* ChoiceViewController.swift in Sources */,
+				11F7E19225616DC2000B8B30 /* MethodViewController.swift in Sources */,
 				11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */,
 				11A4BCCD2574845000C09D7A /* Extensions.swift in Sources */,
 				11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */,

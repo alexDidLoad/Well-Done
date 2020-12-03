@@ -9,119 +9,131 @@ import UIKit
 
 struct CookTimeCalculator {
     
-    public func calculateCookTime(for protein: Protein, method: Protein, doneness: Protein) -> Double {
-        
-        var cookTime = 0.0
-
-        //Steak cook times for each method of cooking
-//        if protein == "steak" {
-//            switch method {
-//            case "pan":
-//                switch doneness {
-//                case "Rare":
-//                    cookTime = 180
-//                case "Medium Rare":
-//                    cookTime = 240
-//                default:
-//                    cookTime = 300
-//                }
-//            case "oven":
-//                switch doneness {
-//                case "Rare":
-//                    cookTime = 600
-//                case "Medium Rare":
-//                    cookTime = 840
-//                default:
-//                    cookTime = 1260
-//                }
-//            default:
-//                switch doneness {
-//                case "Well Done":
-//                    cookTime = 2400
-//                default:
-//                    cookTime = 2400
-//                }
-//            }
-//            //chicken cook times for each method of cooking
-//        } else if protein == "chicken" {
-//            switch method {
-//            case "pan":
-//                switch doneness {
-//                case "Medium":
-//                    cookTime = 240
-//                case "Medium Well":
-//                    cookTime = 300
-//                default:
-//                    cookTime = 360
-//                }
-//            case "oven":
-//                switch doneness {
-//                case "Medium":
-//                    cookTime = 960
-//                case "Medium Well":
-//                    cookTime = 1020
-//                default:
-//                    cookTime = 1080
-//                }
-//            default:
-//                switch doneness {
-//                case "Medium":
-//                    cookTime = 840
-//                case "Medium Well":
-//                    cookTime = 900
-//                default:
-//                    cookTime = 960
-//                }
-//            }
-//            //fish cook times for each method of cooking
-//        } else if protein == "fish" {
-//            switch method {
-//            case "pan":
-//                switch doneness {
-//                case "Medium":
-//                    cookTime = 300
-//                case "Medium Well":
-//                    cookTime = 360
-//                default:
-//                    cookTime = 420
-//                }
-//            case "oven":
-//                switch doneness {
-//                case "Medium":
-//                    cookTime = 720
-//                case "Medium Well":
-//                    cookTime = 780
-//                default:
-//                    cookTime = 840
-//                }
-//            default:
-//                switch doneness {
-//                case "Medium":
-//                    cookTime = 330
-//                case "Medium Well":
-//                    cookTime = 390
-//                default:
-//                    cookTime = 420
-//                }
-//            }
-//        } else {
-//            //egg method boil times
-//            switch method {
-//            case "boil" :
-//                switch doneness {
-//                case "Soft Boil":
-//                    cookTime = 360
-//                case "Medium Boil":
-//                    cookTime = 420
-//                default:
-//                    cookTime = 720
-//                }
-//            default:
-//                break
-//            }
-//        }
-//        return cookTime
-//    }
+    var cookTime = 0.0
+    
+    public mutating func calculateCookTime(for protein: String, method: String, doneness: String) -> Double {
+        if protein == "steak" {
+            calculateSteak(method: method, doneness: doneness)
+        } else if protein == "chicken" {
+            calculateChicken(method: method, doneness: doneness)
+        } else if protein == "fish" {
+            calculateFish(method: method, doneness: doneness)
+        } else {
+            calculateEgg(method: method, doneness: doneness)
+        }
         return cookTime
     }
+    
+    //MARK: - Helpers
+    
+    private mutating func calculateSteak(method: String, doneness: String) {
+        switch method {
+        case "pan":
+            switch doneness {
+            case "rare":
+                cookTime = 180
+            case "medium rare":
+                cookTime = 240
+            default:
+                cookTime = 300
+            }
+        case "oven":
+            switch doneness {
+            case "rare":
+                cookTime = 600
+            case "medium rare":
+                cookTime = 840
+            default:
+                cookTime = 1260
+            }
+        default:
+            switch doneness {
+            case "well done":
+                cookTime = 2400
+            default:
+                cookTime = 2400
+            }
+        }
+    }
+    
+    private mutating func calculateChicken(method: String, doneness: String) {
+        switch method {
+        case "pan":
+            switch doneness {
+            case "medium":
+                cookTime = 240
+            case "medium well":
+                cookTime = 300
+            default:
+                cookTime = 360
+            }
+        case "oven":
+            switch doneness {
+            case "medium":
+                cookTime = 960
+            case "medium well":
+                cookTime = 1020
+            default:
+                cookTime = 1080
+            }
+        default:
+            switch doneness {
+            case "medium":
+                cookTime = 840
+            case "medium well":
+                cookTime = 900
+            default:
+                cookTime = 960
+            }
+        }
+    }
+    
+    private mutating func calculateFish(method: String, doneness: String) {
+        switch method {
+        case "pan":
+            switch doneness {
+            case "medium":
+                cookTime = 300
+            case "medium mell":
+                cookTime = 360
+            default:
+                cookTime = 420
+            }
+        case "oven":
+            switch doneness {
+            case "medium":
+                cookTime = 720
+            case "medium well":
+                cookTime = 780
+            default:
+                cookTime = 840
+            }
+        default:
+            switch doneness {
+            case "medium":
+                cookTime = 330
+            case "medium well":
+                cookTime = 390
+            default:
+                cookTime = 420
+            }
+        }
+    }
+    
+    private mutating func calculateEgg(method: String, doneness: String) {
+        switch method {
+        case "boil" :
+            switch doneness {
+            case "soft boil":
+                cookTime = 360
+            case "medium boil":
+                cookTime = 420
+            default:
+                cookTime = 720
+            }
+        default:
+            break
+        }
+    }
 }
+

@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 
-class HomeViewController: UIViewController {
+class ProteinViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -81,19 +81,19 @@ class HomeViewController: UIViewController {
     //MARK: - Selectors
     
     @objc func steakButtonPressed() {
-        pushTo(viewController: ChoiceViewController(), withProtein: "steak", button: steakButton)
+        pushTo(viewController: MethodViewController(), withProtein: "steak", button: steakButton)
     }
     
     @objc func chickenButtonPressed() {
-        pushTo(viewController: ChoiceViewController(), withProtein: "chicken", button: chickenButton)
+        pushTo(viewController: MethodViewController(), withProtein: "chicken", button: chickenButton)
     }
     
     @objc func fishButtonPressed() {
-        pushTo(viewController: ChoiceViewController(), withProtein: "fish", button: fishButton)
+        pushTo(viewController: MethodViewController(), withProtein: "fish", button: fishButton)
     }
     
     @objc func eggButtonPressed() {
-        pushTo(viewController: ChoiceViewController(), withProtein: "egg", button: eggButton)
+        pushTo(viewController: MethodViewController(), withProtein: "egg", button: eggButton)
     }
     
     @objc func animateTouchDown(button: UIButton) {
