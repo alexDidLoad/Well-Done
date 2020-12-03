@@ -8,9 +8,6 @@
 import UIKit
 import UserNotifications
 
-//Set above class to allow all classes to have access to the protein properties
-var protein = Protein()
-
 class HomeViewController: UIViewController {
     
     //MARK: - Properties
@@ -61,14 +58,12 @@ class HomeViewController: UIViewController {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.text = "Select a Protein"
+        label.text = "Select Protein"
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Light", size: 36)
         return label
     }()
-    
-    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -83,7 +78,6 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
     //MARK: - Selectors
     
     @objc func steakButtonPressed() {
@@ -91,7 +85,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func chickenButtonPressed() {
-       pushTo(viewController: ChoiceViewController(), withProtein: "chicken", button: chickenButton)
+        pushTo(viewController: ChoiceViewController(), withProtein: "chicken", button: chickenButton)
     }
     
     @objc func fishButtonPressed() {
@@ -105,7 +99,6 @@ class HomeViewController: UIViewController {
     @objc func animateTouchDown(button: UIButton) {
         button.pushDown()
     }
-    
     //MARK: - UserNotification
     
     private func registerForNotifications() {
@@ -121,14 +114,12 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
     //MARK: - Helpers
     
     private func configureUI() {
-        
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         configureNavBar(withTitle: "Well Done", prefersLargeTitle: true)
-        navigationItem.backButtonTitle = "Select a Protein"
+        navigationItem.backButtonTitle = "Select Protein"
         
         let topStack = UIStackView(arrangedSubviews: [steakButton, chickenButton])
         topStack.axis = .horizontal
@@ -151,13 +142,11 @@ class HomeViewController: UIViewController {
                         paddingTop: 50,
                         paddingLeading: 20,
                         paddingTrailing: 20)
-        
         view.addSubview(label)
         label.anchor(top: midStack.bottomAnchor,
                      leading: view.leadingAnchor,
                      trailing: view.trailingAnchor,
                      paddingTop: 100)
-        
     }
     
 }

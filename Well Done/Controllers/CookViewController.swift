@@ -9,152 +9,126 @@ import UIKit
 
 class CookViewController: UIViewController {
     
-    
     //MARK: - Properties
     
+    private var stack = UIStackView()
+    private var stackTopAnchor: NSLayoutConstraint!
+    
+    private let topButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("Rare", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 26)
+        button.backgroundColor = #colorLiteral(red: 0.3534811724, green: 0.9519462339, blue: 0.916274381, alpha: 1)
+        button.layer.borderWidth = 0
+        button.setDimensions(height: 150, width: 150)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(handleTopTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private let midButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("Medium Rare", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 26)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.numberOfLines = 0
+        button.backgroundColor = #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1)
+        button.layer.borderWidth = 0
+        button.setDimensions(height: 150, width: 150)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(handleMidTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private let botButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("Well Done", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 26)
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
+        button.layer.borderWidth = 0
+        button.setDimensions(height: 150, width: 150)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(handleBotTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.text = "Select Doneness"
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        label.font = UIFont(name: "SFProText-Light", size: 36)
+        label.numberOfLines = 0
+        return label
+    }()
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .green
-        print(protein.type!)
-        print(protein.method!)
+        configureUI()
+        updateLabels()
+    }
+    //MARK: - Selectors
+    
+    @objc func handleTopTap() {
+        pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: topButton.currentTitle?.lowercased(), button: topButton)
     }
     
+    
+    @objc func handleMidTap() {
+        pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: midButton.currentTitle?.lowercased(), button: midButton)
+    }
+    
+    @objc func handleBotTap() {
+        pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: botButton.currentTitle?.lowercased(), button: botButton)
+    }
+    
+    @objc func animateTouchDown(button: UIButton) {
+        button.pushDown()
+    }
     //MARK: - Helpers
     
-
-//    private let calculator = CookTimeCalculator()
-//
-//    private var topButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-//    private var midButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-//    private var botButton: CustomButton = CustomButton(frame: CGRect(x: 0, y: 0, width: 160, height: 160))
-//    private let label = UILabel()
-//
-//    public var selectedMethod: String!
-//    public var selectedProtein: String!
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        setView()
-//
-//    }
-////
-//    //MARK: - Obj-c Methods
-//
-//    @objc func topTap() {
-//        presentVC(for: selectedProtein, method: selectedMethod, doneness: topButton.currentTitle!)
-//        topButton.bounce()
-//    }
-//
-//    @objc func midTap() {
-//        presentVC(for: selectedProtein, method: selectedMethod, doneness: midButton.currentTitle!)
-//        midButton.bounce()
-//    }
-//
-//    @objc func botTap() {
-//        presentVC(for: selectedProtein, method: selectedMethod, doneness: botButton.currentTitle!)
-//        botButton.bounce()
-//    }
-//
-//    //MARK: - Present VC Method
-//
-//    private func presentVC(for protein: String, method: String, doneness: String) {
-//        if let vc = storyboard?.instantiateViewController(identifier: "TimerVC") as? TimerViewController {
-//            vc.cookTime = calculator.calculateCookTime(for: protein, method: method, doneness: doneness)
-//            vc.modalPresentationStyle = .overFullScreen
-//            present(vc, animated: true)
-//        }
-//    }
-//
-//    //MARK: - Update Label Method
-//
-//    private func updateButtonLabels() {
-//
-//        if selectedProtein == "chicken" || selectedProtein == "fish" {
-//            self.topButton.setTitle("Medium", for: .normal)
-//            self.midButton.setTitle("Medium Well", for: .normal)
-//            self.botButton.setTitle("Well Done", for: .normal)
-//        } else if selectedProtein == "egg" {
-//            self.topButton.setTitle("Soft Boil", for: .normal)
-//            self.midButton.setTitle("Medium Boil", for: .normal)
-//            self.botButton.setTitle("Hard Boil", for: .normal)
-//        } else if selectedMethod == "boil" {
-//            self.topButton.isHidden = true
-//            self.midButton.setTitle("Well Done", for: .normal)
-//            self.midButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
-//            self.botButton.isHidden = true
-//        }
-//    }
-//
-//    //MARK: - Set View Method
-//
-//    private func setView() {
-//
-//        //set labels and background color for view and buttons
-//        view.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-//        label.text = "Select a preferred doneness"
-//        label.textColor = UIColor.black
-//        label.textAlignment = .center
-//        label.font = UIFont(name: "SFProText-Light", size: 30)
-//        label.numberOfLines = 0
-//
-//        topButton.setTitle("Rare", for: .normal)
-//        topButton.setTitleColor(UIColor.black, for: .normal)
-//        topButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
-//        topButton.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-//        midButton.setTitle("Medium Rare", for: .normal)
-//        midButton.setTitleColor(UIColor.black, for: .normal)
-//        midButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
-//        midButton.titleLabel?.textAlignment = .center
-//        midButton.titleLabel?.numberOfLines = 0
-//        midButton.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-//        botButton.setTitle("Well Done", for: .normal)
-//        botButton.setTitleColor(UIColor.black, for: .normal)
-//        botButton.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 30)
-//        botButton.titleLabel?.textAlignment = .center
-//        botButton.titleLabel?.numberOfLines = 0
-//        botButton.backgroundColor = #colorLiteral(red: 1, green: 0.3905242085, blue: 0.4368999004, alpha: 1)
-//
-//        //Add targets
-//        topButton.addTarget(self, action: #selector(self.topTap), for: .touchUpInside)
-//        midButton.addTarget(self, action: #selector(self.midTap), for: .touchUpInside)
-//        botButton.addTarget(self, action: #selector(self.botTap), for: .touchUpInside)
-//
-//        //Add buttons to subview
-//        view.addSubview(topButton)
-//        view.addSubview(midButton)
-//        view.addSubview(botButton)
-//        view.addSubview(label)
-//
-//        topButton.translatesAutoresizingMaskIntoConstraints = false
-//        midButton.translatesAutoresizingMaskIntoConstraints = false
-//        botButton.translatesAutoresizingMaskIntoConstraints = false
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//
-//        //constraints
-//        NSLayoutConstraint.activate([
-//            topButton.topAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-//            topButton.widthAnchor.constraint(equalToConstant: 160),
-//            topButton.heightAnchor.constraint(equalToConstant: 160),
-//            topButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            midButton.topAnchor.constraint(lessThanOrEqualTo: topButton.bottomAnchor, constant: 20),
-//            midButton.heightAnchor.constraint(equalToConstant: 160),
-//            midButton.widthAnchor.constraint(equalToConstant: 160),
-//            midButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            botButton.topAnchor.constraint(lessThanOrEqualTo: midButton.bottomAnchor, constant: 20),
-//            botButton.heightAnchor.constraint(equalToConstant: 160),
-//            botButton.widthAnchor.constraint(equalToConstant: 160),
-//            botButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            label.topAnchor.constraint(lessThanOrEqualTo: botButton.bottomAnchor, constant: 20),
-//            label.bottomAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-//            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            label.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-//        ])
-//
-//        updateButtonLabels()
-//    }
+    private func configureUI() {
+        
+        view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.backButtonTitle = "Select Doneness"
+        
+        stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
+        stack.axis = .vertical
+        stack.spacing = 35
+        view.addSubview(stack)
+        stack.centerX(inView: view)
+        stackTopAnchor = stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 12)
+        stackTopAnchor.isActive = true
+        
+        view.addSubview(label)
+        label.centerX(inView: view)
+        label.anchor(top: stack.bottomAnchor,
+                     bottom: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    
+    private func updateLabels() {
+        if PROTEIN.type == "chicken" || PROTEIN.type == "fish" {
+            topButton.setTitle("Medium", for: .normal)
+            midButton.setTitle("Medium Well", for: .normal)
+            botButton.setTitle("Well Done", for: .normal)
+        } else if PROTEIN.type == "egg" {
+            topButton.setTitle("Soft Boil", for: .normal)
+            midButton.setTitle("Medium Boil", for: .normal)
+            botButton.setTitle("Hard Boil", for: .normal)
+        } else if PROTEIN.method == "boil" {
+            stackTopAnchor.isActive = false
+            stack.centerY(inView: view, constant: -20)
+            stack.centerX(inView: view)
+            topButton.isHidden = true
+            midButton.setTitle("Well Done", for: .normal)
+            midButton.backgroundColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
+            botButton.isHidden = true
+        }
+    }
 }

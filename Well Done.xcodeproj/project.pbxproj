@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		11A4BCCD2574845000C09D7A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCCC2574845000C09D7A /* Extensions.swift */; };
 		11A4BCD625748C5100C09D7A /* Protein.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCD525748C5100C09D7A /* Protein.swift */; };
+		11A4BCF82579368800C09D7A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BCF72579368800C09D7A /* Global.swift */; };
 		11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */; };
 		11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */; };
 		11F7E173255FD5E0000B8B30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E172255FD5E0000B8B30 /* HomeViewController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		11A4BCCC2574845000C09D7A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		11A4BCD525748C5100C09D7A /* Protein.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protein.swift; sourceTree = "<group>"; };
+		11A4BCF72579368800C09D7A /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		11F7E16B255FD5E0000B8B30 /* Well Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Well Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				11A4BCCC2574845000C09D7A /* Extensions.swift */,
+				11A4BCF72579368800C09D7A /* Global.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */,
+				11A4BCF82579368800C09D7A /* Global.swift in Sources */,
 				11F7E1C12563D653000B8B30 /* CookViewController.swift in Sources */,
 				11F7E18C256024E8000B8B30 /* CustomButton.swift in Sources */,
 				11F7E173255FD5E0000B8B30 /* HomeViewController.swift in Sources */,

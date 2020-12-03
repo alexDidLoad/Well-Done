@@ -150,9 +150,9 @@ extension UIViewController {
         navigationController?.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
         
-        protein.type = type
-        protein.method = method
-        protein.doneness = doneness
+        PROTEIN.type = type
+        PROTEIN.method = method
+        PROTEIN.doneness = doneness
         button.liftUp()
     }
     

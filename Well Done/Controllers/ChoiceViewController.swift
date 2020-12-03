@@ -48,34 +48,32 @@ class ChoiceViewController: UIViewController {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.text = "Select a method"
+        label.text = "Select Method"
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Light", size: 36)
         return label
     }()
-    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-        
+        updateImage()
     }
-    
     //MARK: - Selectors
     
     @objc func handleTopTap() {
-        pushTo(viewController: CookViewController(), withProtein: protein.type, withCookMethod: topMethod, button: topButton)
+        pushTo(viewController: CookViewController(), withProtein: PROTEIN.type, withCookMethod: topMethod, button: topButton)
     }
     
     @objc func handleMidTap() {
-        pushTo(viewController: CookViewController(), withProtein: protein.type, withCookMethod: midMethod, button: midButton)
+        pushTo(viewController: CookViewController(), withProtein: PROTEIN.type, withCookMethod: midMethod, button: midButton)
     }
     
     @objc func handleBotTap() {
-        pushTo(viewController: CookViewController(), withProtein: protein.type, withCookMethod: botMethod, button: botButton)
+        pushTo(viewController: CookViewController(), withProtein: PROTEIN.type, withCookMethod: botMethod, button: botButton)
     }
     
     @objc func animateTouchDown(button: UIButton) {
@@ -85,10 +83,9 @@ class ChoiceViewController: UIViewController {
     //MARK: - Helpers
     
     private func configureUI() {
-       
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.backButtonTitle = "Select a Method"
+        navigationItem.backButtonTitle = "Select Method"
         
         stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
         stack.axis = .vertical
@@ -102,12 +99,11 @@ class ChoiceViewController: UIViewController {
         label.centerX(inView: view)
         label.anchor(top: stack.bottomAnchor,
                      bottom: view.safeAreaLayoutGuide.bottomAnchor)
-        updateImage()
     }
     
     /// Updates button images according to the protein.type
     private func updateImage() {
-        if protein.type == "steak" {
+        if PROTEIN.type == "steak" {
             topButton.setImage(UIImage(named: "pan"), for: .normal)
             midButton.setImage(UIImage(named: "oven"), for: .normal)
             botButton.setImage(UIImage(named: "boil"), for: .normal)
@@ -115,7 +111,7 @@ class ChoiceViewController: UIViewController {
             topMethod = "pan"
             midMethod = "oven"
             botMethod = "boil"
-        } else if protein.type == "chicken" || protein.type == "fish" {
+        } else if PROTEIN.type == "chicken" || PROTEIN.type == "fish" {
             topButton.setImage(UIImage(named: "pan"), for: .normal)
             midButton.setImage(UIImage(named: "oven"), for: .normal)
             botButton.setImage(UIImage(named: "fryer"), for: .normal)
@@ -126,11 +122,9 @@ class ChoiceViewController: UIViewController {
             stackTopAnchor.isActive = false
             stack.centerY(inView: view, constant: -20)
             stack.centerX(inView: view)
-            
             topButton.isHidden = true
             midButton.setImage(UIImage(named: "boil"), for: .normal)
             botButton.isHidden = true
-    
             midMethod = "boil"
         }
     }
