@@ -94,7 +94,7 @@ struct CookTimeCalculator {
             switch doneness {
             case "medium":
                 cookTime = 300
-            case "medium mell":
+            case "medium well":
                 cookTime = 360
             default:
                 cookTime = 420

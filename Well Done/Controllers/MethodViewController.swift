@@ -21,7 +21,7 @@ class MethodViewController: UIViewController {
     private let topButton: CustomButton = {
         let button = CustomButton()
         button.setImage(UIImage(named: "pan"), for: .normal)
-        button.setDimensions(height: 150, width: 150)
+        button.setDimensions(height: 140, width: 140)
         button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleTopTap), for: .touchUpInside)
@@ -30,7 +30,7 @@ class MethodViewController: UIViewController {
     private let midButton: CustomButton = {
         let button = CustomButton()
         button.setImage(UIImage(named: "oven"), for: .normal)
-        button.setDimensions(height: 150, width: 150)
+        button.setDimensions(height: 140, width: 140)
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleMidTap), for: .touchUpInside)
@@ -39,7 +39,7 @@ class MethodViewController: UIViewController {
     private let botButton: CustomButton = {
         let button = CustomButton()
         button.setImage(UIImage(named: "fryer"), for: .normal)
-        button.setDimensions(height: 150, width: 150)
+        button.setDimensions(height: 140, width: 140)
         button.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleBotTap), for: .touchUpInside)
@@ -49,9 +49,9 @@ class MethodViewController: UIViewController {
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Select Method"
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Light", size: 36)
+        label.font = UIFont(name: "SFProText-Medium", size: 36)
         return label
     }()
     //MARK: - Lifecycle
@@ -88,16 +88,22 @@ class MethodViewController: UIViewController {
         
         stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
         stack.axis = .vertical
-        stack.spacing = 35
+        stack.spacing = 30
         view.addSubview(stack)
         stack.centerX(inView: view)
         stackTopAnchor = stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12)
         stackTopAnchor.isActive = true
         
-        view.addSubview(label)
-        label.centerX(inView: view)
-        label.anchor(top: stack.bottomAnchor,
-                     bottom: view.safeAreaLayoutGuide.bottomAnchor)
+        let bottomView = configureBottomView()
+        view.addSubview(bottomView)
+        bottomView.anchor(top: stack.bottomAnchor, paddingTop: 30)
+        bottomView.centerX(inView: view)
+        
+        bottomView.addSubview(label)
+        label.centerX(inView: bottomView)
+        label.anchor(top: bottomView.topAnchor,
+                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                     paddingTop: 40)
     }
     
     private func updateImage() {

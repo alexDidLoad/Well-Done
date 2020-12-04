@@ -18,10 +18,11 @@ class DonenessViewController: UIViewController {
         let button = CustomButton()
         button.setTitle("Rare", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 26)
-        button.backgroundColor = #colorLiteral(red: 0.3534811724, green: 0.9519462339, blue: 0.916274381, alpha: 1)
-        button.layer.borderWidth = 0
-        button.setDimensions(height: 150, width: 150)
+        button.titleLabel?.font = UIFont(name: "SFProText-Thin", size: 26)
+        button.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        button.layer.borderWidth = 10
+        button.layer.borderColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        button.setDimensions(height: 140, width: 140)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleTopTap), for: .touchUpInside)
         return button
@@ -31,12 +32,13 @@ class DonenessViewController: UIViewController {
         let button = CustomButton()
         button.setTitle("Medium Rare", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 26)
+        button.titleLabel?.font = UIFont(name: "SFProText-Thin", size: 26)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.numberOfLines = 0
-        button.backgroundColor = #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1)
-        button.layer.borderWidth = 0
-        button.setDimensions(height: 150, width: 150)
+        button.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        button.layer.borderWidth = 10
+        button.layer.borderColor = #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1)
+        button.setDimensions(height: 140, width: 140)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleMidTap), for: .touchUpInside)
         return button
@@ -46,10 +48,12 @@ class DonenessViewController: UIViewController {
         let button = CustomButton()
         button.setTitle("Well Done", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 26)
-        button.backgroundColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
-        button.layer.borderWidth = 0
-        button.setDimensions(height: 150, width: 150)
+        button.titleLabel?.font = UIFont(name: "SFProText-Thin", size: 25)
+        button.titleLabel?.numberOfLines = 0
+        button.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        button.layer.borderWidth = 10
+        button.layer.borderColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
+        button.setDimensions(height: 140, width: 140)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleBotTap), for: .touchUpInside)
         return button
@@ -58,10 +62,9 @@ class DonenessViewController: UIViewController {
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Select Doneness"
-        label.textColor = UIColor.black
+        label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Light", size: 36)
-        label.numberOfLines = 0
+        label.font = UIFont(name: "SFProText-Medium", size: 36)
         return label
     }()
     //MARK: - Lifecycle
@@ -98,16 +101,22 @@ class DonenessViewController: UIViewController {
         
         stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
         stack.axis = .vertical
-        stack.spacing = 35
+        stack.spacing = 30
         view.addSubview(stack)
         stack.centerX(inView: view)
         stackTopAnchor = stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 12)
         stackTopAnchor.isActive = true
         
-        view.addSubview(label)
-        label.centerX(inView: view)
-        label.anchor(top: stack.bottomAnchor,
-                     bottom: view.safeAreaLayoutGuide.bottomAnchor)
+        let bottomView = configureBottomView()
+        view.addSubview(bottomView)
+        bottomView.anchor(top: stack.bottomAnchor, paddingTop: 30)
+        bottomView.centerX(inView: view)
+        
+        bottomView.addSubview(label)
+        label.centerX(inView: bottomView)
+        label.anchor(top: bottomView.topAnchor,
+                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                     paddingTop: 40)
     }
     
     private func updateLabels() {
@@ -125,7 +134,7 @@ class DonenessViewController: UIViewController {
             stack.centerX(inView: view)
             topButton.isHidden = true
             midButton.setTitle("Well Done", for: .normal)
-            midButton.backgroundColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
+            midButton.layer.borderColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
             botButton.isHidden = true
         }
     }

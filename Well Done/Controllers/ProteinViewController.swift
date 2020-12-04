@@ -17,7 +17,7 @@ class ProteinViewController: UIViewController {
         button.setImage(UIImage(named: "meat"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        button.setDimensions(height: 150, width: 150)
+        button.setDimensions(height: 140, width: 140)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(steakButtonPressed), for: .touchUpInside)
         return button
@@ -28,7 +28,7 @@ class ProteinViewController: UIViewController {
         button.setImage(UIImage(named: "chicken"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        button.setDimensions(height: 150, width: 150)
+        button.setDimensions(height: 140, width: 140)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(chickenButtonPressed), for: .touchUpInside)
         return button
@@ -39,7 +39,7 @@ class ProteinViewController: UIViewController {
         button.setImage(UIImage(named: "fish"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
-        button.setDimensions(height: 150, width: 150)
+        button.setDimensions(height: 140, width: 140)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(fishButtonPressed), for: .touchUpInside)
         return button
@@ -50,7 +50,7 @@ class ProteinViewController: UIViewController {
         button.setImage(UIImage(named: "egg"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 35)
-        button.setDimensions(height: 150, width: 150)
+        button.setDimensions(height: 140, width: 140)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(eggButtonPressed), for: .touchUpInside)
         return button
@@ -59,11 +59,12 @@ class ProteinViewController: UIViewController {
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Select Protein"
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Light", size: 36)
+        label.font = UIFont(name: "SFProText-Medium", size: 36)
         return label
     }()
+ 
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -120,7 +121,7 @@ class ProteinViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         configureNavBar(withTitle: "Well Done", prefersLargeTitle: true)
         navigationItem.backButtonTitle = "Select Protein"
-        
+
         let topStack = UIStackView(arrangedSubviews: [steakButton, chickenButton])
         topStack.axis = .horizontal
         topStack.distribution = .equalSpacing
@@ -128,7 +129,7 @@ class ProteinViewController: UIViewController {
         topStack.anchor(top: view.safeAreaLayoutGuide.topAnchor,
                         leading: view.leadingAnchor,
                         trailing: view.trailingAnchor,
-                        paddingTop: 30,
+                        paddingTop: 35,
                         paddingLeading: 20,
                         paddingTrailing: 20)
         
@@ -142,11 +143,18 @@ class ProteinViewController: UIViewController {
                         paddingTop: 50,
                         paddingLeading: 20,
                         paddingTrailing: 20)
-        view.addSubview(label)
-        label.anchor(top: midStack.bottomAnchor,
-                     leading: view.leadingAnchor,
-                     trailing: view.trailingAnchor,
-                     paddingTop: 100)
+        
+        
+        let bottomView = configureBottomView()
+        view.addSubview(bottomView)
+        bottomView.anchor(top: midStack.bottomAnchor, paddingTop: 50)
+        bottomView.centerX(inView: view)
+        
+        bottomView.addSubview(label)
+        label.centerX(inView: bottomView)
+        label.anchor(top: bottomView.topAnchor,
+                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                     paddingTop: 50)
     }
     
 }

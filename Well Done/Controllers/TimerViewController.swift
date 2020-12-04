@@ -14,24 +14,27 @@ class TimerViewController: UIViewController {
     //MARK: - Properties
     
     private let startButton: CustomTimerButton = {
-        let button = CustomTimerButton(withTitle: "START", withBackgroundColor: #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1), isHidden: false)
+        let button = CustomTimerButton(withTitle: "START", withBackgroundColor: #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1), isHidden: false)
         button.setDimensions(height: 60, width: 150)
+        button.layer.borderColor = #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1).cgColor
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleStartPressed), for: .touchUpInside)
         return button
     }()
     
     private let resetButton: CustomTimerButton = {
-        let button = CustomTimerButton(withTitle: "RESET", withBackgroundColor: #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1), isHidden: true)
+        let button = CustomTimerButton(withTitle: "RESET", withBackgroundColor: #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1), isHidden: true)
         button.setDimensions(height: 60, width: 150)
+        button.layer.borderColor = #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1).cgColor
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleResetPressed), for: .touchUpInside)
         return button
     }()
     
     private let backButton: CustomTimerButton = {
-        let button = CustomTimerButton(withTitle: "BACK", withBackgroundColor: #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1), isHidden: false)
+        let button = CustomTimerButton(withTitle: "BACK", withBackgroundColor: #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1), isHidden: false)
         button.setDimensions(height: 60, width: 150)
+        button.layer.borderColor = #colorLiteral(red: 1, green: 0.4193676412, blue: 0.4201382995, alpha: 1).cgColor
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleBackPressed), for: .touchUpInside)
         return button
@@ -40,6 +43,7 @@ class TimerViewController: UIViewController {
     private let timerLabel: UILabel = {
         let label = UILabel()
         label.text = "nil"
+        label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Ultralight", size: 60)
         label.setDimensions(height: 221, width: 221)
@@ -51,7 +55,7 @@ class TimerViewController: UIViewController {
     
     private let progressLayer: CustomShapeLayer = {
         let layer = CustomShapeLayer()
-        layer.strokeColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1).cgColor
+        layer.strokeColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1).withAlphaComponent(0.8).cgColor
         layer.zPosition = 1
         return layer
     }()
@@ -98,26 +102,33 @@ class TimerViewController: UIViewController {
     private var endTime: Date?
     
     private var calculator = CookTimeCalculator()
-    private var isRunning: Bool? = false
     
-    private let notificationCenter = UNUserNotificationCenter.current()
+    private let userNotificationCenter = UNUserNotificationCenter.current()
+    private let notification = NotificationCenter.default
     
     private var audioPlayer: AVAudioPlayer!
     private var soundEffect: AVAudioPlayer!
     
+    private var isRunning: Bool = false
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureUI()
+        addNotificationObserver()
     }
+    
+    deinit {
+        notification.removeObserver(self)
+    }
+    
     //MARK: - Selectors
     
     @objc func handleStartPressed(button: UIButton) {
         startTime()
         notificationAlert()
-        isRunning?.toggle()
+        isRunning = true
         startButton.isHidden = true
         resetButton.isHidden = false
         buttonSoundEffect()
@@ -141,6 +152,12 @@ class TimerViewController: UIViewController {
     
     @objc private func updateTime() {
         alertUser()
+    }
+    
+    @objc func willEnterForeground() {
+        if isRunning {
+            pulsingLayer.add(pulsingAnimation, forKey: "pulsing")
+        }
     }
     
     //MARK: - Helpers
@@ -170,12 +187,19 @@ class TimerViewController: UIViewController {
         timerLabel.centerX(inView: view)
         timerLabel.centerY(inView: view)
         
+        let bottomView = configureBottomView()
+        view.addSubview(bottomView)
+        bottomView.centerX(inView: view)
+        bottomView.anchor(top: timerLabel.bottomAnchor, paddingTop: 50)
+        
         let stack = UIStackView(arrangedSubviews: [startButton, resetButton, backButton])
         stack.axis = .vertical
-        stack.spacing = 20
-        view.addSubview(stack)
-        stack.centerX(inView: view)
-        stack.anchor(top: timerLabel.bottomAnchor, paddingTop: 65)
+        stack.spacing = 15
+        bottomView.addSubview(stack)
+        stack.centerX(inView: bottomView)
+        stack.anchor(top: bottomView.topAnchor, paddingTop: 35)
+        stack.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
     }
     
     private func startTime() {
@@ -196,7 +220,7 @@ class TimerViewController: UIViewController {
         isRunning = false
         resetButton.isHidden = true
         startButton.isHidden = false
-        notificationCenter.removeAllPendingNotificationRequests()
+        userNotificationCenter.removeAllPendingNotificationRequests()
     }
     
     private func exitTimer() {
@@ -210,7 +234,7 @@ class TimerViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             present(ac, animated: true)
         }
-        notificationCenter.removeAllPendingNotificationRequests()
+        userNotificationCenter.removeAllPendingNotificationRequests()
     }
     
     private func notificationAlert() {
@@ -225,7 +249,7 @@ class TimerViewController: UIViewController {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
-        notificationCenter.add(request)
+        userNotificationCenter.add(request)
     }
     
     private func alertUser() {
@@ -269,7 +293,8 @@ class TimerViewController: UIViewController {
         }
     }
     
-    
-   
-    
+    private func addNotificationObserver() {
+        notification.addObserver(self, selector: #selector(self.willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
 }
+

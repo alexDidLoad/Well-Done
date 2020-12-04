@@ -20,8 +20,9 @@ class CustomTimerButton: UIButton {
         backgroundColor = color
         setTitle(title, for: .normal)
         setTitleColor(.black, for: .normal)
-        titleLabel?.font = UIFont(name: "SFProText-Medium", size: 20)
+        titleLabel?.font = UIFont(name: "SFProText-Light", size: 20)
         layer.cornerRadius = 30
+        layer.borderWidth = 5
         layer.masksToBounds = false
         layer.shadowColor = shadowColor
         layer.shadowOffset = shadowOffSet

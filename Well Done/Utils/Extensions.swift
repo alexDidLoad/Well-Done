@@ -100,13 +100,21 @@ extension UIView {
 
 extension UIViewController {
     
-    func configureGradientLayer() {
+    func configureGradientLayer(view: UIView) {
         let gradient = CAGradientLayer()
-        gradient.colors = [#colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1).cgColor, #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1).cgColor]
+        gradient.colors = [#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1).cgColor, #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor]
         //sets the two points at the top to the bottom
         gradient.locations = [0, 1]
         view.layer.addSublayer(gradient)
         gradient.frame = view.frame
+    }
+    
+    func configureBottomView() -> UIView {
+        let iv = UIView()
+        iv.backgroundColor = #colorLiteral(red: 0.1018215939, green: 0.3255112469, blue: 0.360734731, alpha: 1)
+        iv.setDimensions(height: 1000, width: 1000)
+        iv.layer.cornerRadius = 1000 / 2
+        return iv
     }
     
     func configureNavBar(withTitle title: String, prefersLargeTitle: Bool) {
@@ -143,10 +151,14 @@ extension UIViewController {
         guard let method = withCookMethod else { return }
         guard let doneness = withDoneness else { return }
         
-        let vc = viewController
-        navigationController?.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: true)
-        
+        let transition: CATransition = CATransition()
+        transition.duration = 0.8
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        navigationController!.view.layer.add(transition, forKey: kCATransition)
+        navigationController?.pushViewController(viewController, animated: true)
+    
         PROTEIN.type = type
         PROTEIN.method = method
         PROTEIN.doneness = doneness

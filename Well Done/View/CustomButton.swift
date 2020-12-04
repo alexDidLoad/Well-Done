@@ -23,9 +23,7 @@ class CustomButton: UIButton {
         layer.shadowOffset = shadowOffSet
         layer.shadowOpacity = shadowOpacity
         layer.shadowRadius = shadowRadius
-        layer.cornerRadius = 150 / 2
-        layer.borderColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
-        layer.borderWidth = 1
+        layer.cornerRadius = 140 / 2
         backgroundColor = UIColor.white
     }
     
