@@ -42,7 +42,6 @@ class TimerViewController: UIViewController {
     
     private let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "nil"
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Ultralight", size: 60)
@@ -51,6 +50,21 @@ class TimerViewController: UIViewController {
         label.layer.cornerRadius = 221 / 2
         label.layer.masksToBounds = true
         return label
+    }()
+    
+    private let finishedTimeLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = .black
+        label.font = UIFont(name: "SFProText-Ultralight", size: 18)
+        return label
+    }()
+    
+    private let bellIcon: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(systemName: "bell")
+        iv.tintColor = .black
+        return iv
     }()
     
     private let progressLayer: CustomShapeLayer = {
@@ -99,7 +113,8 @@ class TimerViewController: UIViewController {
     private var timer = Timer()
     private var timeLeft: TimeInterval = 0
     private var cookTime: Double!
-    private var endTime: Date?
+    private var date: Date?
+    private let calendar = Calendar.current
     
     private var calculator = CookTimeCalculator()
     
@@ -111,10 +126,10 @@ class TimerViewController: UIViewController {
     
     private var isRunning: Bool = false
     //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureUI()
         addNotificationObserver()
     }
@@ -187,6 +202,18 @@ class TimerViewController: UIViewController {
         timerLabel.centerX(inView: view)
         timerLabel.centerY(inView: view)
         
+        finishedTimeLabel.text = calculateEndTime()
+        timerLabel.addSubview(finishedTimeLabel)
+        finishedTimeLabel.centerX(inView: timerLabel, constant: 4)
+        finishedTimeLabel.centerY(inView: timerLabel, constant: 50)
+        
+        timerLabel.addSubview(bellIcon)
+        bellIcon.setDimensions(height: 15, width: 15)
+        bellIcon.anchor(top: finishedTimeLabel.topAnchor,
+                        trailing: finishedTimeLabel.leadingAnchor,
+                        paddingTop: 4,
+                        paddingTrailing: 2)
+        
         let bottomView = configureBottomView()
         view.addSubview(bottomView)
         bottomView.centerX(inView: view)
@@ -197,17 +224,17 @@ class TimerViewController: UIViewController {
         stack.spacing = 15
         bottomView.addSubview(stack)
         stack.centerX(inView: bottomView)
-        stack.anchor(top: bottomView.topAnchor, paddingTop: 35)
+        stack.anchor(top: bottomView.topAnchor, paddingTop: 30)
         stack.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
     }
     
     private func startTime() {
+        finishedTimeLabel.text = calculateEndTime()
         view.layer.addSublayer(progressLayer)
         progressAnimation.duration = timeLeft
         progressLayer.add(progressAnimation, forKey: "stroke")
         pulsingLayer.add(pulsingAnimation, forKey: "pulsing")
-        endTime = Date().addingTimeInterval(timeLeft)
+        date = Date().addingTimeInterval(timeLeft)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
@@ -254,7 +281,7 @@ class TimerViewController: UIViewController {
     
     private func alertUser() {
         if timeLeft > 0 {
-            timeLeft = endTime?.timeIntervalSinceNow ?? 0
+            timeLeft = date?.timeIntervalSinceNow ?? 0
             timerLabel.text = timeLeft.time
         } else {
             timerLabel.text = "00:00"
@@ -295,6 +322,25 @@ class TimerViewController: UIViewController {
     
     private func addNotificationObserver() {
         notification.addObserver(self, selector: #selector(self.willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    private func calculateEndTime() -> String {
+        let date = Date()
+        var hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        let calculatedMinutes = minute + Int(cookTime / 60)
+        
+        if calculatedMinutes > 60 {
+            hour += 1
+            finishedTimeLabel.text = "\(hour):\(calculatedMinutes % 60)"
+        } else if calculatedMinutes == 60 {
+            finishedTimeLabel.text = "\(hour):0\(calculatedMinutes % 60)"
+        } else if calculatedMinutes < 10 {
+            finishedTimeLabel.text = "\(hour):0\(calculatedMinutes)"
+        } else {
+            finishedTimeLabel.text = "\(hour):\(calculatedMinutes)"
+        }
+        return finishedTimeLabel.text!
     }
 }
 

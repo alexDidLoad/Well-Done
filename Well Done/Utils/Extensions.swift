@@ -49,9 +49,13 @@ extension UIView {
         }
     }
     
-    func centerX(inView view: UIView) {
+    func centerX(inView view: UIView, leadingAnchor: NSLayoutXAxisAnchor? = nil, paddingLeading: CGFloat = 0, constant: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
-        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: constant).isActive = true
+        
+        if let leading = leadingAnchor {
+            anchor(leading: leading, paddingLeading: paddingLeading)
+        }
     }
     
     func centerY(inView view: UIView, leadingAnchor: NSLayoutXAxisAnchor? = nil, paddingLeading: CGFloat = 0, constant: CGFloat = 0) {
@@ -176,4 +180,6 @@ extension TimeInterval {
     }
     
 }
+
+    
 
