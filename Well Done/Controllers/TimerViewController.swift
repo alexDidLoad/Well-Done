@@ -332,15 +332,20 @@ class TimerViewController: UIViewController {
         
         if calculatedMinutes > 60 {
             hour += 1
-            finishedTimeLabel.text = "\(hour):\(calculatedMinutes % 60)"
+            if calculatedMinutes % 60 > 10 {
+                finishedTimeLabel.text = "\(hour):\(calculatedMinutes % 60)"
+            } else if calculatedMinutes % 60 < 10 {
+                finishedTimeLabel.text = "\(hour):0\(calculatedMinutes % 60)"
+            }
         } else if calculatedMinutes == 60 {
-            finishedTimeLabel.text = "\(hour):0\(calculatedMinutes % 60)"
+            finishedTimeLabel.text = "\(hour):00"
         } else if calculatedMinutes < 10 {
             finishedTimeLabel.text = "\(hour):0\(calculatedMinutes)"
         } else {
             finishedTimeLabel.text = "\(hour):\(calculatedMinutes)"
         }
-        return finishedTimeLabel.text!
+        guard let finishedTimeLabelText = finishedTimeLabel.text else { return ""}
+        return finishedTimeLabelText
     }
 }
 
