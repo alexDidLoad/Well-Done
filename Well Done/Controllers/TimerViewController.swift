@@ -11,32 +11,39 @@ import AVFoundation
 
 class TimerViewController: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - UI Components
     
-    private let startButton: CustomTimerButton = {
-        let button = CustomTimerButton(withTitle: "START", withBackgroundColor: #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1), isHidden: false)
-        button.setDimensions(height: 60, width: 150)
-        button.layer.borderColor = #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1).cgColor
+    private let playButton: CustomTimerButton = {
+        let button = CustomTimerButton(withImage: "play.circle", isHidden: false)
+        button.setDimensions(height: 60, width: 60)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(handleStartPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handlePlay), for: .touchUpInside)
         return button
     }()
     
-    private let resetButton: CustomTimerButton = {
-        let button = CustomTimerButton(withTitle: "RESET", withBackgroundColor: #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1), isHidden: true)
-        button.setDimensions(height: 60, width: 150)
-        button.layer.borderColor = #colorLiteral(red: 0.9999362826, green: 0.9020040035, blue: 0.4274116755, alpha: 1).cgColor
+    private let pauseButton: CustomTimerButton = {
+        let button = CustomTimerButton(withImage: "pause.circle", isHidden: true)
+        button.setDimensions(height: 60, width: 60)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(handleResetPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        return button
+    }()
+    
+    private let stopButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setDimensions(height: 60, width: 60)
+        button.backgroundColor = .white
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(handleStop), for: .touchUpInside)
         return button
     }()
     
     private let backButton: CustomTimerButton = {
-        let button = CustomTimerButton(withTitle: "BACK", withBackgroundColor: #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1), isHidden: false)
-        button.setDimensions(height: 60, width: 150)
+        let button = CustomTimerButton(withImage: "chevron.left.circle.fill", isHidden: false)
+        button.setDimensions(height: 60, width: 60)
         button.layer.borderColor = #colorLiteral(red: 1, green: 0.4193676412, blue: 0.4201382995, alpha: 1).cgColor
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(handleBackPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
         return button
     }()
     
@@ -92,8 +99,8 @@ class TimerViewController: UIViewController {
     private let progressAnimation: CABasicAnimation = {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
-        animation.toValue = 1
-        animation.speed = 0.8
+        animation.toValue = 1.0
+        animation.speed = 1.0
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
         return animation
@@ -109,10 +116,12 @@ class TimerViewController: UIViewController {
         animation.repeatCount = .infinity
         return animation
     }()
+    //MARK: - Properties
     
     private var timer = Timer()
     private var timeLeft: TimeInterval = 0
     private var cookTime: Double!
+    private var savedTime: Double!
     private var date: Date?
     private let calendar = Calendar.current
     
@@ -125,6 +134,7 @@ class TimerViewController: UIViewController {
     private var soundEffect: AVAudioPlayer!
     
     private var isRunning: Bool = false
+    private var hasPaused: Bool = false
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -140,23 +150,43 @@ class TimerViewController: UIViewController {
     
     //MARK: - Selectors
     
-    @objc func handleStartPressed(button: UIButton) {
-        startTime()
-        notificationAlert()
-        isRunning = true
-        startButton.isHidden = true
-        resetButton.isHidden = false
+    @objc func handlePlay(button: UIButton) {
+        if hasPaused == true {
+            savedTime = Double(date!.timeIntervalSinceNow - timeLeft)
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            if timeLeft > 0 {
+                notificationAlert()
+            }
+            resumeAnimation()
+        } else {
+            startTime()
+            notificationAlert()
+            isRunning = true
+        }
+        playButton.isHidden = true
+        pauseButton.isHidden = false
         buttonSoundEffect()
         button.liftUp()
     }
     
-    @objc func handleResetPressed(button: UIButton) {
-        reset()
+    @objc func handleStop(button: UIButton) {
+        stopTime()
         buttonSoundEffect()
         button.liftUp()
     }
     
-    @objc func handleBackPressed(button: UIButton) {
+    @objc func handlePause(button: UIButton) {
+        pauseAnimation()
+        timer.invalidate()
+        userNotificationCenter.removeAllPendingNotificationRequests()
+        hasPaused = true
+        playButton.isHidden = false
+        pauseButton.isHidden = true
+        buttonSoundEffect()
+        button.liftUp()
+    }
+    
+    @objc func handleBack(button: UIButton) {
         exitTimer()
         button.liftUp()
     }
@@ -175,16 +205,163 @@ class TimerViewController: UIViewController {
         }
     }
     
+    //MARK: - Notifications
+    
+    private func addNotificationObserver() {
+        notification.addObserver(self, selector: #selector(self.willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    private func notificationAlert() {
+        let content = UNMutableNotificationContent()
+        content.title = "Food is ready!"
+        content.body = "Don't let it burn!"
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData" : "Well Done"]
+        content.sound = UNNotificationSound.default
+        
+        var trigger: UNTimeIntervalNotificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: timeLeft, repeats: false) {
+            didSet { trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeLeft, repeats: false)}
+        }
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        userNotificationCenter.add(request)
+    }
+    //MARK: - Audio Player
+    
+    private func playAlarm() {
+        guard let url = Bundle.main.url(forResource: "marimba", withExtension: ".wav") else { return }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let player = audioPlayer else { return }
+            player.play()
+        } catch {
+            print("DEBUG: Failed to play alarm: \(error.localizedDescription)")
+        }
+    }
+    
+    private func buttonSoundEffect() {
+        guard let url = Bundle.main.url(forResource: "buttonTock", withExtension: ".mp3") else { return }
+        do {
+            soundEffect = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            soundEffect.play()
+        } catch {
+            print("DEBUG: Failed to play sound effect: \(error.localizedDescription)")
+        }
+    }
     //MARK: - Helpers
+    
+    private func startTime() {
+        finishedTimeLabel.text = calculateEndTime()
+        view.layer.addSublayer(progressLayer)
+        progressAnimation.duration = timeLeft
+        progressLayer.speed = 1.0
+        progressLayer.add(progressAnimation, forKey: "stroke")
+        pulsingLayer.speed = 1.0
+        pulsingLayer.add(pulsingAnimation, forKey: "pulsing")
+        date = Date().addingTimeInterval(timeLeft)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    
+    private func stopTime() {
+        timer.invalidate()
+        timeLeft = cookTime
+        timerLabel.text = timeLeft.time
+        progressLayer.removeFromSuperlayer()
+        pulsingLayer.removeAnimation(forKey: "pulsing")
+        isRunning = false
+        pauseButton.isHidden = true
+        playButton.isHidden = false
+        userNotificationCenter.removeAllPendingNotificationRequests()
+    }
+    
+   
+    private func exitTimer() {
+        if timerLabel.text == "00:00" || isRunning == false {
+            navigationController?.popToRootViewController(animated: true)
+        } else {
+            let ac = UIAlertController(title: "Are you sure?", message: "Going back will reset the timer", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] action in
+                                        self?.navigationController?.popToRootViewController(animated: true)}
+            ))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            present(ac, animated: true)
+        }
+        userNotificationCenter.removeAllPendingNotificationRequests()
+    }
+    
+    private func alertUser() {
+        
+        if hasPaused && timeLeft > 0 {
+            timeLeft = date!.timeIntervalSinceNow + (-savedTime)
+            timerLabel.text = timeLeft.time
+        } else if timeLeft > 0 {
+            timeLeft = date?.timeIntervalSinceNow ?? 0
+            timerLabel.text = timeLeft.time
+        } else {
+            timerLabel.text = "00:00"
+            playAlarm()
+            pulsingLayer.removeAnimation(forKey: "pulsing")
+            timer.invalidate()
+            
+            let ac = UIAlertController(title: "Food's Ready", message: "\nDon't overcook it!", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: { [weak self] _ in
+                self?.audioPlayer?.stop()
+            }))
+            present(ac, animated: true)
+        }
+    }
+    
+    private func calculateEndTime() -> String {
+        let date = Date()
+        var hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        let calculatedMinutes = minute + Int(cookTime / 60)
+        
+        if calculatedMinutes > 60 {
+            hour += 1
+            if calculatedMinutes % 60 > 10 {
+                finishedTimeLabel.text = "\(hour):\(calculatedMinutes % 60)"
+            } else if calculatedMinutes % 60 < 10 {
+                finishedTimeLabel.text = "\(hour):0\(calculatedMinutes % 60)"
+            }
+        } else if calculatedMinutes == 60 {
+            finishedTimeLabel.text = "\(hour):00"
+        } else if calculatedMinutes < 10 {
+            finishedTimeLabel.text = "\(hour):0\(calculatedMinutes)"
+        } else {
+            finishedTimeLabel.text = "\(hour):\(calculatedMinutes)"
+        }
+        guard let finishedTimeLabelText = finishedTimeLabel.text else { return ""}
+        return finishedTimeLabelText
+    }
+    
+    private func resumeAnimation() {
+        let pausedTime = progressLayer.timeOffset
+        progressLayer.speed = 1.0
+        progressLayer.timeOffset = 0.0
+        progressLayer.beginTime = 0.0
+        let timeSincePause = progressLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        progressLayer.beginTime = timeSincePause
+        pulsingLayer.speed = 1.0
+        pulsingLayer.add(pulsingAnimation, forKey: "pulsing")
+    }
+    
+    private func pauseAnimation() {
+        let pausedTime: CFTimeInterval = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
+        progressLayer.speed = 0.0
+        progressLayer.timeOffset = pausedTime
+        pulsingLayer.speed = 0.0
+    }
     
     private func configureUI() {
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         navigationItem.title = "\(PROTEIN.type.capitalized) | \(PROTEIN.method.capitalized) | \(PROTEIN.doneness.capitalized)"
         navigationItem.hidesBackButton = true
-        
+        let startAngle = 1.5 * CGFloat.pi
         let center = view.center
         let pulsingPath = UIBezierPath(arcCenter: center, radius: 125, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
-        let circularPath = UIBezierPath(arcCenter: center, radius: 118, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: center, radius: 118, startAngle: startAngle, endAngle: startAngle + 2 * CGFloat.pi , clockwise: true)
         
         progressLayer.path = circularPath.cgPath
         trackLayer.path = circularPath.cgPath
@@ -219,7 +396,7 @@ class TimerViewController: UIViewController {
         bottomView.centerX(inView: view)
         bottomView.anchor(top: timerLabel.bottomAnchor, paddingTop: 50)
         
-        let stack = UIStackView(arrangedSubviews: [startButton, resetButton, backButton])
+        let stack = UIStackView(arrangedSubviews: [playButton, pauseButton])
         stack.axis = .vertical
         stack.spacing = 15
         bottomView.addSubview(stack)
@@ -228,124 +405,5 @@ class TimerViewController: UIViewController {
         stack.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
-    private func startTime() {
-        finishedTimeLabel.text = calculateEndTime()
-        view.layer.addSublayer(progressLayer)
-        progressAnimation.duration = timeLeft
-        progressLayer.add(progressAnimation, forKey: "stroke")
-        pulsingLayer.add(pulsingAnimation, forKey: "pulsing")
-        date = Date().addingTimeInterval(timeLeft)
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-    }
-    
-    private func reset() {
-        timer.invalidate()
-        timeLeft = cookTime
-        timerLabel.text = timeLeft.time
-        progressLayer.removeFromSuperlayer()
-        pulsingLayer.removeAnimation(forKey: "pulsing")
-        isRunning = false
-        resetButton.isHidden = true
-        startButton.isHidden = false
-        userNotificationCenter.removeAllPendingNotificationRequests()
-    }
-    
-    private func exitTimer() {
-        if timerLabel.text == "00:00" || isRunning == false {
-            navigationController?.popToRootViewController(animated: true)
-        } else {
-            let ac = UIAlertController(title: "Are you sure?", message: "Going back will reset the timer", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] action in
-                                        self?.navigationController?.popToRootViewController(animated: true)}
-            ))
-            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            present(ac, animated: true)
-        }
-        userNotificationCenter.removeAllPendingNotificationRequests()
-    }
-    
-    private func notificationAlert() {
-        let content = UNMutableNotificationContent()
-        content.title = "Food is ready!"
-        content.body = "Don't let it burn!"
-        content.categoryIdentifier = "alarm"
-        content.userInfo = ["customData" : "Well Done"]
-        content.sound = UNNotificationSound.default
-        
-        let interval = TimeInterval(cookTime)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        userNotificationCenter.add(request)
-    }
-    
-    private func alertUser() {
-        if timeLeft > 0 {
-            timeLeft = date?.timeIntervalSinceNow ?? 0
-            timerLabel.text = timeLeft.time
-        } else {
-            timerLabel.text = "00:00"
-            playAlarm()
-            pulsingLayer.removeAnimation(forKey: "pulsing")
-            timer.invalidate()
-            
-            let ac = UIAlertController(title: "Food's Ready", message: "\nDon't overcook it!", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: { [weak self] _ in
-                self?.audioPlayer?.stop()
-            }))
-            present(ac, animated: true)
-        }
-    }
-    
-    private func playAlarm() {
-        guard let url = Bundle.main.url(forResource: "marimba", withExtension: ".wav") else { return }
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            guard let player = audioPlayer else { return }
-            player.play()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    private func buttonSoundEffect() {
-        guard let url = Bundle.main.url(forResource: "buttonTock", withExtension: ".mp3") else { return }
-        do {
-            soundEffect = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            soundEffect.play()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    private func addNotificationObserver() {
-        notification.addObserver(self, selector: #selector(self.willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-    }
-    
-    private func calculateEndTime() -> String {
-        let date = Date()
-        var hour = calendar.component(.hour, from: date)
-        let minute = calendar.component(.minute, from: date)
-        let calculatedMinutes = minute + Int(cookTime / 60)
-        
-        if calculatedMinutes > 60 {
-            hour += 1
-            if calculatedMinutes % 60 > 10 {
-                finishedTimeLabel.text = "\(hour):\(calculatedMinutes % 60)"
-            } else if calculatedMinutes % 60 < 10 {
-                finishedTimeLabel.text = "\(hour):0\(calculatedMinutes % 60)"
-            }
-        } else if calculatedMinutes == 60 {
-            finishedTimeLabel.text = "\(hour):00"
-        } else if calculatedMinutes < 10 {
-            finishedTimeLabel.text = "\(hour):0\(calculatedMinutes)"
-        } else {
-            finishedTimeLabel.text = "\(hour):\(calculatedMinutes)"
-        }
-        guard let finishedTimeLabelText = finishedTimeLabel.text else { return ""}
-        return finishedTimeLabelText
-    }
 }
 

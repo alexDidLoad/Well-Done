@@ -9,7 +9,7 @@ import UIKit
 
 class CustomTimerButton: UIButton {
     
-    init(withTitle title: String, withBackgroundColor color: UIColor, isHidden: Bool) {
+    init(withImage image: String, isHidden: Bool) {
         super.init(frame: .zero)
         
         let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.30).cgColor
@@ -17,12 +17,9 @@ class CustomTimerButton: UIButton {
         let shadowOpacity = Float(1.0)
         let shadowRadius = CGFloat(10.0)
         
-        backgroundColor = color
-        setTitle(title, for: .normal)
-        setTitleColor(.black, for: .normal)
-        titleLabel?.font = UIFont(name: "SFProText-Light", size: 20)
-        layer.cornerRadius = 30
-        layer.borderWidth = 5
+        tintColor = .white
+        setImage(UIImage(systemName: image), for: .normal)
+        imageView?.setDimensions(height: 60, width: 60)
         layer.masksToBounds = false
         layer.shadowColor = shadowColor
         layer.shadowOffset = shadowOffSet

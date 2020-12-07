@@ -10,7 +10,7 @@ import UserNotifications
 
 class ProteinViewController: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - UI Components
     
     private let steakButton: CustomButton = {
         let button = CustomButton()

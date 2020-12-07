@@ -9,10 +9,7 @@ import UIKit
 
 class DonenessViewController: UIViewController {
     
-    //MARK: - Properties
-    
-    private var stack = UIStackView()
-    private var stackTopAnchor: NSLayoutConstraint!
+    //MARK: - UI Components
     
     private let topButton: CustomButton = {
         let button = CustomButton()
@@ -67,6 +64,12 @@ class DonenessViewController: UIViewController {
         label.font = UIFont(name: "SFProText-Medium", size: 36)
         return label
     }()
+    
+    //MARK: - Properties
+    
+    private var stack = UIStackView()
+    private var stackTopAnchor: NSLayoutConstraint!
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {

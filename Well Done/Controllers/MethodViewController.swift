@@ -9,14 +9,7 @@ import UIKit
 
 class MethodViewController: UIViewController {
     
-    //MARK: - Properties
-    
-    private var stack = UIStackView()
-    private var stackTopAnchor: NSLayoutConstraint!
-    
-    private var topMethod: String? = "pan"
-    private var midMethod: String? = "oven"
-    private var botMethod: String? = "fryer"
+    //MARK: - UI Components
     
     private let topButton: CustomButton = {
         let button = CustomButton()
@@ -54,6 +47,16 @@ class MethodViewController: UIViewController {
         label.font = UIFont(name: "SFProText-Medium", size: 36)
         return label
     }()
+    
+    //MARK: - Properties
+    
+    private var stack = UIStackView()
+    private var stackTopAnchor: NSLayoutConstraint!
+    
+    private var topMethod: String? = "pan"
+    private var midMethod: String? = "oven"
+    private var botMethod: String? = "fryer"
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
