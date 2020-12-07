@@ -29,19 +29,25 @@ class TimerViewController: UIViewController {
         return button
     }()
     
-    private let stopButton: UIButton = {
-        let button = UIButton(type: .system)
+    private let stopButton: CustomTimerButton = {
+        let button = CustomTimerButton(withImage: "stop.circle", isHidden: false)
         button.setDimensions(height: 60, width: 60)
-        button.backgroundColor = .white
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleStop), for: .touchUpInside)
         return button
     }()
     
-    private let backButton: CustomTimerButton = {
-        let button = CustomTimerButton(withImage: "chevron.left.circle.fill", isHidden: false)
-        button.setDimensions(height: 60, width: 60)
-        button.layer.borderColor = #colorLiteral(red: 1, green: 0.4193676412, blue: 0.4201382995, alpha: 1).cgColor
+    private let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.imageView?.setDimensions(height: 40, width: 44)
+        button.setImage(UIImage(systemName: "chevron.left.circle.fill"), for: .normal)
+        button.layer.shadowColor = #colorLiteral(red: 0.371483969, green: 0.4022138112, blue: 0.4468566387, alpha: 1).cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 4.0)
+        button.layer.shadowOpacity = Float(1.0)
+        button.layer.shadowRadius = CGFloat(5.0)
+        button.layer.cornerRadius = 42 / 2
+        button.layer.masksToBounds = false
+        button.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
         return button
@@ -270,12 +276,13 @@ class TimerViewController: UIViewController {
         progressLayer.removeFromSuperlayer()
         pulsingLayer.removeAnimation(forKey: "pulsing")
         isRunning = false
+        hasPaused = false
         pauseButton.isHidden = true
         playButton.isHidden = false
         userNotificationCenter.removeAllPendingNotificationRequests()
     }
     
-   
+    
     private func exitTimer() {
         if timerLabel.text == "00:00" || isRunning == false {
             navigationController?.popToRootViewController(animated: true)
@@ -363,6 +370,10 @@ class TimerViewController: UIViewController {
         let pulsingPath = UIBezierPath(arcCenter: center, radius: 125, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
         let circularPath = UIBezierPath(arcCenter: center, radius: 118, startAngle: startAngle, endAngle: startAngle + 2 * CGFloat.pi , clockwise: true)
         
+        backButton.setDimensions(height: 42, width: 44)
+        view.addSubview(backButton)
+        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, paddingTop: 10, paddingLeading: 10)
+        
         progressLayer.path = circularPath.cgPath
         trackLayer.path = circularPath.cgPath
         view.layer.addSublayer(trackLayer)
@@ -396,12 +407,12 @@ class TimerViewController: UIViewController {
         bottomView.centerX(inView: view)
         bottomView.anchor(top: timerLabel.bottomAnchor, paddingTop: 50)
         
-        let stack = UIStackView(arrangedSubviews: [playButton, pauseButton])
+        let stack = UIStackView(arrangedSubviews: [playButton, pauseButton, stopButton])
         stack.axis = .vertical
         stack.spacing = 15
         bottomView.addSubview(stack)
         stack.centerX(inView: bottomView)
-        stack.anchor(top: bottomView.topAnchor, paddingTop: 30)
+        stack.anchor(top: bottomView.topAnchor, paddingTop: 20)
         stack.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
