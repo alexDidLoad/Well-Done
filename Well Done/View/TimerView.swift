@@ -98,7 +98,6 @@ class TimerView: UIView {
         super.init(frame: .zero)
         
         configureUI()
-        print(PROTEIN.doneness)
         
     }
     
@@ -159,7 +158,7 @@ class TimerView: UIView {
         timerLabel.centerX(inView: self)
         timerLabel.centerY(inView: self)
         
-        finishedTimeLabel.text = calculateEndTime()
+        finishedTimeLabel.text = "hh:mm"
         timerLabel.addSubview(finishedTimeLabel)
         finishedTimeLabel.centerX(inView: timerLabel, constant: 4)
         finishedTimeLabel.centerY(inView: timerLabel, constant: 50)
@@ -170,7 +169,6 @@ class TimerView: UIView {
                         trailing: finishedTimeLabel.leadingAnchor,
                         paddingTop: 4,
                         paddingTrailing: 2)
-        
     }
     
     private func calculateEndTime() -> String {

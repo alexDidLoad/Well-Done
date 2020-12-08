@@ -120,7 +120,8 @@ class TimerViewController: UIViewController {
         navigationItem.title = "\(PROTEIN.type.capitalized) | \(PROTEIN.method.capitalized) | \(PROTEIN.doneness.capitalized)"
         navigationItem.hidesBackButton = true
         
-        timerView.timeLeft = timerView.calculator.calculateCookTime(for: PROTEIN.type, method: PROTEIN.method, doneness: PROTEIN.doneness)
+        timerView.cookTime = timerView.calculator.calculateCookTime(for: PROTEIN.type, method: PROTEIN.method, doneness: PROTEIN.doneness)
+        timerView.timeLeft = timerView.cookTime
         timerView.timerLabel.text = timerView.timeLeft.time
         
         let quickTipView = QuickTipView(frame: .zero)
@@ -185,5 +186,4 @@ extension TimerViewController: BottomTimerViewDelegate {
     func handleCancel() {
         exitTimer()
     }
-    
 }

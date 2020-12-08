@@ -15,7 +15,6 @@ protocol BottomTimerViewDelegate: class {
     func handleCancel()
 }
 
-
 class BottomTimerView: UIView {
     
     //MARK: - UI Components
