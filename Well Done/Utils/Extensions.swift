@@ -113,16 +113,7 @@ extension UIViewController {
         gradient.frame = view.frame
     }
     
-    func configureBottomView() -> UIView {
-        let iv = UIView()
-        iv.backgroundColor = #colorLiteral(red: 0.1018215939, green: 0.3255112469, blue: 0.360734731, alpha: 1)
-        iv.setDimensions(height: 1000, width: 1000)
-        iv.layer.cornerRadius = 1000 / 2
-        return iv
-    }
-    
     func configureNavBar(withTitle title: String, prefersLargeTitle: Bool) {
-        
         //Creating a constant with our customized settings
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -141,6 +132,14 @@ extension UIViewController {
         
         //overrides status bar to be white (battery | wifi symbol | time)
         navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
+    }
+    
+    func configureBottomView() -> UIView {
+        let iv = UIView()
+        iv.backgroundColor = #colorLiteral(red: 0.1018215939, green: 0.3255112469, blue: 0.360734731, alpha: 1)
+        iv.setDimensions(height: 1000, width: 1000)
+        iv.layer.cornerRadius = 1000 / 2
+        return iv
     }
     
     /// Pushes to next view controller

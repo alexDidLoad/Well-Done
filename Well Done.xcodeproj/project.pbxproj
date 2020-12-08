@@ -14,6 +14,8 @@
 		11A4BD04257952EA00C09D7A /* CustomTimerButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BD03257952EA00C09D7A /* CustomTimerButtons.swift */; };
 		11A4BD0A25797E0A00C09D7A /* buttonTock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11A4BD0825797E0A00C09D7A /* buttonTock.mp3 */; };
 		11A4BDB6257F284500C09D7A /* QuickTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BDB5257F284500C09D7A /* QuickTipView.swift */; };
+		11A4BDBB257FF63D00C09D7A /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BDBA257FF63D00C09D7A /* TimerView.swift */; };
+		11A4BDC2257FF9AB00C09D7A /* BottomTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BDC1257FF9AB00C09D7A /* BottomTimerView.swift */; };
 		11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */; };
 		11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */; };
 		11F7E173255FD5E0000B8B30 /* ProteinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E172255FD5E0000B8B30 /* ProteinViewController.swift */; };
@@ -53,6 +55,8 @@
 		11A4BD03257952EA00C09D7A /* CustomTimerButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimerButtons.swift; sourceTree = "<group>"; };
 		11A4BD0825797E0A00C09D7A /* buttonTock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = buttonTock.mp3; sourceTree = "<group>"; };
 		11A4BDB5257F284500C09D7A /* QuickTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTipView.swift; sourceTree = "<group>"; };
+		11A4BDBA257FF63D00C09D7A /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		11A4BDC1257FF9AB00C09D7A /* BottomTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTimerView.swift; sourceTree = "<group>"; };
 		11F7E16B255FD5E0000B8B30 /* Well Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Well Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 				11A4BD03257952EA00C09D7A /* CustomTimerButtons.swift */,
 				11A4BCFE257945B000C09D7A /* CustomShapeLayer.swift */,
 				11A4BDB5257F284500C09D7A /* QuickTipView.swift */,
+				11A4BDBA257FF63D00C09D7A /* TimerView.swift */,
+				11A4BDC1257FF9AB00C09D7A /* BottomTimerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,6 +292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11A4BDBB257FF63D00C09D7A /* TimerView.swift in Sources */,
+				11A4BDC2257FF9AB00C09D7A /* BottomTimerView.swift in Sources */,
 				11A4BCFF257945B000C09D7A /* CustomShapeLayer.swift in Sources */,
 				11F7E1DA256B3813000B8B30 /* CookTimeCalculator.swift in Sources */,
 				11A4BCF82579368800C09D7A /* Global.swift in Sources */,
