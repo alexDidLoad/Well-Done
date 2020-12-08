@@ -14,7 +14,7 @@ class TimerViewController: UIViewController {
     //MARK: - UI Components
     
     private let playButton: CustomTimerButton = {
-        let button = CustomTimerButton(withImage: "play.circle", isHidden: false)
+        let button = CustomTimerButton(withImage: "play.circle.fill", isHidden: false)
         button.setDimensions(height: 60, width: 60)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
         button.addTarget(self, action: #selector(handlePlay), for: .touchUpInside)
@@ -29,27 +29,23 @@ class TimerViewController: UIViewController {
         return button
     }()
     
-    private let stopButton: CustomTimerButton = {
-        let button = CustomTimerButton(withImage: "stop.circle", isHidden: false)
-        button.setDimensions(height: 60, width: 60)
+    private let resetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("RESET", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProText-Semibold", size: 16)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(handleStop), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleReset), for: .touchUpInside)
         return button
     }()
     
-    private let backButton: UIButton = {
+    private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        button.imageView?.setDimensions(height: 40, width: 44)
-        button.setImage(UIImage(systemName: "chevron.left.circle.fill"), for: .normal)
-        button.layer.shadowColor = #colorLiteral(red: 0.371483969, green: 0.4022138112, blue: 0.4468566387, alpha: 1).cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 4.0)
-        button.layer.shadowOpacity = Float(1.0)
-        button.layer.shadowRadius = CGFloat(5.0)
-        button.layer.cornerRadius = 42 / 2
-        button.layer.masksToBounds = false
-        button.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.setTitle("CANCEL", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProText-Semibold", size: 16)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
-        button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
         return button
     }()
     
@@ -57,7 +53,7 @@ class TimerViewController: UIViewController {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Ultralight", size: 60)
+        label.font = UIFont(name: "SFProText-Medium", size: 60)
         label.setDimensions(height: 221, width: 221)
         label.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         label.layer.cornerRadius = 221 / 2
@@ -175,9 +171,8 @@ class TimerViewController: UIViewController {
         button.liftUp()
     }
     
-    @objc func handleStop(button: UIButton) {
+    @objc func handleReset(button: UIButton) {
         stopTime()
-        buttonSoundEffect()
         button.liftUp()
     }
     
@@ -192,7 +187,7 @@ class TimerViewController: UIViewController {
         button.liftUp()
     }
     
-    @objc func handleBack(button: UIButton) {
+    @objc func handleCancel(button: UIButton) {
         exitTimer()
         button.liftUp()
     }
@@ -298,7 +293,6 @@ class TimerViewController: UIViewController {
     }
     
     private func alertUser() {
-        
         if hasPaused && timeLeft > 0 {
             timeLeft = date!.timeIntervalSinceNow + (-savedTime)
             timerLabel.text = timeLeft.time
@@ -365,14 +359,21 @@ class TimerViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
         navigationItem.title = "\(PROTEIN.type.capitalized) | \(PROTEIN.method.capitalized) | \(PROTEIN.doneness.capitalized)"
         navigationItem.hidesBackButton = true
+        
+        let quickTipView = QuickTipView(frame: .zero)
+        view.addSubview(quickTipView)
+        quickTipView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                            leading: view.safeAreaLayoutGuide.leadingAnchor,
+                            trailing: view.safeAreaLayoutGuide.trailingAnchor,
+                            paddingTop: 20,
+                            paddingLeading: 15,
+                            paddingTrailing: 15)
+        quickTipView.centerX(inView: view)
+        
         let startAngle = 1.5 * CGFloat.pi
         let center = view.center
         let pulsingPath = UIBezierPath(arcCenter: center, radius: 125, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
         let circularPath = UIBezierPath(arcCenter: center, radius: 118, startAngle: startAngle, endAngle: startAngle + 2 * CGFloat.pi , clockwise: true)
-        
-        backButton.setDimensions(height: 42, width: 44)
-        view.addSubview(backButton)
-        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, paddingTop: 10, paddingLeading: 10)
         
         progressLayer.path = circularPath.cgPath
         trackLayer.path = circularPath.cgPath
@@ -407,13 +408,26 @@ class TimerViewController: UIViewController {
         bottomView.centerX(inView: view)
         bottomView.anchor(top: timerLabel.bottomAnchor, paddingTop: 50)
         
-        let stack = UIStackView(arrangedSubviews: [playButton, pauseButton, stopButton])
+        let stack = UIStackView(arrangedSubviews: [playButton, pauseButton])
         stack.axis = .vertical
-        stack.spacing = 15
         bottomView.addSubview(stack)
         stack.centerX(inView: bottomView)
         stack.anchor(top: bottomView.topAnchor, paddingTop: 20)
         stack.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        view.addSubview(resetButton)
+        resetButton.setHeight(height: 28)
+        resetButton.anchor(top: stack.topAnchor,
+                           trailing: view.safeAreaLayoutGuide.trailingAnchor,
+                           paddingTop: 64,
+                           paddingTrailing: 16)
+        
+        view.addSubview(cancelButton)
+        cancelButton.setHeight(height: 28)
+        cancelButton.anchor(top: stack.topAnchor,
+                           leading: view.safeAreaLayoutGuide.leadingAnchor,
+                           paddingTop: 64,
+                           paddingLeading: 16)
     }
     
 }
