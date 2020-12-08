@@ -79,9 +79,9 @@ class QuickTipView: UIView {
         case "oven":
             bodyLabel.text = "Set the oven at 365°F and leave it alone.🤫"
         case "boil":
-            bodyLabel.text = "What tip do you need? It's done when it's done 🥸"
+            bodyLabel.text = "What tip do you need? It's done when it's done.🤨"
         default:
-            bodyLabel.text = "No Tips for you. You're on your own, Good luck 😈"
+            bodyLabel.text = "No Tips for you. You're on your own, Good luck.😈"
         }
     }
     

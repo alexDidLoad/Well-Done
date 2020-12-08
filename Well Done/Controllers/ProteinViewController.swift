@@ -130,8 +130,8 @@ class ProteinViewController: UIViewController {
                         leading: view.leadingAnchor,
                         trailing: view.trailingAnchor,
                         paddingTop: 35,
-                        paddingLeading: 20,
-                        paddingTrailing: 20)
+                        paddingLeading: 25,
+                        paddingTrailing: 25)
         
         let midStack = UIStackView(arrangedSubviews: [fishButton, eggButton])
         midStack.axis = .horizontal
@@ -141,8 +141,8 @@ class ProteinViewController: UIViewController {
                         leading: view.leadingAnchor,
                         trailing: view.trailingAnchor,
                         paddingTop: 50,
-                        paddingLeading: 20,
-                        paddingTrailing: 20)
+                        paddingLeading: 25,
+                        paddingTrailing: 25)
         
         
         let bottomView = configureBottomView()
