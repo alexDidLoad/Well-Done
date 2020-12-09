@@ -16,6 +16,7 @@
 		11A4BDB6257F284500C09D7A /* QuickTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BDB5257F284500C09D7A /* QuickTipView.swift */; };
 		11A4BDBB257FF63D00C09D7A /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BDBA257FF63D00C09D7A /* TimerView.swift */; };
 		11A4BDC2257FF9AB00C09D7A /* BottomTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BDC1257FF9AB00C09D7A /* BottomTimerView.swift */; };
+		11A4BDC52581402000C09D7A /* ProteinButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4BDC42581402000C09D7A /* ProteinButtonView.swift */; };
 		11F7E16F255FD5E0000B8B30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */; };
 		11F7E171255FD5E0000B8B30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */; };
 		11F7E173255FD5E0000B8B30 /* ProteinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7E172255FD5E0000B8B30 /* ProteinViewController.swift */; };
@@ -57,6 +58,7 @@
 		11A4BDB5257F284500C09D7A /* QuickTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTipView.swift; sourceTree = "<group>"; };
 		11A4BDBA257FF63D00C09D7A /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		11A4BDC1257FF9AB00C09D7A /* BottomTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTimerView.swift; sourceTree = "<group>"; };
+		11A4BDC42581402000C09D7A /* ProteinButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinButtonView.swift; sourceTree = "<group>"; };
 		11F7E16B255FD5E0000B8B30 /* Well Done.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Well Done.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11F7E16E255FD5E0000B8B30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11F7E170255FD5E0000B8B30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				11F7E18B256024E8000B8B30 /* CustomButton.swift */,
 				11A4BD03257952EA00C09D7A /* CustomTimerButtons.swift */,
 				11A4BCFE257945B000C09D7A /* CustomShapeLayer.swift */,
+				11A4BDC42581402000C09D7A /* ProteinButtonView.swift */,
 				11A4BDB5257F284500C09D7A /* QuickTipView.swift */,
 				11A4BDBA257FF63D00C09D7A /* TimerView.swift */,
 				11A4BDC1257FF9AB00C09D7A /* BottomTimerView.swift */,
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11A4BDC52581402000C09D7A /* ProteinButtonView.swift in Sources */,
 				11A4BDBB257FF63D00C09D7A /* TimerView.swift in Sources */,
 				11A4BDC2257FF9AB00C09D7A /* BottomTimerView.swift in Sources */,
 				11A4BCFF257945B000C09D7A /* CustomShapeLayer.swift in Sources */,

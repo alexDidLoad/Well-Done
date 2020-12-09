@@ -98,6 +98,21 @@ extension UIView {
         }
     }
     
+    /// Button slide and fade animation
+    func fade(out viewsOut: [UIView]) {
+        UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+            for view in viewsOut {
+                view.transform = CGAffineTransform(translationX: 0, y: 15)
+            }
+        } completion: { _ in
+            UIView.animate(withDuration: 1.0, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+                for view in viewsOut {
+                    view.transform = view.transform.translatedBy(x: 0, y: -150)
+                    view.alpha = 0
+                }
+            }
+        }
+    }
 }
 
 //MARK: - UIViewController Extension
@@ -161,11 +176,27 @@ extension UIViewController {
         transition.subtype = CATransitionSubtype.fromRight
         navigationController!.view.layer.add(transition, forKey: kCATransition)
         navigationController?.pushViewController(viewController, animated: true)
-    
+        
         PROTEIN.type = type
         PROTEIN.method = method
         PROTEIN.doneness = doneness
         button.liftUp()
+    }
+    
+    func NSLayoutActivate(_ objects:[NSLayoutConstraint?]) {
+        for object in objects {
+            if let object = object {
+                object.isActive = true
+            }
+        }
+    }
+    
+    func NSLayoutDeactivate(_ objects:[NSLayoutConstraint?]) {
+        for object in objects {
+            if let object = object {
+                object.isActive = false
+            }
+        }
     }
 }
 
@@ -180,5 +211,5 @@ extension TimeInterval {
     
 }
 
-    
+
 

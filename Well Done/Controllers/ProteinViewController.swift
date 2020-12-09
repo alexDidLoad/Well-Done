@@ -56,6 +56,37 @@ class ProteinViewController: UIViewController {
         return button
     }()
     
+    private let methodOneButton: CustomButton = {
+        let button = CustomButton()
+        button.setImage(UIImage(named: "pan"), for: .normal)
+        button.setDimensions(height: 140, width: 140)
+        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 29)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
+        button.addTarget(self, action: #selector(handleTopTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private let methodTwoButton: CustomButton = {
+        let button = CustomButton()
+        button.setImage(UIImage(named: "oven"), for: .normal)
+        button.setDimensions(height: 140, width: 140)
+        button.imageEdgeInsets = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
+//        button.addTarget(self, action: #selector(handleMidTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private let methodThreeButton: CustomButton = {
+        let button = CustomButton()
+        button.setImage(UIImage(named: "fryer"), for: .normal)
+        button.setDimensions(height: 140, width: 140)
+        button.imageEdgeInsets = UIEdgeInsets(top: 17, left: 25, bottom: 17, right: 17)
+        button.addTarget(self, action: #selector(animateTouchDown), for: .touchDown)
+//        button.addTarget(self, action: #selector(handleBotTap), for: .touchUpInside)
+        return button
+    }()
+    
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Select Protein"
@@ -64,7 +95,17 @@ class ProteinViewController: UIViewController {
         label.font = UIFont(name: "SFProText-Medium", size: 36)
         return label
     }()
+    
+    private lazy var topStack = UIStackView(arrangedSubviews: [steakButton, chickenButton])
+    private lazy var midStack = UIStackView(arrangedSubviews: [fishButton, eggButton])
+    var topLeadingAnchor: NSLayoutConstraint?
+    var topTrailingAnchor: NSLayoutConstraint?
  
+    var midLeadingAnchor: NSLayoutConstraint?
+    var midTrailingAnchor: NSLayoutConstraint?
+    
+    var botTopAnchor: NSLayoutConstraint?
+    var botCenterAnchor: NSLayoutConstraint?
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -78,15 +119,20 @@ class ProteinViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+        
     }
+    
     //MARK: - Selectors
     
     @objc func steakButtonPressed() {
-        pushTo(viewController: MethodViewController(), withProtein: "steak", button: steakButton)
+//        pushTo(viewController: MethodViewController(), withProtein: "steak", button: steakButton)
+        view.fade(out: [topStack, midStack])
+        animate()
     }
     
     @objc func chickenButtonPressed() {
-        pushTo(viewController: MethodViewController(), withProtein: "chicken", button: chickenButton)
+//        pushTo(viewController: MethodViewController(), withProtein: "chicken", button: chickenButton)
+       
     }
     
     @objc func fishButtonPressed() {
@@ -95,6 +141,11 @@ class ProteinViewController: UIViewController {
     
     @objc func eggButtonPressed() {
         pushTo(viewController: MethodViewController(), withProtein: "egg", button: eggButton)
+    }
+    
+    @objc func handleTopTap() {
+        
+        view.fade(out: [methodOneButton, methodTwoButton, methodThreeButton])
     }
     
     @objc func animateTouchDown(button: UIButton) {
@@ -122,7 +173,7 @@ class ProteinViewController: UIViewController {
         configureNavBar(withTitle: "Well Done", prefersLargeTitle: true)
         navigationItem.backButtonTitle = "Select Protein"
 
-        let topStack = UIStackView(arrangedSubviews: [steakButton, chickenButton])
+//        let topStack = UIStackView(arrangedSubviews: [steakButton, chickenButton])
         topStack.axis = .horizontal
         topStack.distribution = .equalSpacing
         view.addSubview(topStack)
@@ -133,7 +184,7 @@ class ProteinViewController: UIViewController {
                         paddingLeading: 25,
                         paddingTrailing: 25)
         
-        let midStack = UIStackView(arrangedSubviews: [fishButton, eggButton])
+//        let midStack = UIStackView(arrangedSubviews: [fishButton, eggButton])
         midStack.axis = .horizontal
         midStack.distribution = .equalSpacing
         view.addSubview(midStack)
@@ -143,6 +194,13 @@ class ProteinViewController: UIViewController {
                         paddingTop: 50,
                         paddingLeading: 25,
                         paddingTrailing: 25)
+        
+        view.addSubview(methodThreeButton)
+        methodThreeButton.centerX(inView: view)
+        botTopAnchor = methodThreeButton.topAnchor.constraint(equalTo: view.bottomAnchor)
+        botTopAnchor?.isActive = true
+        botCenterAnchor = methodThreeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        botCenterAnchor?.isActive = false
         
         
         let bottomView = configureBottomView()
@@ -155,6 +213,35 @@ class ProteinViewController: UIViewController {
         label.anchor(top: bottomView.topAnchor,
                      bottom: view.safeAreaLayoutGuide.bottomAnchor,
                      paddingTop: 50)
+        
+        view.addSubview(methodOneButton)
+        methodOneButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 35)
+        topLeadingAnchor = methodOneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25)
+        topLeadingAnchor?.isActive = false
+        topTrailingAnchor = methodOneButton.trailingAnchor.constraint(equalTo: view.leadingAnchor)
+        topTrailingAnchor?.isActive = true
+        
+        view.addSubview(methodTwoButton)
+        methodTwoButton.anchor(top: methodOneButton.topAnchor)
+        midLeadingAnchor = methodTwoButton.leadingAnchor.constraint(equalTo: view.trailingAnchor)
+        midLeadingAnchor?.isActive = true
+        midTrailingAnchor = methodTwoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
+        midTrailingAnchor?.isActive = false
+    }
+    
+    func animate() {
+        
+        NSLayoutDeactivate([topTrailingAnchor, midLeadingAnchor, botTopAnchor])
+        NSLayoutActivate([topLeadingAnchor, midTrailingAnchor, botCenterAnchor])
+//        topLeadingAnchor?.isActive = true
+//        midTrailingAnchor?.isActive = true
+//
+        UIView.animate(withDuration: 0.5, delay: 1.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.label.text = "Select Method"
+        }
+        
     }
     
 }
