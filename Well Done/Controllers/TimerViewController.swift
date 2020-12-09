@@ -120,9 +120,6 @@ class TimerViewController: UIViewController {
         navigationItem.title = "\(PROTEIN.type.capitalized) | \(PROTEIN.method.capitalized) | \(PROTEIN.doneness.capitalized)"
         navigationItem.hidesBackButton = true
         
-        timerView.cookTime = timerView.calculator.calculateCookTime(for: PROTEIN.type, method: PROTEIN.method, doneness: PROTEIN.doneness)
-        timerView.timeLeft = timerView.cookTime
-        timerView.timerLabel.text = timerView.timeLeft.time
         
         let quickTipView = QuickTipView(frame: .zero)
         view.addSubview(quickTipView)
@@ -134,6 +131,9 @@ class TimerViewController: UIViewController {
                             paddingTrailing: 15)
         quickTipView.centerX(inView: view)
         
+        timerView.cookTime = timerView.calculator.calculateCookTime(for: PROTEIN.type, method: PROTEIN.method, doneness: PROTEIN.doneness)
+        timerView.timeLeft = timerView.cookTime
+        timerView.timerLabel.text = timerView.timeLeft.time
         view.addSubview(timerView)
         timerView.centerX(inView: view)
         timerView.centerY(inView: view)
@@ -187,3 +187,4 @@ extension TimerViewController: BottomTimerViewDelegate {
         exitTimer()
     }
 }
+

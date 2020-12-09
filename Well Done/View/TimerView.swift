@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class TimerView: UIView {
     
     //MARK: - UI Components
@@ -83,6 +82,7 @@ class TimerView: UIView {
     }()
     
     //MARK: - Properties
+    
     public var timer = Timer()
     public var timeLeft: TimeInterval = 0
     public var cookTime: Double! = 0
@@ -150,6 +150,7 @@ class TimerView: UIView {
         pulsingLayer.position = center
         pulsingLayer.frame = bounds
         layer.addSublayer(pulsingLayer)
+
         
         cookTime = calculator.calculateCookTime(for: PROTEIN.type, method: PROTEIN.method, doneness: PROTEIN.doneness)
         timeLeft = cookTime
