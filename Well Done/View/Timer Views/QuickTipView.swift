@@ -95,7 +95,7 @@ class QuickTipView: UIView {
                 bodyLabel.text = "For pot roast, simmer it on medium-low.🥘"
             }
         default:
-            bodyLabel.text = "Make sure the oil is at 350°F, and fry in batches!👍🏻"
+            bodyLabel.text = "Make sure the oil is at 350°F, and fry in batches!✨"
         }
     }
     
