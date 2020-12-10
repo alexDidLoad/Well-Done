@@ -14,9 +14,15 @@
 
 ## Description
 
-Well Done is a simple food timer app that takes the thinking out of cooking steak, chicken, fish and eggs! Each protein has their own methods of cooking and
-cook times will vary depending on your preferred choice of doneness. The timer utilizes a pulsing animation built with CABasicAnimation and buttons are animated with CGAffineTransform.
-If the application is on the foreground, it will play an alarm using the AVFoundation framework. If the application is moved to the background, you will receive a push notification when the timer is complete. 
+- Well Done is a simple food timer app that takes the thinking out of cooking steak, chicken, fish and eggs! 
+
+- Each protein has their own methods of cooking and cook times will vary depending on your preferred choice of doneness.
+
+- The timer utilizes a pulsing animation built with CABasicAnimation and buttons are animated with CGAffineTransform.
+
+- If the application is on the foreground, it will play an alarm using the AVFoundation framework. 
+
+- If the application is moved to the background, you will receive a push notification when the timer is complete. 
 
 #### Frameworks
 
