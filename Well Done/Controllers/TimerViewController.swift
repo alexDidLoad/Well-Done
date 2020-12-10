@@ -9,14 +9,15 @@ import UIKit
 import UserNotifications
 import AVFoundation
 
+let userNotificationCenter = UNUserNotificationCenter.current()
+
 class TimerViewController: UIViewController {
     
     //MARK: - Properties
     
     private var timerView = TimerView()
     
-    private let userNotificationCenter = UNUserNotificationCenter.current()
-    private let notification = NotificationCenter.default
+    private let pulsingNotification = NotificationCenter.default
     
     private var audioPlayer: AVAudioPlayer!
     
@@ -32,10 +33,15 @@ class TimerViewController: UIViewController {
         addNotificationObserver()
     }
     
-    deinit {
-        notification.removeObserver(self)
+    override func viewWillDisappear(_ animated: Bool) {
+        PROTEIN.type = nil
+        PROTEIN.method = nil
+        PROTEIN.doneness = nil
     }
     
+    deinit {
+        pulsingNotification.removeObserver(self)
+    }
     //MARK: - Selectors
     
     @objc private func updateTime() {
@@ -64,11 +70,10 @@ class TimerViewController: UIViewController {
             timerView.pulsingLayer.add(timerView.pulsingAnimation, forKey: pulsing)
         }
     }
-    
     //MARK: - Notifications
     
     private func addNotificationObserver() {
-        notification.addObserver(self, selector: #selector(self.willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        pulsingNotification.addObserver(self, selector: #selector(self.willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     private func notificationAlert() {
@@ -79,25 +84,15 @@ class TimerViewController: UIViewController {
         content.userInfo = ["customData" : "Well Done"]
         content.sound = UNNotificationSound.default
         
-        var trigger: UNTimeIntervalNotificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: timerView.timeLeft, repeats: false) {
-            didSet { trigger = UNTimeIntervalNotificationTrigger(timeInterval: timerView.timeLeft, repeats: false)}
-        }
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        var trigger: UNTimeIntervalNotificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval:
+                                                                                            timerView.timeLeft,
+                                                                                           repeats: false) {
+            didSet { trigger = UNTimeIntervalNotificationTrigger(timeInterval: timerView.timeLeft,
+                                                                 repeats: false)} }
+        let request = UNNotificationRequest(identifier: UUID().uuidString,
+                                            content: content,
+                                            trigger: trigger)
         userNotificationCenter.add(request)
-    }
-    //MARK: - Audio Player
-    
-    private func playAlarm() {
-        guard let url = Bundle.main.url(forResource: "marimba", withExtension: ".wav") else { return }
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            guard let player = audioPlayer else { return }
-            player.play()
-        } catch {
-            print("DEBUG: Failed to play alarm: \(error.localizedDescription)")
-        }
     }
     //MARK: - Helpers
     
@@ -115,8 +110,21 @@ class TimerViewController: UIViewController {
         userNotificationCenter.removeAllPendingNotificationRequests()
     }
     
+    private func playAlarm() {
+        guard let url = Bundle.main.url(forResource: "marimba", withExtension: ".wav") else { return }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let player = audioPlayer else { return }
+            player.play()
+        } catch {
+            print("DEBUG: Failed to play alarm: \(error.localizedDescription)")
+        }
+    }
+
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.9925742745, green: 0.9858585, blue: 0.8622567654, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "\(PROTEIN.type.capitalized) | \(PROTEIN.method.capitalized) | \(PROTEIN.doneness.capitalized)"
         navigationItem.hidesBackButton = true
@@ -131,7 +139,9 @@ class TimerViewController: UIViewController {
                             paddingTrailing: 15)
         quickTipView.centerX(inView: view)
         
-        timerView.cookTime = timerView.calculator.calculateCookTime(for: PROTEIN.type, method: PROTEIN.method, doneness: PROTEIN.doneness)
+        timerView.cookTime = timerView.calculator.calculateCookTime(for: PROTEIN.type,
+                                                                    method: PROTEIN.method,
+                                                                    doneness: PROTEIN.doneness)
         timerView.timeLeft = timerView.cookTime
         timerView.timerLabel.text = timerView.timeLeft.time
         view.addSubview(timerView)
@@ -145,12 +155,12 @@ class TimerViewController: UIViewController {
         bottomTimerView.anchor(top: timerView.bottomAnchor, paddingTop: 180)
     }
 }
-
 //MARK: - BottomTimerViewDelegate
 
 extension TimerViewController: BottomTimerViewDelegate {
     
     func handlePlay() {
+        
         if hasPaused == true {
             timerView.savedTime = Double(timerView.date!.timeIntervalSinceNow - timerView.timeLeft)
             timerView.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -168,7 +178,9 @@ extension TimerViewController: BottomTimerViewDelegate {
     
     func handleReset() {
         timerView.timer.invalidate()
-        timerView.timeLeft = timerView.calculator.calculateCookTime(for: PROTEIN.type, method: PROTEIN.method, doneness: PROTEIN.doneness)
+        timerView.timeLeft = timerView.calculator.calculateCookTime(for: PROTEIN.type,
+                                                                    method: PROTEIN.method,
+                                                                    doneness: PROTEIN.doneness)
         timerView.timerLabel.text = timerView.timeLeft.time
         timerView.progressLayer.removeFromSuperlayer()
         timerView.pulsingLayer.removeAnimation(forKey: pulsing)

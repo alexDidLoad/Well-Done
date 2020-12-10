@@ -12,7 +12,6 @@ class MainViewController: UIViewController {
     
     //MARK: - UI Components
     
-    
     private let label: UILabel = {
         let label = UILabel()
         label.text = "Select Protein"
@@ -25,18 +24,7 @@ class MainViewController: UIViewController {
     let proteinButtons = ProteinButtonView()
     let methodButtons = MethodButtonView()
     let donenessButtons = DonenessButtonView()
-    
-    //MARK: - Properties
-    var protein = Protein()
-    
-    var topLeadingAnchor: NSLayoutConstraint?
-    var topTrailingAnchor: NSLayoutConstraint?
-    
-    var midLeadingAnchor: NSLayoutConstraint?
-    var midTrailingAnchor: NSLayoutConstraint?
-    
-    var botTopAnchor: NSLayoutConstraint?
-    var botCenterAnchor: NSLayoutConstraint?
+
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -49,11 +37,10 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+      
         proteinButtons.alpha = 1
         methodButtons.alpha = 1
         donenessButtons.alpha = 1
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,7 +48,6 @@ class MainViewController: UIViewController {
         methodButtons.resetMethodButtons()
         donenessButtons.resetDoneButtons()
     }
-    
     //MARK: - UserNotification
     
     private func registerForNotifications() {
@@ -80,7 +66,7 @@ class MainViewController: UIViewController {
     //MARK: - Helpers
     
     private func configureUI() {
-        view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.9925742745, green: 0.9858585, blue: 0.8622567654, alpha: 1)
 
         donenessButtons.delegate = self
         donenessButtons.setDimensions(height: view.frame.height / 2,
@@ -116,7 +102,6 @@ class MainViewController: UIViewController {
                      paddingTop: 50)
     }
 }
-
 //MARK: - ProteinButtonViewDelegate
 
 extension MainViewController: ProteinButtonViewDelegate {
@@ -127,7 +112,6 @@ extension MainViewController: ProteinButtonViewDelegate {
         label.text = "Select Method"
     }
 }
-
 //MARK: - MethodButtonViewDelegate
 
 extension MainViewController: MethodButtonViewDelegate {
@@ -138,7 +122,6 @@ extension MainViewController: MethodButtonViewDelegate {
         label.text = "Select Doneness"
     }
 }
-
 //MARK: - DonenessButtonViewDelegate
 
 extension MainViewController: DonenessButtonViewDelegate {

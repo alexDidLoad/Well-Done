@@ -148,8 +148,8 @@ extension UIViewController {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white,
-                                               .font: UIFont(name: "SFProText-Heavy", size: 35)!]
-        appearance.backgroundColor = #colorLiteral(red: 0.305575788, green: 0.8039663434, blue: 0.7685286403, alpha: 1)
+                                               .font: UIFont(name: "SFProText-Heavy", size: 32)!]
+        appearance.backgroundColor = #colorLiteral(red: 0.9201372495, green: 0.7823413367, blue: 0.6659447732, alpha: 1)
         
         //Sets all of the navigation bar's attributes to our constant 'appearance'
         navigationItem.title = title
@@ -159,6 +159,7 @@ extension UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitle
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : #colorLiteral(red: 0.4614635429, green: 0.2202478027, blue: 0.2029526682, alpha: 1)]
         
         //overrides status bar to be white (battery | wifi symbol | time)
         navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
@@ -166,7 +167,7 @@ extension UIViewController {
     
     func configureBottomView() -> UIView {
         let iv = UIView()
-        iv.backgroundColor = #colorLiteral(red: 0.1018215939, green: 0.3255112469, blue: 0.360734731, alpha: 1)
+        iv.backgroundColor = #colorLiteral(red: 0.9341124892, green: 0.4440332055, blue: 0.4035766721, alpha: 1)
         iv.setDimensions(height: 1000, width: 1000)
         iv.layer.cornerRadius = 1000 / 2
         return iv
@@ -197,7 +198,6 @@ extension UIViewController {
     }
     
 }
-
 
 //MARK: - Time Interval Extension
 

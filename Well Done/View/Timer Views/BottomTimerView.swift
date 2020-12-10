@@ -117,7 +117,7 @@ class BottomTimerView: UIView {
     
     private func configureUI() {
         
-        backgroundColor = #colorLiteral(red: 0.1018215939, green: 0.3255112469, blue: 0.360734731, alpha: 1)
+        backgroundColor = #colorLiteral(red: 0.9384854436, green: 0.4436456263, blue: 0.4033697844, alpha: 1)
         setDimensions(height: 1000, width: 1000)
         layer.cornerRadius = 1000 / 2
         

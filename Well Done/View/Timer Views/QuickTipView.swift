@@ -14,7 +14,7 @@ class QuickTipView: UIView {
     private let lightningIcon: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "bolt.fill")
-        iv.tintColor = #colorLiteral(red: 0.07448554784, green: 0.2862593234, blue: 0.3056544662, alpha: 1)
+        iv.tintColor = #colorLiteral(red: 0.4614635429, green: 0.2202478027, blue: 0.2029526682, alpha: 1)
         iv.setDimensions(height: 18, width: 18)
         return iv
     }()
@@ -23,7 +23,7 @@ class QuickTipView: UIView {
         let label = UILabel()
         label.text = "QUICK TIP"
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0.07448554784, green: 0.2862593234, blue: 0.3056544662, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.4614635429, green: 0.2202478027, blue: 0.2029526682, alpha: 1)
         label.font = UIFont(name: "SFProText-Heavy", size: 12)
         label.setHeight(height: 30)
         return label
@@ -33,7 +33,7 @@ class QuickTipView: UIView {
         let label = UILabel()
         label.text = "BODY TEXT HERE"
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0.07448554784, green: 0.2862593234, blue: 0.3056544662, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.4614635429, green: 0.2202478027, blue: 0.2029526682, alpha: 1)
         label.font = UIFont(name: "SFProText-Medium", size: 12)
         label.setHeight(height: 30)
         return label
@@ -55,7 +55,7 @@ class QuickTipView: UIView {
     
     private func configureUI() {
         
-        self.backgroundColor = #colorLiteral(red: 0.7857559323, green: 0.9420768023, blue: 0.9264129996, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.9952659011, green: 0.8474430442, blue: 0.7168733478, alpha: 1)
         self.setHeight(height: 70)
         layer.cornerRadius = 10
         addSubview(lightningIcon)
@@ -75,13 +75,27 @@ class QuickTipView: UIView {
     private func updateBodyLabel() {
         switch PROTEIN.method {
         case "pan":
-            bodyLabel.text = "Flip, reset the timer and its finished!🔥"
+            switch PROTEIN.type {
+            case "steak":
+                bodyLabel.text = "Flip it, add butter and run the timer one more time!🔥"
+            case "chicken":
+                bodyLabel.text = "Flip it and run the timer one more time!🔥"
+            case "fish":
+                bodyLabel.text = "Flip it, turn off the heat and run the timer again!🐟"
+            default:
+                bodyLabel.text = "Hmm...This is a problem 🧐"
+            }
         case "oven":
             bodyLabel.text = "Set the oven at 365°F and leave it alone.🤫"
         case "boil":
-            bodyLabel.text = "What tip do you need? It's done when it's done.🤨"
+            switch PROTEIN.type {
+            case "egg":
+                bodyLabel.text = "Make sure the water is at a rolling boil.🌡"
+            default:
+                bodyLabel.text = "For pot roast, simmer it on medium-low.🥘"
+            }
         default:
-            bodyLabel.text = "No Tips for you. You're on your own, Good luck.😈"
+            bodyLabel.text = "Make sure the oil is at 350°F, and fry in batches!👍🏻"
         }
     }
     

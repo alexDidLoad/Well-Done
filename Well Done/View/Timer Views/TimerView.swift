@@ -13,12 +13,12 @@ class TimerView: UIView {
     
     public lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.textColor = #colorLiteral(red: 0.07448554784, green: 0.2862593234, blue: 0.3056544662, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.3612693247, green: 0.1692554465, blue: 0.1591040988, alpha: 1)
         label.textAlignment = .center
         label.font = UIFont(name: "SFProText-Medium", size: 60)
-        label.setDimensions(height: 221, width: 221)
-        label.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
-        label.layer.cornerRadius = 221 / 2
+        label.setDimensions(height: 222, width: 222)
+        label.backgroundColor = #colorLiteral(red: 0.9925742745, green: 0.9858585, blue: 0.8622567654, alpha: 1)
+        label.layer.cornerRadius = 222 / 2
         label.layer.masksToBounds = true
         return label
     }()
@@ -26,7 +26,7 @@ class TimerView: UIView {
     public lazy var finishedTimeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = #colorLiteral(red: 0.4614635429, green: 0.2202478027, blue: 0.2029526682, alpha: 1)
         label.font = UIFont(name: "SFProText-Ultralight", size: 18)
         return label
     }()
@@ -34,7 +34,7 @@ class TimerView: UIView {
     private lazy var bellIcon: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "bell")
-        iv.tintColor = .black
+        iv.tintColor = #colorLiteral(red: 0.4614635429, green: 0.2202478027, blue: 0.2029526682, alpha: 1)
         return iv
     }()
     
@@ -47,7 +47,7 @@ class TimerView: UIView {
     
     private lazy var trackLayer: CustomShapeLayer = {
         let layer = CustomShapeLayer()
-        layer.strokeColor = UIColor.white.withAlphaComponent(0.7).cgColor
+        layer.strokeColor = #colorLiteral(red: 0.8677172293, green: 0.8631488958, blue: 0.7567991068, alpha: 1).cgColor
         layer.zPosition = 0
         return layer
     }()
@@ -55,7 +55,7 @@ class TimerView: UIView {
     public lazy var pulsingLayer: CustomShapeLayer = {
         let layer = CustomShapeLayer()
         layer.strokeColor = UIColor.clear.cgColor
-        layer.fillColor = #colorLiteral(red: 0.305575788, green: 0.8039663434, blue: 0.7685286403, alpha: 1).cgColor
+        layer.fillColor = #colorLiteral(red: 0.02021012269, green: 0.6839219928, blue: 0.7261256576, alpha: 1).withAlphaComponent(0.5).cgColor
         layer.zPosition = -1
         return layer
     }()
@@ -98,7 +98,6 @@ class TimerView: UIView {
         super.init(frame: .zero)
         
         configureUI()
-        
     }
     
     required init?(coder: NSCoder) {

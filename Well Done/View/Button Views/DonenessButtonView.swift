@@ -86,22 +86,22 @@ class DonenessButtonView: UIView {
     
     //MARK: - Selectors
     
-    @objc func handleTopTap() {
+    @objc func handleTopTap(button: UIButton) {
         PROTEIN.doneness = topButton.currentTitle?.lowercased()
         delegate?.handleDonenessSelected()
-        print("DEBUG: top tap")
+        button.liftUp()
     }
     
-    @objc func handleMidTap() {
+    @objc func handleMidTap(button: UIButton) {
         PROTEIN.doneness = midButton.currentTitle?.lowercased()
         delegate?.handleDonenessSelected()
-        print("DEBUG: mid tap")
+        button.liftUp()
     }
     
-    @objc func handleBotTap() {
+    @objc func handleBotTap(button: UIButton) {
         PROTEIN.doneness = botButton.currentTitle?.lowercased()
         delegate?.handleDonenessSelected()
-        print("DEBUG: bot tap")
+        button.liftUp()
     }
     
     @objc func animateTouchDown(button: UIButton) {
@@ -127,13 +127,17 @@ class DonenessButtonView: UIView {
         
         addSubview(botButton)
         botButton.centerX(inView: self)
-        botTopAnchor = botButton.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 30)
+        botTopAnchor = botButton.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 40)
         botTopAnchor?.isActive = true
         botCenterAnchor = botButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 85)
         botCenterAnchor?.isActive = false
     }
     
     private func updateLabels() {
+        topButton.isHidden = false
+        midButton.isHidden = false
+        botButton.isHidden = false
+        
         if PROTEIN.type == "chicken" || PROTEIN.type == "fish" {
             topButton.setTitle("Medium", for: .normal)
             midButton.setTitle("Medium Well", for: .normal)
@@ -142,11 +146,15 @@ class DonenessButtonView: UIView {
             topButton.setTitle("Soft Boil", for: .normal)
             midButton.setTitle("Medium Boil", for: .normal)
             botButton.setTitle("Hard Boil", for: .normal)
-        } else if PROTEIN.method == "boil" {
+        } else if PROTEIN.method == "boil"  && PROTEIN.type == "steak"{
             topButton.isHidden = true
             midButton.isHidden = true
             botButton.setTitle("Well Done", for: .normal)
             botButton.layer.borderColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
+        } else {
+            topButton.setTitle("Rare", for: .normal)
+            midButton.setTitle("Medium Rare", for: .normal)
+            botButton.setTitle("Well Done", for: .normal)
         }
     }
     

@@ -72,22 +72,22 @@ class MethodButtonView: UIView {
     }
     //MARK: - Selectors
     
-    @objc func handleTopTap() {
+    @objc func handleTopTap(button: UIButton) {
         PROTEIN.method = topMethod
         delegate?.handleMethodSelected()
-        print("DEBUG: top tap")
+        button.liftUp()
     }
     
-    @objc func handleMidTap() {
+    @objc func handleMidTap(button: UIButton) {
         PROTEIN.method = midMethod
         delegate?.handleMethodSelected()
-        print("DEBUG: mid tap")
+        button.liftUp()
     }
     
-    @objc func handleBotTap() {
+    @objc func handleBotTap(button: UIButton) {
         PROTEIN.method = botMethod
         delegate?.handleMethodSelected()
-        print("DEBUG: bot tap")
+        button.liftUp()
     }
     
     @objc func animateTouchDown(button: UIButton) {
@@ -113,13 +113,17 @@ class MethodButtonView: UIView {
         
         addSubview(botButton)
         botButton.centerX(inView: self)
-        botTopAnchor = botButton.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 30)
+        botTopAnchor = botButton.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 40)
         botTopAnchor?.isActive = true
         botCenterAnchor = botButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 85)
         botCenterAnchor?.isActive = false
     }
     
     private func updateImage() {
+        topButton.isHidden = false
+        midButton.isHidden = false
+        botButton.isHidden = false
+        
         if PROTEIN.type == "steak" {
             topButton.setImage(UIImage(named: "pan"), for: .normal)
             midButton.setImage(UIImage(named: "oven"), for: .normal)
@@ -139,7 +143,7 @@ class MethodButtonView: UIView {
             topButton.isHidden = true
             midButton.isHidden = true
             botButton.setImage(UIImage(named: "boil"), for: .normal)
-            midMethod = "boil"
+            botMethod = "boil"
         }
     }
     
