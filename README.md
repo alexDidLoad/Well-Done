@@ -1,10 +1,7 @@
 # Well-Done
 
 ### Screen Shots
-
-![SecondhandEvergreenBat-size_restricted](https://user-images.githubusercontent.com/67172004/101830308-2c4d8180-3ae9-11eb-9752-094309ee8101.gif)
-
-
+<img src="https://user-images.githubusercontent.com/67172004/101830308-2c4d8180-3ae9-11eb-9752-094309ee8101.gif" width="300" height="630">  <img src="https://user-images.githubusercontent.com/67172004/101831202-771bc900-3aea-11eb-83bf-e038e9c71ab9.gif" width="300" height="630">  <img src="https://user-images.githubusercontent.com/67172004/101831355-a4687700-3aea-11eb-8a81-86b6b9ea2321.png" width="300" height="630">
 ---
 
 ### Table of Contents
