@@ -1,15 +1,19 @@
-////
-////  CookViewController.swift
-////  Well Done
-////
-////  Created by Alexander Ha on 11/17/20.
-////
+//
+//  DonenessButtonView.swift
+//  Well Done
+//
+//  Created by Alexander Ha on 12/9/20.
+//
 
 import UIKit
 
-class DonenessViewController: UIViewController {
+protocol DonenessButtonViewDelegate: class {
+    func handleDonenessSelected()
+}
+
+class DonenessButtonView: UIView {
     
-    //MARK: - UI Components
+    //MARK: - UIComponents
     
     private let topButton: CustomButton = {
         let button = CustomButton()
@@ -56,40 +60,48 @@ class DonenessViewController: UIViewController {
         return button
     }()
     
-    private let label: UILabel = {
-        let label = UILabel()
-        label.text = "Select Doneness"
-        label.textColor = .white
-        label.textAlignment = .center
-        label.font = UIFont(name: "SFProText-Medium", size: 36)
-        return label
-    }()
-    
     //MARK: - Properties
     
-    private var stack = UIStackView()
-    private var stackTopAnchor: NSLayoutConstraint!
+    weak var delegate: DonenessButtonViewDelegate?
     
+    private var topLeadingAnchor: NSLayoutConstraint?
+    private var topTrailingAnchor: NSLayoutConstraint?
+    
+    private var midLeadingAnchor: NSLayoutConstraint?
+    private var midTrailingAnchor: NSLayoutConstraint?
+    
+    private var botTopAnchor: NSLayoutConstraint?
+    private var botCenterAnchor: NSLayoutConstraint?
     //MARK: - Lifecycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         
         configureUI()
-        updateLabels()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Selectors
     
     @objc func handleTopTap() {
-        pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: topButton.currentTitle?.lowercased(), button: topButton)
+        PROTEIN.doneness = topButton.currentTitle?.lowercased()
+        delegate?.handleDonenessSelected()
+        print("DEBUG: top tap")
     }
     
     @objc func handleMidTap() {
-        pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: midButton.currentTitle?.lowercased(), button: midButton)
+        PROTEIN.doneness = midButton.currentTitle?.lowercased()
+        delegate?.handleDonenessSelected()
+        print("DEBUG: mid tap")
     }
     
     @objc func handleBotTap() {
-        pushTo(viewController: TimerViewController(),withProtein: PROTEIN.type, withCookMethod: PROTEIN.method, withDoneness: botButton.currentTitle?.lowercased(), button: botButton)
+        PROTEIN.doneness = botButton.currentTitle?.lowercased()
+        delegate?.handleDonenessSelected()
+        print("DEBUG: bot tap")
     }
     
     @objc func animateTouchDown(button: UIButton) {
@@ -99,27 +111,26 @@ class DonenessViewController: UIViewController {
     
     private func configureUI() {
         
-        view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
-        navigationController?.navigationBar.prefersLargeTitles = false
+        addSubview(topButton)
+        topButton.anchor(top: self.topAnchor, paddingTop: 30)
+        topLeadingAnchor = topButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25)
+        topLeadingAnchor?.isActive = false
+        topTrailingAnchor = topButton.trailingAnchor.constraint(equalTo: self.leadingAnchor, constant: -25)
+        topTrailingAnchor?.isActive = true
         
-        stack = UIStackView(arrangedSubviews: [topButton, midButton, botButton])
-        stack.axis = .vertical
-        stack.spacing = 30
-        view.addSubview(stack)
-        stack.centerX(inView: view)
-        stackTopAnchor = stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: 12)
-        stackTopAnchor.isActive = true
+        addSubview(midButton)
+        midButton.anchor(top: self.topAnchor, paddingTop: 30)
+        midLeadingAnchor = midButton.leadingAnchor.constraint(equalTo: self.trailingAnchor, constant: 25)
+        midLeadingAnchor?.isActive = true
+        midTrailingAnchor = midButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25)
+        midTrailingAnchor?.isActive = false
         
-        let bottomView = configureBottomView()
-        view.addSubview(bottomView)
-        bottomView.anchor(top: stack.bottomAnchor, paddingTop: 30)
-        bottomView.centerX(inView: view)
-        
-        bottomView.addSubview(label)
-        label.centerX(inView: bottomView)
-        label.anchor(top: bottomView.topAnchor,
-                     bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                     paddingTop: 40)
+        addSubview(botButton)
+        botButton.centerX(inView: self)
+        botTopAnchor = botButton.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 30)
+        botTopAnchor?.isActive = true
+        botCenterAnchor = botButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 85)
+        botCenterAnchor?.isActive = false
     }
     
     private func updateLabels() {
@@ -132,13 +143,25 @@ class DonenessViewController: UIViewController {
             midButton.setTitle("Medium Boil", for: .normal)
             botButton.setTitle("Hard Boil", for: .normal)
         } else if PROTEIN.method == "boil" {
-            stackTopAnchor.isActive = false
-            stack.centerY(inView: view, constant: -20)
-            stack.centerX(inView: view)
             topButton.isHidden = true
-            midButton.setTitle("Well Done", for: .normal)
-            midButton.layer.borderColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
-            botButton.isHidden = true
+            midButton.isHidden = true
+            botButton.setTitle("Well Done", for: .normal)
+            botButton.layer.borderColor = #colorLiteral(red: 1, green: 0.4196327627, blue: 0.4195776284, alpha: 1)
         }
+    }
+    
+    public func animateInDoneness() {
+        updateLabels()
+        NSLayoutDeactivate([topTrailingAnchor, midLeadingAnchor, botTopAnchor])
+        NSLayoutActivate([topLeadingAnchor, midTrailingAnchor, botCenterAnchor])
+        UIView.animate(withDuration: 0.5, delay: 0.8, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    public func resetDoneButtons() {
+        NSLayoutDeactivate([topLeadingAnchor,midTrailingAnchor,botCenterAnchor])
+        NSLayoutActivate([topTrailingAnchor, midLeadingAnchor, botTopAnchor])
+        self.layoutIfNeeded()
     }
 }

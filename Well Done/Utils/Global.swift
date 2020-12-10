@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 var PROTEIN = Protein()
 let pulsing = "pulsing"
 let stroke = "stroke"

@@ -117,9 +117,9 @@ class TimerViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = #colorLiteral(red: 0.96853441, green: 1, blue: 0.9685121179, alpha: 1)
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "\(PROTEIN.type.capitalized) | \(PROTEIN.method.capitalized) | \(PROTEIN.doneness.capitalized)"
         navigationItem.hidesBackButton = true
-        
         
         let quickTipView = QuickTipView(frame: .zero)
         view.addSubview(quickTipView)
